@@ -1,0 +1,2805 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>d0</name>
+    </assembly>
+    <members>
+        <member name="F:CPF_experiment.AgentState.h">
+            <summary>
+            Only used when AgentState objects are put in the open list priority queue - mainly in AStarForSingleAgent, I think.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.AgentState.arrivalTime">
+            <summary>
+            At goal
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.AgentState.lastMove">
+            <summary>
+            The last move's time is the agent's G
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.AgentState.prev">
+            <summary>
+            Only used by AStarForSingleAgent, which should itself be deleted.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.AgentState.EquivalenceOverDifferentTimes">
+            <summary>
+            For CBS this must be set to false.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AgentState.SwapCurrentWithGoal">
+            <summary>
+            Only used by EnumeratedPDB - check if can be removed
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AgentState.MoveTo(CPF_experiment.TimedMove)">
+            <summary>
+            Updates the agent's last move with the given move and sets arrivalTime (at goal) if necessary.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AgentState.AtGoal">
+            <summary>
+            Checks if the agent is at its goal location
+            </summary>
+            <returns>True if the agent has reached its goal location</returns>
+        </member>
+        <member name="M:CPF_experiment.AgentState.GetIndexInHeap">
+            <summary>
+            BH_Item implementation
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AgentState.SetIndexInHeap(System.Int32)">
+            <summary>
+            BH_Item implementation
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AgentState.Equals(System.Object)">
+            <summary>
+            When equivalence over different times is necessary,
+            checks this.agent and last position only,
+            ignoring data that would make this state different to other equivalent states:
+            It doesn't matter from which direction the agent got to its current location.
+            It's also necessary to ignore the agents' move time - we want the same positions
+            in any time to be equivalent.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.AgentState.GetHashCode">
+            <summary>
+            When equivalence over different times is necessary,
+            uses this.agent and last position only, ignoring direction and time.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.AgentState.CompareTo(CPF_experiment.IBinaryHeapItem)">
+            <summary>
+            Used when AgentState objects are put in the open list priority queue - mainly in AStarForSingleAgent, I think.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CPF_experiment.AStarMDD">
+            <summary>
+            Finds the solution with the least number of conflicts, given a set of MDDs
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AStarMDD.ClearIllegal">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AStarMDD.ResetIllegal">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.MDDStep.Equals(System.Object)">
+            <summary>
+            Only compares the steps.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.MDDStep.GetHashCode">
+            <summary>
+            Only uses the steps
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.MDDStep.SetConflicts(System.Collections.Generic.Dictionary{CPF_experiment.TimedMove,System.Collections.Generic.List{System.Int32}},System.Collections.Generic.Dictionary{CPF_experiment.TimedMove,System.Collections.Generic.List{System.Int32}})">
+            <summary>
+            Updates the conflicts member according to given CATs. Both tables may be null.
+            </summary>
+            <param name="ID_CAT"></param>
+            <param name="CBS_CAT"></param>
+        </member>
+        <member name="M:CPF_experiment.MDDStep.GetIndexInHeap">
+            <summary>
+            BH_Item implementation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.MDDStep.SetIndexInHeap(System.Int32)">
+            <summary>
+            BH_Item implementation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ExpandedNode.GetNextChild">
+            <summary>
+            
+            </summary>
+            <returns>The next child, or null if there aren't any more</returns>
+        </member>
+        <member name="T:CPF_experiment.AStarWithOD">
+            <summary>
+            A* implementation with Standley's operator decomposition (OD). See AAAI 2010 paper by IndependenceDetection Scott Standley on Cooperative Pathfinding.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AStarWithOD.Expand(CPF_experiment.WorldState)">
+            <summary>
+            Expand a given node. This includes:
+            - Generating all possible children
+            - Inserting them to OPEN
+            - Insert the generated nodes to the hashtable of nodes, currently implmented together with the closed list.
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.AStarWithPartialExpansionBasic">
+            <summary>
+            Only keeps generated nodes that have the same f as the parent.
+            The parent is then re-inserted with the lowest f from its discarded children
+            (Yoshizumi, Miura, and Ishida 2000)
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.AStarWithPartialExpansionBasic.nextFvalue">
+            <summary>
+            The lowest discarded F
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AStarWithPartialExpansionBasic.ProcessGeneratedNode(CPF_experiment.WorldState)">
+            <summary>
+            Adds nodes of target F only
+            </summary>
+            <param name="currentNode"></param>
+            <param name="parentNode"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CPF_experiment.CBS_LocalConflicts">
+            <summary>
+            Merges agents if they conflict more times than the given threshold in the CT nodes from the root to the current CT nodes only.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CBS_LocalConflicts.CONSTRAINTS">
+            <summary>
+            The key of the constraints list used for each CBS node
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CBS_LocalConflicts.MUST_CONSTRAINTS">
+            <summary>
+            The key of the must constraints list used for each CBS node
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CBS_LocalConflicts.CAT">
+            <summary>
+            The key of the internal CAT for CBS, used to favor A* nodes that have fewer conflicts with other routes during tie-breaking.
+            Also used to indicate that CBS is running.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CBS_LocalConflicts.closedList">
+            <summary>
+            Might as well be a HashSet. We don't need to retrive from it.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CBS_LocalConflicts.maxCost">
+            <summary>
+            Nodes with with a higher cost aren't generated
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.CBS_LocalConflicts.targetCost">
+            <summary>
+            Search is stopped when the minimum cost passes the target
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.CBS_LocalConflicts.lowLevelGeneratedCap">
+            <summary>
+            Search is stopped when the low level generated nodes count exceeds the cap
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.CBS_LocalConflicts.milliCap">
+            <summary>
+            Search is stopped when the millisecond count exceeds the cap
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CBS_LocalConflicts.minDepth">
+            <summary>
+            TODO: Shouldn't this be called minTimeStep?
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CBS_LocalConflicts.topMost">
+            <summary>
+            Used to know when to clear problem parameters.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CBS_LocalConflicts.Setup(CPF_experiment.ProblemInstance,System.Int32,CPF_experiment.Run,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="problemInstance"></param>
+            <param name="minDepth"></param>
+            <param name="runner"></param>
+            <param name="minCost">Not taken into account</param>
+        </member>
+        <member name="M:CPF_experiment.CBS_LocalConflicts.SetGlobals">
+            <summary>
+            
+            </summary>
+            <returns>Whether this is the top-most CBS</returns>
+        </member>
+        <member name="M:CPF_experiment.CBS_LocalConflicts.Shuffle(CPF_experiment.CbsNode)">
+            <summary>
+            TODO: Count the shuffles.
+            TODO: Consider choosing a different conflict to work on if that current one couldn't be solved with a shuffle.
+                  It isn't so easy, because just choosing another conflict won't work - a shuffle that changed nothing would revert to the old conflict automatically.
+            </summary>
+            <param name="currentNode"></param>
+        </member>
+        <member name="M:CPF_experiment.CBS_LocalConflicts.ExpandImpl(CPF_experiment.CbsNode,System.Boolean,System.Collections.Generic.IList{CPF_experiment.CbsNode}@,System.Boolean@,CPF_experiment.CbsNode)">
+            <summary>
+            
+            </summary>
+            <param name="node"></param>
+            <param name="node"></param>
+            <param name="children"></param>
+            <param name="adoptBy">If not given, adoption is done by expanded node</param>
+            <returns>true if adopted - need to rerun this method, ignoring the returned children from this call, bacause adoption was performed</returns>
+        </member>
+        <member name="M:CPF_experiment.CBS_LocalConflicts.MDDHeuristic(CPF_experiment.CbsNode)">
+            <summary>
+            Returns whether the node is solvable with the current costs. If unsure, returns true;
+            Currently avoiding building a k-agent MDD.
+            </summary>
+            <param name="node"></param>
+            <returns>Whether MDD after pruning believes that the node's configuration of costs is solvable.</returns>
+        </member>
+        <member name="M:CPF_experiment.CBS_LocalConflicts.MergeExpand(CPF_experiment.CbsNode,System.Int32@)">
+            <summary>
+            </summary>
+            <param name="node"></param>
+            <param name="closedListHitChildCost"></param>
+            <returns>null if planning the child's path failed, otherwise returns the new child</returns>
+        </member>
+        <member name="T:CPF_experiment.CBS_GlobalConflicts">
+            <summary>
+            Merges agents if they conflict more times than the given threshold in all the CT.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CBS_GlobalConflicts.Setup(CPF_experiment.ProblemInstance,CPF_experiment.Run)">
+            <summary>
+            Assumes agent nums start from 0 and are consecutive.
+            </summary>
+            <param name="problemInstance"></param>
+            <param name="runner"></param>
+        </member>
+        <member name="T:CPF_experiment.CbsHeuristic">
+            <summary>
+            TODO: This class can actually be generalized to SolverHeuristic and be used as a brute-force estimator.
+                  The only CBS things in it are the targetCost, the Debug.Assert that the root costs exactly like SIC's
+                  estimate, and the statistics.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CbsHeuristic.#ctor(CPF_experiment.CBS_LocalConflicts,CPF_experiment.Run,System.Boolean,System.Int32,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="cbs">The underlying CBS to use</param>
+            <param name="runner"></param>
+            <param name="reportSolution">
+            Whether to store the solution found by CBS in the node.
+            This should greatly speed up searches.</param>
+            <param name="minAboveSic">
+            The minimum increment by which to beat SIC's estimate, if possible.
+            Larger values would cause each call to the heuristic to take longer, but make it return better estimates.
+            </param>
+        </member>
+        <member name="M:CPF_experiment.CbsHeuristic.h(CPF_experiment.WorldState)">
+            <summary>
+            
+            Assumes g of node was already calculated!
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsHeuristic.h(CPF_experiment.WorldState,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Computes a heuristic by running a bounded CBS search from the given node.
+            Assumes g of node was already calculated and h isn't zero.
+            </summary>
+            <param name="s"></param>
+            <param name="targetCost">Stop when the target cost is reached</param>
+            <param name="sicEstimate">For a debug assertion.</param>
+            <param name="lowLevelGeneratedCap">The number of low level nodes to generated</param>
+            <param name="milliCap">The process total millisecond count to stop at</param>
+            <param name="resume">Whether to resume the last search instead of solving the given node. Assumes the last search was from the same node as the given node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsHeuristic.init(CPF_experiment.ProblemInstance,System.Collections.Generic.List{System.UInt32})">
+            <summary>
+            Part of the HeuristicCalculator interface.
+            </summary>
+            <param name="pi"></param>
+            <param name="vAgents">Only passed to the underlying heuristic. TODO: Consider using in h() too.</param>
+        </member>
+        <member name="M:CPF_experiment.CbsHeuristic.ClearStatistics">
+            <summary>
+            Clears statistics.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.DyanamicLazyCbsh.h(CPF_experiment.WorldState,System.Int32,System.Single)">
+            <summary>
+            Assumes g of node was already calculated.
+            </summary>
+            <param name="s"></param>
+            <param name="targetH"></param>
+            <param name="effectiveBranchingFactor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.DyanamicLazyCbsh.h(CPF_experiment.WorldState,System.Int32,System.Single,System.Int32,System.Boolean)">
+            <summary>
+            Assumes g of node was already calculated.
+            </summary>
+            <param name="s"></param>
+            <param name="targetH"></param>
+            <param name="effectiveBranchingFactor"></param>
+            <returns></returns>
+        </member>
+        <member name="F:CPF_experiment.CbsConflict.vertex">
+            <summary>
+            If true, conflict is two agents have same dest, from any direction. Otherwise it's an edge conflict.
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.DisjointSets`1">
+            <summary>
+            Algorithm from http://en.wikipedia.org/wiki/Disjoint-set_data_structure.
+            Operations cost O(Ackerman^-1(n)) time - practically constant. Cost is asymptotically optimal :)
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.DisjointSets`1.#ctor(System.Collections.Generic.ISet{`0})">
+            <summary>
+            Initially all entries are single item sets.
+            </summary>
+            <param name="entries"></param>
+        </member>
+        <member name="M:CPF_experiment.DisjointSets`1.AddSet(`0)">
+            <summary>
+            Does nothing if entry is already present.
+            Returns whether the entry was really added now.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.DisjointSets`1.IsSingle(`0)">
+            <summary>
+            Assumes entry is already in the DisjointSets data structure
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.DisjointSets`1.CopyUnions(CPF_experiment.DisjointSets{`0})">
+            <summary>
+            Modifies this data structure to also contains all unions from other.
+            </summary>
+            <param name="other"></param>
+            <returns>Whether this object was changed</returns>
+        </member>
+        <member name="M:CPF_experiment.DisjointSets`1.Find(CPF_experiment.DisjointSetItem)">
+            <summary>
+            Finds the representative of the item's set
+            </summary>
+            <param name="x"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.DisjointSets`1.Union(`0,`0)">
+            <summary>
+            Doesn't assume x, y already in the data structure.
+            Returns whether they were really only united now.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.DisjointSets`1.AreUnited(`0,`0)">
+            <summary>
+            Assumes entries are already in the DisjointSets data structure
+            </summary>
+            <param name="entryA"></param>
+            <param name="entryB"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CPF_experiment.Dictionary_U`2.Keys">
+             Summary:
+                 Gets an enumerable collection that contains the keys in the read-only dictionary.
+                 Warning: May contain duplicates if multiple inner dicts have the same key.
+            
+             Returns:
+                 An enumerable collection that contains the keys in the read-only dictionary.
+                 
+        </member>
+        <member name="M:CPF_experiment.Dictionary_U`2.Clear">
+            <summary>
+            Hardly used.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Dictionary_U`2.Print">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.Dictionary_U`2.Count">
+            <summary>
+            Gets the number of values in the Dictionary. 
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.IStatisticsCsvWriter.OutputStatisticsHeader(System.IO.TextWriter)">
+            <summary>
+            Prints header of statistics of a single run to the given output. 
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.IStatisticsCsvWriter.OutputStatistics(System.IO.TextWriter)">
+            <summary>
+            Prints statistics of a single run to the given output.
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.IStatisticsCsvWriter.NumStatsColumns">
+            <summary>
+            To fill out them out when an algorithm isn't run
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.IStatisticsCsvWriter.ClearStatistics">
+            <summary>
+            Clears statistics.
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.OpenList">
+            <summary>
+            Supporting O(1) insertion and removal of items that compare equal to the top of the heap.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.OpenList.Remove(CPF_experiment.IBinaryHeapItem)">
+            <summary>
+            Uses Equality check only for removing from the queue.
+            Might cost O(n) if all items are in the queue and not the heap.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.OpenList.Contains(CPF_experiment.IBinaryHeapItem)">
+            <summary>
+            Assumes item was added to the open list in the past
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.RandomChoiceOfHeuristic.#ctor(CPF_experiment.HeuristicCalculator,CPF_experiment.HeuristicCalculator,System.Double,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="p"></param>
+            <param name="seed"></param>
+        </member>
+        <member name="M:CPF_experiment.HashSet_U`1.Clear">
+            <summary>
+            Hardly used.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.HashSet_U`1.Print">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.HashSet_U`1.Count">
+            <summary>
+            Gets the number of values in the HashSet. 
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.IBinaryHeapItem">
+            <summary>
+            represents items that are stored in the binary heap
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.IBinaryHeapItem.GetIndexInHeap">
+            <summary>
+            The index of the item in the binary heap
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.BinaryHeap">
+            <summary>
+            A binary heap, useful for sorting data and priority queues.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.#ctor">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.#ctor(System.Int32)">
+            <summary>
+            Creates a new binary heap with the specified initial capacity.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.#ctor(CPF_experiment.IBinaryHeapItem[],System.Int32)">
+            <summary>
+            Creates a new binary heap from the given array.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.#ctor(System.Collections.Generic.IReadOnlyCollection{CPF_experiment.IBinaryHeapItem})">
+            <summary>
+            Creates a new binary heap from the given collection.
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.BinaryHeap.Count">
+            <summary>
+            Gets the number of values in the heap. 
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.BinaryHeap.Capacity">
+            <summary>
+            Gets or sets the capacity of the heap.
+            Can only set it to values larger than the current capacity.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.Peek">
+            <summary>
+            Gets the first value in the heap without removing it.
+            </summary>
+            <returns>The lowest value of type TValue.</returns>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.Clear">
+            <summary>
+            Removes all items from the heap.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.Add(CPF_experiment.IBinaryHeapItem)">
+            <summary>
+            Adds a key and value to the heap.
+            </summary>
+            <param name="item">The item to add to the heap.</param>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.Remove">
+            <summary>
+            Removes and returns the first item in the heap.
+            </summary>
+            <returns>The next item in the heap.</returns>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.Parent(System.Int32)">
+            <summary>
+            helper function that calculates the parent of a node
+            </summary>
+            <param name="index"></param>
+            <returns>-1 if there's no parent (index==0)</returns>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.Child1(System.Int32)">
+            <summary>
+            helper function that calculates the first child of a node
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.Child2(System.Int32)">
+            <summary>
+            helper function that calculates the second child of a node
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.Copy">
+            <summary>
+            Creates a new instance of an identical binary heap.
+            </summary>
+            <returns>A BinaryHeap.</returns>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.Contains(CPF_experiment.IBinaryHeapItem)">
+            <summary>
+            Checks to see if the binary heap contains the specified item.
+            Uses CompareTo, not the item's binary heap index.
+            First call runs in O(nlogn) time. Next calls are O(logn).
+            </summary>
+            <param name="item">The item to search the binary heap for.</param>
+            <returns>A boolean, true if binary heap contains item.</returns>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.CopyTo(CPF_experiment.IBinaryHeapItem[],System.Int32)">
+            <summary>
+            Copies the binary heap to an array at the specified index.
+            </summary>
+            <param name="array">One dimensional array that is the destination of the copied elements.</param>
+            <param name="arrayIndex">The zero-based index at which copying begins.</param>
+        </member>
+        <member name="P:CPF_experiment.BinaryHeap.IsReadOnly">
+            <summary>
+            Returns whether or not the binary heap is readonly.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.BinaryHeap.Remove(CPF_experiment.IBinaryHeapItem)">
+            <summary>
+            Removes an item from the binary heap. 
+            Assumes item is or was in the heap. Doesn't use Equality checks.
+            This will not remove duplicates.
+            TODO: Change into Remove(int binaryHeapIndex)!
+            </summary>
+            <param name="item">The item to be removed.</param>
+            <returns>Boolean true if the item was removed.</returns>
+        </member>
+        <member name="F:CPF_experiment.AdditivePDBs.m_vExcludedAgents">
+            The set of agents that are not covered by this set of pattern
+            databases. This information is not used by this class or any of its
+            related classes, but is simply precomputed as useful information for
+            the caller (for example, if the caller wanted to add to our
+            heuristic estimate).
+        </member>
+        <member name="M:CPF_experiment.AdditivePDBs.build(CPF_experiment.ProblemInstance,CPF_experiment.WorldState)">
+            <summary>
+            Determines how many additive pattern databases to build and divides
+            the agents among them, possibly leaving some agents out.
+            </summary>
+            <param name="s">The root of the search tree. This is also expected
+            to have context parameters such as agents' goal states.</param>
+        </member>
+        <member name="M:CPF_experiment.AdditivePDBs.init(CPF_experiment.ProblemInstance,System.Collections.Generic.List{System.UInt32})">
+            <summary>
+            Initializes the pattern database by storing references to the
+            problem instance and also the subset of agents that the pattern
+            database pertains to.
+            </summary>
+            <param name="pi">The problem instance.</param>
+            <param name="vAgents">The agents that the pattern database should keep track of.</param>
+        </member>
+        <member name="M:CPF_experiment.AdditivePDBs.h(CPF_experiment.WorldState)">
+            <summary>
+            Simply returns the sum of each of the additive pattern database 
+            heuristic estimates on the given state.
+            </summary>
+            <param name="s">The state.</param>
+            <returns>The admissible heuristic value for the additive pattern
+            databases.</returns>
+        </member>
+        <member name="M:CPF_experiment.AdditivePDBs.OutputStatisticsHeader(System.IO.TextWriter)">
+            <summary>
+            Prints header of statistics of a single run to the given output. 
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AdditivePDBs.OutputStatistics(System.IO.TextWriter)">
+            <summary>
+            Prints statistics of a single run to the given output.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AdditivePDBs.ClearStatistics">
+            <summary>
+            Clears statistics.
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.Conflict">
+            <summary>
+            This class represents a conflict between two groups of agents in Standley's Indepedence Detection algorithm and in ICTS.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.minOpsToSolve">
+            <summary>
+            A lower estimate of the number of operations (replanning or merging) needed to solve the node.
+            Used for tie-breaking.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.countsOfInternalAgentsThatConflict">
+            <summary>
+            For each agent in the problem instance, saves the number of agents from the problem instance that it conflicts with.
+            Used for choosing the next conflict to resolve by replanning/merging/shuffling, and for tie-breaking.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.totalExternalAgentsThatConflict">
+            <summary>
+            Counts the number of external agents this node conflicts with.
+            Used for tie-breaking.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.totalConflictsWithExternalAgents">
+            <summary>
+            Used for tie-breaking.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.conflictCountsPerAgent">
+            <summary>
+            For each agent in the problem instance, maps agent _nums_ it conflicts with, internal or external,
+            to the number of conflicts betweem them.
+            Used for book-keeping to maintain countsOfInternalAgentsThatConflict,
+            totalExternalAgentsThatConflict and minOpsToSolve, and other counts.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.conflictTimesPerAgent">
+            <summary>
+            For each agent in the problem instance, maps agent _nums_ of agents it collides with to the time of their first collision.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.mustConstraint">
+            <summary>
+            Forcing an agent to be at a certain place at a certain time
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.agentAExpansion">
+            <summary>
+            For partial expansion
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.agentBExpansion">
+            <summary>
+            For partial expansion
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.totalInternalAgentsThatConflict">
+            <summary>
+            For tie-breaking
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.largerConflictingGroupSize">
+            <summary>
+            For tie-breaking
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.totalConflictsBetweenInternalAgents">
+            <summary>
+            For tie-breaking
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.#ctor(CPF_experiment.CbsNode,CPF_experiment.CbsConstraint,System.Int32)">
+            <summary>
+            Child from branch action constructor
+            </summary>
+            <param name="father"></param>
+            <param name="newConstraint"></param>
+            <param name="agentToReplan"></param>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.#ctor(CPF_experiment.CbsNode,System.Int32,System.Int32)">
+            <summary>
+            Child from merge action constructor. FIXME: Code dup with previous constructor.
+            </summary>
+            <param name="father"></param>
+            <param name="mergeGroupA"></param>
+            <param name="mergeGroupB"></param>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.Solve(System.Int32)">
+            <summary>
+            Solves the entire node - finds a plan for every agent group.
+            Since this method is only called for the root of the constraint tree, every agent is in its own group.
+            </summary>
+            <param name="depthToReplan"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.Replan(System.Int32,System.Int32,System.Collections.Generic.List{CPF_experiment.AgentState},System.Int32,System.Int32)">
+            <summary>
+            Replan for a given agent (when constraints for that agent have changed).
+            </summary>
+            <param name="agentForReplan"></param>
+            <param name="depthToReplan">CBS's minDepth param. !@# Should be called minTimeStep?</param>
+            <param name="subGroup">If given, assume CAT is already populated and use this subGroup</param>
+            <param name="maxPlanSize">If given, use it instead of computing it</param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.UpdateAtGoalConflictCounts(System.Int32,System.Int32,System.Collections.Generic.IReadOnlyDictionary{CPF_experiment.TimedMove,System.Collections.Generic.List{System.Int32}})">
+            <summary>
+            Update conflict counts according to what happens after the plan finishes -
+            needed if the plan is shorter than one of the previous plans and collides
+            with it while at the goal.
+            It's cheaper to do it this way than to force the solver the go more deeply.
+            The conflict counts are saved at the group's representative.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.CalcMinOpsToSolve">
+             <summary>
+             Calculates the minimum number of replans to solve, and from it the minimum number of replans or merges to solve.
+             
+             A replan can resolve all of the agent's conflicts by luck, even if it was only targeting a single conflict.
+            
+             To calculate the minimum number of replans to solve, 
+             what we want is the size of the minimum vertex cover of the conflict graph.
+             Sadly, it's an NP-hard problem. Its decision variant is NP-complete.
+             Happily, it has a 2-approximation: Just choose both endpoints of each uncovered edge repeatedly until no uncovered edges are lef.
+             
+             So we can just take half the count from that approximation.
+             
+             Notice a merge is like two replans in one, so we might need to take ceil(num_replans/2).
+             Luckily, in Cbs_LocalConflicts, a merge is only possible once every B+1 depth steps,
+             because we only count selected conflicts (they're guaranteed to be unequal),
+             so we can cap the number of possible merges and substract less.
+             
+             In Cbs_GlobalConflicts, we could use the global table to discount some merges.
+             </summary>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.nextConflicts">
+            <summary>
+            Used to preserve state of conflict iteration.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.ClearConflictChoiceData">
+            <summary>
+            The iterator holds the state of the generator, with all the different queues etc - a lot of memory.
+            We also clear the MDDs that were built - if no child uses them, they'll be garbage-collected.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.ChooseNextConflict">
+            Returns whether another conflict was found
+        </member>
+        <member name="M:CPF_experiment.CbsNode.ChooseConflict">
+            <summary>
+            Chooses an internal conflict to work on.
+            Resets conflicts iteration if it's used.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetConflictsNoOrder">
+            <summary>
+            No special ordering.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:CPF_experiment.CbsNode.nextConflictCouldBeCardinal">
+            <summary>
+            CBS may use this to decide whether to give up the current conflict and check the next one.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetConflictsCardinalFirstUsingMdd">
+            <summary>
+            Returns all conflicts, cardinal first, then possibly cardinal, then semi cardinal,
+            then possibly semi cardinal, and finally non-cardinal, building MDDs as necessary.
+            Trying to build MDDs as late as possible.
+            
+            TODO: Consider turning all queues into priority queues that prefer smaller agents, smaller degree etc.
+            TODO: Find a better data strcture to support faster deletion from queues.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.FindConflict(System.Int32,System.Int32,System.Int32,System.Collections.Generic.ISet{System.Int32}[])">
+            <summary>
+            Assuming the groups conflict, return their conflict.
+            </summary>
+            <param name="aConflictingGroupMemberIndex"></param>
+            <param name="bConflictingGroupMemberIndex"></param>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.FindConflicting(System.Int32,System.Int32,System.Int32,System.Int32@,System.Int32@,System.Collections.Generic.ISet{System.Int32}[])">
+            <summary>
+            Assuming the groups conflict, find the specific agents that conflict.
+            Also sets largerConflictingGroupSize.
+            </summary>
+            <param name="aConflictingGroupMemberIndex"></param>
+            <param name="bConflictingGroupMemberIndex"></param>
+            <param name="time"></param>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.ChooseBestConflict(System.Int32@,System.Int32@,System.Int32@)">
+             <summary>
+             Chooses the first agent to be the one that maximizes the number of agents it conflicts with internally divided by 2^(group_size-1).
+             Then chooses an agent among the agents it conflicts with using the same formula.
+             Then chooses their first conflict.
+            
+             Choosing the agent that conflicts the most is a greedy strategy.
+             Had replanning promised to resolve all conflicts, it would've been better to choose according to the minimum vertex cover.
+             
+             Assumes all agents are initially on the same timestep (no OD).
+             
+             TODO: Prefer conflicts where one of the conflicting agents is at their goal, to reduce the danger of task blow-up
+             by enabling partial expansion. On the other hand, partial expansion is only possible in basic CBS.
+             </summary>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.AdoptSolutionOf(CPF_experiment.CbsNode)">
+            <summary>
+            Adopt everything but the new constraint, basically.
+            
+            Notice that to correctly adopt a merge child, adopting its new agentsGroupAssignment is necessary.
+            Otherwise its conflicts counts, SinglePlan.agentNum and conflict choice would be incompatible.
+            </summary>
+            <param name="child"></param>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetHashCode">
+            <summary>
+            Uses the group assignments and the constraints.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.Equals(System.Object)">
+            <summary>
+            Checks the group assignment and the constraints
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.Clear">
+            <summary>
+            Worth doing because the node may always be in the closed list
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetLastConstraint">
+            <summary>
+            Not used.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetConstraintsOrdered">
+            <summary>
+            For printing
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetIndexInHeap">
+            <summary>
+            IBinaryHeapItem implementation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.SetIndexInHeap(System.Int32)">
+            <summary>
+            IBinaryHeapItem implementation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.ShouldMerge(System.Int32)">
+            <summary>
+            Check if the agent groups that participate in the conflict of this node pass the merge threshold.
+            </summary>
+            <param name="mergeThreshold"></param>
+            <returns>Whether to merge.</returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.ShouldMerge(System.Int32,System.Int32[][])">
+            <summary>
+            Check if the agent groups that participate in the conflict of this node pass the merge threshold,
+            using the given conflict counts.
+            </summary>
+            <param name="mergeThreshold"></param>
+            <param name="globalConflictCounter"></param>
+            <returns>Whether to merge.</returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetGroup(System.Int32)">
+            <summary>
+            Returns a list of indices of agents in the group
+            </summary>
+            <param name="agentIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetGroupCost(System.Int32)">
+            <summary>
+            Currently unused.
+            </summary>
+            <param name="groupNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetGroupSize(System.Int32)">
+            <summary>
+            A bit cheaper than GetGroup(n).Count. Still O(n).
+            </summary>
+            <param name="groupNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetGroupSizes">
+            <summary>
+            In O(n)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.GetGroups">
+            <summary>
+            In O(n)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.MergeGroups(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Updates the agentsGroupAssignment and the conflictCountsPerAgent. Warning: changes the hash!
+            </summary>
+            <param name="a">Index of first group representative</param>
+            <param name="b">Index of second group representative</param>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.PathLength(System.Int32)">
+            <summary>
+            NOT the cost, just the length - 1.
+            </summary>
+            <param name="agent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsNode.Replan3b(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            For CBS IDA* only.
+            Consider inheriting from CbsNode and overriding the Replan method instead.
+            </summary>
+            <param name="agentForReplan"></param>
+            <param name="depthToReplan"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CPF_experiment.AgentToCheckForCardinalConflicts">
+            <summary>
+            Because the default tuple comparison compares the first element only :(.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AgentToCheckForCardinalConflicts.GetIndexInHeap">
+            <summary>
+            IBinaryHeapItem implementation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.AgentToCheckForCardinalConflicts.SetIndexInHeap(System.Int32)">
+            <summary>
+            IBinaryHeapItem implementation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsConstraint.Equals(System.Object)">
+            <summary>
+            Checks that the agentNum is equal, and compares the move.
+            If one of the constraints is a query, an instance only created and used to quickly search for a move in a set of constraints,
+            the direction is ignored if the other constraint is a vertex constraint.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsConstraint.GetHashCode">
+            <summary>
+            Uses the move and the agents.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.CbsConstraint.Allows(CPF_experiment.CbsConstraint)">
+            <summary>
+            Kind of the opposite of Equals: checks that the moves are unequal or that not one of the other's agents appears in this.agents.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CPF_experiment.MDD">
+            <summary>
+            A compact representation of all the paths to the goal of a given agent that are of a given cost and length
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.MDD.cost">
+            <summary>
+            Just for printing the node
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.MDD.#ctor(System.Int32,System.Int32,CPF_experiment.Move,System.Int32,System.Int32,System.Int32,CPF_experiment.ProblemInstance,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="mddNum"></param>
+            <param name="agentNum"></param>
+            <param name="start_pos"></param>
+            <param name="cost">The MDD must be of this cost</param>
+            <param name="numOfLevels">
+            The MDD must be of this number of levels, not counting level zero.
+            If higher than cost, the extra levels will be WAITs at the goal.
+            </param>
+            <param name="numOfAgents"></param>
+            <param name="instance"></param>
+            <param name="ignoreConstraints"></param>
+        </member>
+        <member name="F:CPF_experiment.MDD.queryConstraint">
+            <summary>
+            Just an optimization
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.MDD.GetAllChildren(CPF_experiment.MDDNode,System.Int32,System.Int32)">
+            <summary>
+            Returns all the children of a given MDD node that have a heuristic estimate that is not larger than the given heuristic bound.
+            </summary>
+            <param name="mdd"></param>
+            <param name="heuristicBound">The heuristic estimate of the returned children must be lower than or equal to the bound</param>
+            <param name="numOfAgents">The number of agents in the MDD node</param>
+            <returns>A list of relevant MDD nodes</returns>
+        </member>
+        <member name="M:CPF_experiment.MDD.SyncMDDs(CPF_experiment.MDD,System.Boolean)">
+            <summary>
+            Match and prune MDD according to another MDD.
+            </summary>
+            <param name="other"></param>
+            <param name="checkTriples">If true, use the "3E" method.</param>
+        </member>
+        <member name="M:CPF_experiment.MDDNode.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.MDDNode.GetHashCode">
+            <summary>
+            Only uses the move
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.MDDNode.Equals(System.Object)">
+            <summary>
+            Only uses the move
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.HeuristicCalculator.h(CPF_experiment.WorldState)">
+            <summary>Returns the heuristic estimate.</summary>
+            <param name="s">The current state.</param>
+        </member>
+        <member name="M:CPF_experiment.HeuristicCalculator.init(CPF_experiment.ProblemInstance,System.Collections.Generic.List{System.UInt32})">
+            <summary>
+            Initializes the pattern database by storing references to the
+            problem instance and also the subset of agents that the pattern
+            database pertains to.
+            </summary>
+            <param name="pi">The problem instance.</param>
+            <param name="vAgents">The agents that the pattern database should keep track of.</param>
+        </member>
+        <member name="M:CPF_experiment.LazyHeuristic.h(CPF_experiment.WorldState,System.Int32,System.Single)">
+            <summary>Returns the heuristic estimate. Used when a low level generated nodes cap is needed.</summary>
+            <param name="s">The current state.</param>
+            <param name="target">The lowest target estimate to return, if possible.</param>
+            <param name="effectiveBranchingFactor">The branching factor so far of the A* search we're serving.</param>
+        </member>
+        <member name="M:CPF_experiment.LazyHeuristic.h(CPF_experiment.WorldState,System.Int32,System.Single,System.Int32,System.Boolean)">
+            <summary>Returns the heuristic estimate. Used when a time cap is needed.</summary>
+            <param name="s">The current state.</param>
+            <param name="target">The lowest target estimate to return, if possible.</param>
+            <param name="effectiveBranchingFactor">Ignored. Kept only to make the number of parameters different from the previous method.</param>
+            <param name="millisCap">Stop the search when the process' total millisecond count reaches the cap.</param>
+            <param name="resume">Whether to resume the last search. Assumes last search was from the same node</param>
+        </member>
+        <member name="T:CPF_experiment.ClassicAStar">
+            <summary>
+            This is an implementation of the classic A* algorithm for the MAPF problem.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.ClassicAStar.mustConstraints">
+            <summary>
+            An array of dictionaries that map constrained timesteps to must constraints.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.#ctor(CPF_experiment.HeuristicCalculator,System.Boolean,System.Boolean)">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.Setup(CPF_experiment.ProblemInstance,System.Int32,CPF_experiment.Run,System.Int32)">
+            <summary>
+            Setup the relevant data structures for a run.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.CreateSearchRoot(System.Int32,System.Int32)">
+            <summary>
+            Factory method. Creates the initial state from which the search will start. 
+            This will be the first state to be inserted to OPEN.
+            </summary>
+            <returns>The root of the search tree</returns>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.Clear">
+            <summary>
+            Clears the relevant data structures and variables to free memory.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.OutputStatistics(System.IO.TextWriter)">
+            <summary>
+            Prints statistics of a single run to the given output. 
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.Solve">
+            <summary>
+            Runs the algorithm until the problem is solved or memory/time is exhausted
+            </summary>
+            <returns>True if solved</returns>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.Expand(CPF_experiment.WorldState)">
+            <summary>
+            Expand a given node. This includes:
+            - Generating all possible children
+            - Inserting them to OPEN
+            - Insert the generated nodes to the hashtable of nodes, currently implemented together with the closed list.
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.ExpandOneAgent(System.Collections.Generic.List{CPF_experiment.WorldState},System.Int32)">
+            <summary>
+            Expands a single agent in the nodes.
+            This includes:
+            - Generating the children
+            - Inserting them into OPEN
+            - Insert node into CLOSED
+            Returns the child nodes
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.CreateSearchNode(CPF_experiment.WorldState)">
+            <summary>
+            Factory method.
+            </summary>
+            <param name="from"></param>
+            <returns></returns>
+        </member>
+        <member name="F:CPF_experiment.ClassicAStar.queryConstraint">
+            <summary>
+            Just an optimization
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.IsValid(CPF_experiment.TimedMove,System.Collections.Generic.IReadOnlyDictionary{CPF_experiment.TimedMove,System.Int32},System.Int32,System.Int32,CPF_experiment.WorldState,CPF_experiment.WorldState)">
+            <summary>
+            Check if the move is valid, i.e. not colliding into walls or other agents.
+            This method is here instead of in ProblemInstance to enable algorithmic tweaks.
+            </summary>
+            <param name="possibleMove">The move to check if possible</param>
+            <returns>true, if the move is possible.</returns>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.GetPlan">
+            <summary>
+            Returns the found plan, or null if no plan was found.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.ProcessGeneratedNode(CPF_experiment.WorldState)">
+            <summary>
+            Returns whether the node was inserted into the open list.
+            </summary>
+            <param name="currentNode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.RMStarCollisionBackPropagation(CPF_experiment.CbsConflict,CPF_experiment.WorldState)">
+            <summary>
+            NOT the algorithm in the M* journal paper.
+            They want each node to propagate its entire collision set, not just the new conflict that began the process.
+            This implementation may be suitable for the M* algorithm as appears in the paper,
+            but it isn't suitable when we want to backpropagate from a closed list hit,
+            because then we don't have a specific conflict to propagate.
+            </summary>
+            <param name="conflict"></param>
+            <param name="fromNode">
+            Not the node where the collision happened, because it was never generated.
+            The node from where the colliding moves were made.
+            </param>
+        </member>
+        <member name="M:CPF_experiment.ClassicAStar.RMStarCollisionBackPropagation(CPF_experiment.DisjointSets{System.Int32},CPF_experiment.WorldState)">
+            <summary>
+            Not the paper's version either, since it always propagates the same collision sets.
+            </summary>
+            <param name="colSets">The collision sets of the _child_ of fromNode</param>
+            <param name="fromNode"></param>
+        </member>
+        <member name="F:CPF_experiment.Constants.NO_SOLUTION_COST">
+            <summary>
+            The cost that is set to the algorithms when all the states have been expanded and no goal was found 
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Constants.TIMEOUT_COST">
+            <summary>
+            The cost that is set to the algorithms when they are halted due to out of time 
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Constants.MAX_MEMORY_COST">
+            <summary>
+            The cost that is set to the algorithms when they are halted due to out of memory
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Constants.GENERATED_PER_PRINT">
+            <summary>
+            The number of generated nodes after which a debug print will be given
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Constants.PRIMES_FOR_HASHING">
+            <summary>
+            Prime numbers for hashing
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Constants.MAX_FAIL_COUNT">
+            <summary>
+            Max Consecutive failures before an algorithm is omitted from the list of tested algorithms
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Constants.EXHAUSTIVE_ICTS">
+            <summary>
+            This determines whether the ICTS should search a solution with lowest conflicts for the ID framework
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Constants.Variant">
+            <summary>
+            For partial expansion
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ISolver.GetName">
+            <summary>
+            Return the name of the solver, useful for outputing results.
+            </summary>
+            <returns>The name of the solver</returns>
+        </member>
+        <member name="M:CPF_experiment.ISolver.Solve">
+            <summary>
+            Solves the instance that was set by a call to Setup()
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ISolver.Setup(CPF_experiment.ProblemInstance,CPF_experiment.Run)">
+            <summary>
+            Setup the relevant data structures for a run.
+            </summary>
+            <param name="problemInstance"></param>
+            <param name="runner"></param>
+        </member>
+        <member name="M:CPF_experiment.ISolver.SetHeuristic(CPF_experiment.HeuristicCalculator)">
+            <summary>
+            Set the heuristic
+            </summary>
+            <param name="heuristic"></param>
+        </member>
+        <member name="M:CPF_experiment.ISolver.Clear">
+            <summary>
+            Clears the relevant data structures and variables to free memory usage.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ISolver.GetPlan">
+            <summary>
+            Returns the found plan, or null if no plan was found.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ISolver.GetSolutionCost">
+            <summary>
+            Returns the cost of the solution found, or error codes otherwise.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ISolver.GetSolutionDepth">
+            <summary>
+            Gets the delta of (actual solution cost - first state heuristics)
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ICbsSolver.Setup(CPF_experiment.ProblemInstance,System.Int32,CPF_experiment.Run,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="problemInstance"></param>
+            <param name="minDepth">!@# Shoud be more generally called minTimeStep? Because for CBS the depth isn't the time step</param>
+            <param name="runner"></param>
+        </member>
+        <member name="M:CPF_experiment.MddMatchAndPrune.#ctor(CPF_experiment.Run)">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.MddMatchAndPrune.buildGeneralMDD">
+            <summary>
+            Build the generalized MDD
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.MddMatchAndPrune.Expand(CPF_experiment.MddMatchAndPruneState,CPF_experiment.successorIterator)">
+            <summary>
+            expands a given node
+            </summary>
+            <param name="toExpand"></param>
+        </member>
+        <member name="M:CPF_experiment.MddMatchAndPrune.pruneLevel(System.Int32)">
+            <summary>
+            prunes a given level according to the edgesMatrix
+            </summary>
+            <param name="level"></param>
+        </member>
+        <member name="M:CPF_experiment.MddMatchAndPrune.pruneMDDs">
+            <summary>
+            prunes the given MDDs according to each other
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.successorIterator.getNext">
+            <summary>
+            Return the next generated child.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.successorIterator.nextSuccessor(System.Int32)">
+            <summary>
+            Sets the next child in line for a given agent, if it's the last child returns the first in order (closed loop). If reset returns false.
+            </summary>
+            <param name="agent"></param>
+        </member>
+        <member name="M:CPF_experiment.successorIterator.nextChild(System.Int32)">
+            <summary>
+            Recursive function, try to proceed the first agent if it is at the end of its children resets him and proceeds the second agent and so on
+            </summary>
+            <param name="agent"></param>
+        </member>
+        <member name="M:CPF_experiment.successorIterator.isLegal(System.Int32)">
+            <summary>
+            if we move the i'st agent we check whether it is legal with all agents that moved before, i.e. from that point forward
+            </summary>
+            <param name="checkFrom"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CPF_experiment.Plan">
+            <summary>
+            Represents a plan for a set of agents.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Plan.#ctor(CPF_experiment.WorldState)">
+            <summary>
+            Reconstructs the plan by goind backwards from the goal.
+            </summary>
+            <param name="goalState">The goal state from which to start going backwards</param>
+        </member>
+        <member name="M:CPF_experiment.Plan.#ctor(CPF_experiment.AgentState)">
+            <summary>
+            Reconstructs the plan by going backwards from the goal.
+            </summary>
+            <param name="goalState">The goal state from which to start going backwards</param>
+        </member>
+        <member name="M:CPF_experiment.Plan.#ctor(System.Collections.Generic.LinkedList{CPF_experiment.Move}[])">
+            <summary>
+            Assumes all routes are of the same length.
+            </summary>
+            <param name="routePerAgent"></param>
+        </member>
+        <member name="M:CPF_experiment.Plan.#ctor(System.Collections.Generic.IEnumerable{CPF_experiment.Plan})">
+            <summary>
+            Generates a big plan from a collection of smaller plans.
+            </summary>
+            <param name="subplans"></param>
+        </member>
+        <member name="M:CPF_experiment.Plan.#ctor(CPF_experiment.Plan)">
+            <summary>
+            Medium-depth copy constructor - uses same Move objects.
+            </summary>
+            <param name="cpy"></param>
+        </member>
+        <member name="M:CPF_experiment.Plan.ContinueWith(CPF_experiment.Plan)">
+            <summary>
+            Add actions of other plan after actions of plan.
+            If this plan ends where the other starts,
+            the first timestep of the other plan is skipped.
+            </summary>
+            <param name="other"></param>
+        </member>
+        <member name="M:CPF_experiment.Plan.GetLocationsAt(System.Int32)">
+            <summary>
+            Returns the location of the agents at a given time. 
+            If the requested time is after the last step of the plan,
+            the agents are assumed to stay at their final location.
+            </summary>
+            <param name="time">The requested time</param>
+            <returns>A list of Moves that are the locations of the different agents at the requested time</returns>
+        </member>
+        <member name="M:CPF_experiment.Plan.GetSize">
+            <summary>
+            NOT the cost, which:
+            A) could depend on steps taken before solving started,
+            B) is 1 smaller than the size (a plan that starts at the goal costs zero)
+            Useful only for iteration over the relevant part of the plan.
+            </summary>
+            <returns>The size of the plan, assuming is doesn't end with steps where all agents WAIT at the goal (which should be discounted).</returns>
+        </member>
+        <member name="M:CPF_experiment.Plan.IsColliding(System.Int32,CPF_experiment.Plan)">
+            <summary>
+            Check if this plan collides with another plan at a given time
+            </summary>
+            <param name="time">The time at which to check if the collision occured</param>
+            <param name="otherPlan">The plan to check against</param>
+        </member>
+        <member name="M:CPF_experiment.Plan.PrintPlan">
+            <summary>
+            Prints the plan to the Console. 
+            This is used for debugging purposes.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.SinglePlan.#ctor(CPF_experiment.WorldState,System.Int32)">
+            <summary>
+            Not used
+            </summary>
+            <param name="goalState"></param>
+            <param name="agentIndex"></param>
+        </member>
+        <member name="M:CPF_experiment.SinglePlan.#ctor(CPF_experiment.Plan,System.Int32,System.Int32)">
+            <summary>
+            Not used
+            </summary>
+            <param name="plan"></param>
+            <param name="agentIndex"></param>
+            <param name="agentNum"></param>
+        </member>
+        <member name="M:CPF_experiment.SinglePlan.GetLocationAt(System.Int32)">
+            <summary>
+            TODO: Get rid of the else
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.SinglePlan.ContinueWith(CPF_experiment.SinglePlan)">
+            <summary>
+            Add actions of other plan after actions of plan.
+            If this plan ends where the other starts,
+            the first timestep of the other plan is skipped
+            </summary>
+            <param name="other"></param>
+        </member>
+        <member name="M:CPF_experiment.SinglePlan.GetSize">
+            <summary>
+            NOT the cost, which:
+            A) could depend on steps taken before solving started,
+            B) is 1 smaller than the size (a plan that starts at the goal costs zero)
+            Useful only for iteration over the relevant part of the plan.
+            </summary>
+            <returns>The size of the plan, excluding WAITs at the goal</returns>
+        </member>
+        <member name="M:CPF_experiment.SinglePlan.GetCost">
+            <summary>
+            TODO: Find all "GetSize() - 1" uses and replace them with this method
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.SinglePlan.IsColliding(System.Int32,CPF_experiment.SinglePlan)">
+            <summary>
+            Check if this plan collides with another plan at a given time
+            </summary>
+            <param name="time">The time at which to check if the collision occured</param>
+            <param name="otherPlan">The plan to check against</param>
+        </member>
+        <member name="M:CPF_experiment.SinglePlan.PrintPlan">
+            <summary>
+            Prints the plan to the Console. 
+            This is used for debugging purposes.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.SinglePlan.GetSinglePlans(System.Collections.Generic.LinkedList{CPF_experiment.Move}[])">
+            <summary>
+            Creates SinglePlans with agentIndex as agentNum. Not suitable for subproblems.
+            </summary>
+            <param name="allRoutes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CPF_experiment.AStarWithRID">
+            <summary>
+            This Solver runs A* but from time to time tries to solve completely the expanded node, by using Standley's independent detection.
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.SumIndividualCosts">
+            <summary>
+            This class forms a wrapper around m_Problem.GetSingleAgentOptimalCost().
+            It represents the single shortest path heuristic, precomputed for every agent.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.SumIndividualCosts.estimateSize">
+            <summary>
+            Since this class simply refers via a table-lookup to the globally
+            available m_Problem.GetSingleAgentOptimalCost class, we incur no memory.
+            </summary>
+            <returns>0 by definition.</returns>
+        </member>
+        <member name="M:CPF_experiment.SumIndividualCosts.build">
+            <summary>
+            The building function for this class doesn't do anything because we
+            are simply wrapping the functionality of the m_Problem.GetSingleAgentOptimalCost
+            class.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.SumIndividualCosts.h(CPF_experiment.WorldState)">
+            <summary>
+            Returns the heuristic estimate.
+            </summary>
+            <param name="s">The current state.</param>
+            <returns>The PDB entry for the given state.</returns>
+        </member>
+        <member name="M:CPF_experiment.SumIndividualCosts.OutputStatisticsHeader(System.IO.TextWriter)">
+            <summary>
+            Prints header of statistics of a single run to the given output. 
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.SumIndividualCosts.OutputStatistics(System.IO.TextWriter)">
+            <summary>
+            Prints statistics of a single run to the given output.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.SumIndividualCosts.ClearStatistics">
+            <summary>
+            Clears statistics.
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.EnumeratedPDB">
+            <summary>
+            Represents a pattern database that enumerates all possible
+            configurations of the state space by mapping each state to a unique
+            32-bit integer. A lookup table in memory maps each 32-bit integer
+            representation of the state to a heuristic estimate. In order to reduce
+            memory consumption even further, the heuristic estimates are internally
+            stored as the difference on top of the single shortest path heuristic.
+            The hope is that the reduced magnitude of heuristic values will now
+            always fit within the range of a single unsigned byte. This assumption,
+            of course, will break on instances that are large enough to cause an
+            overflow.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.EnumeratedPDB.m_vTable">
+            <summary>
+            The index is the hash of the state, and the resulting value should
+            be added to that reported by the true path heuristic in order to
+            get the correct admissible heuristic value. We reserve Byte.MaxValue
+            to represent an uninitialized table entry.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.EnumeratedPDB.m_vPermutations">
+            <summary>
+            m_vPermutations[i] represents the number of permutations of the
+            remaining agents after placing the ith agent. For example, if we
+            had 10 agents, and we've already placed 3 of them, then
+            m_vPermutations[2] represents the number of permutations for the
+            remaining 7 agents. This precomputed table depends on the number
+            of free locations in the board and is used as a perfect hash 
+            function that maps a state in the search space to an integer.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.EnumeratedPDB.m_bOffsetFromSingleShortestPath">
+            <summary>
+            Determines whether or not we will internally represent heuristic
+            values as offsets from the single shortest path heuristic.
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.EnumeratedPDB.Context">
+            <summary>
+            Encapsulates the two file streams we will be using as we are
+            building the pattern database. These two file streams represent the
+            nodes we will be reading for input, and the resulting generated
+            children nodes which will be outputted to the second file. We also
+            include certain measures such as the number of nodes that have been
+            written to a file, and the filenames.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.EnumeratedPDB.Context.nextLevel">
+            <summary>
+            After processing all of the nodes in one level, and writing the
+            resulting children nodes to the next file, we are now ready to
+            process the next file. Therefore, we simply swap the input for
+            the output file stream.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.EnumeratedPDB.estimateSize">
+            <summary>
+            The size of an enumerative pattern database based on our member
+            variables is simply as many permutations as possible given the
+            number of agents and the free locations. Note there may be some
+            additional constant overhead associated with this class.
+            </summary>
+            <returns>An estimate of the amount of memory required for this
+            pattern database in units of bytes.</returns>
+        </member>
+        <member name="M:CPF_experiment.EnumeratedPDB.init(CPF_experiment.ProblemInstance,System.Collections.Generic.List{System.UInt32})">
+            <summary>
+            The initialization function accepts a problem instance describing
+            the original full problem, and a list of agents for which this
+            pattern database will be responsible for. This must be called prior
+            to a call to build the pattern database.
+            </summary>
+            <param name="pi">A description of the problem instance.</param>
+            <param name="vAgents">The agents that we should be responsible for.
+            Each entry in the list is an index to ProblemInstance.m_vAgents
+            pointing to which agents we care about.</param>
+        </member>
+        <member name="M:CPF_experiment.EnumeratedPDB.build">
+            <summary>
+            Builds the pattern database, storing the heuristic table in memory.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.EnumeratedPDB.h(CPF_experiment.WorldState)">
+            <summary>
+            Returns the heuristic estimate for the subset of agents of the
+            given state that this pattern database is responsible for.
+            </summary>
+            <param name="s">The current state.</param>
+            <returns>The PDB entry for the given state.</returns>
+        </member>
+        <member name="M:CPF_experiment.EnumeratedPDB.hash(CPF_experiment.WorldState)">
+            <summary>
+            While working on the original search problem, we have to only pay
+            attention to a subset of all of the agents in the current state.
+            Specifically, we only consider the agents listed in m_vAgents,
+            which are the agents that we've built the current pattern database
+            for. This differs from the buildHash function, which hashes all
+            agents in the given state.
+            </summary>
+            <param name="s">A state which includes all of the agents in the
+            original search problem.</param>
+            <returns>An index into the table of heuristic values.</returns>
+        </member>
+        <member name="M:CPF_experiment.EnumeratedPDB.computePermutations">
+            <summary>
+            We precompute the total number of permutations for a given number
+            of agents. We refer to these precomputed values when we call our
+            hash function.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.PDB.m_vAgents">
+            <summary>
+            The agents to extract from the state. Each value in this list is an
+            index into the Trevor_WorldState.allAgentsStates array. This is
+            ignored while we are building the pattern database (because it is
+            assumed that we are initialized by a root node that contains only
+            the agents we are interested in), but is used during the search effort
+            in the real problem.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.PDB.init(CPF_experiment.ProblemInstance,System.Collections.Generic.List{System.UInt32})">
+            <summary>
+            Initializes the pattern database by storing references to the
+            problem instance and also the subset of agents that the pattern
+            database pertains to.
+            </summary>
+            <param name="pi">The problem instance.</param>
+            <param name="vAgents">The agents that the pattern database should keep track of.</param>
+        </member>
+        <member name="M:CPF_experiment.PDB.estimateSize">
+            <summary>
+            Returns an estimate of the amount of memory in bytes that is
+            required to keep this PDB in memory. This is useful in
+            determining how many agents we should allocate to a particular
+            pattern database to efficiently utilize our available memory.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.PDB.Expand(CPF_experiment.WorldState,System.Collections.Generic.ICollection{CPF_experiment.WorldState})">
+            <summary>
+            Expands a node. This is done recursively - generating agent possibilities one at a time.
+            This includes:
+            - Generating the children
+            - Inserting them into OPEN
+            - Insert node into CLOSED
+            Why does a PDB need to know how to expand nodes? Seems like someone else's job
+            </summary>
+            <param name="currentNode">The node to expand</param>
+            <param name="children">The generated nodes will be filled into this collection</param>
+        </member>
+        <member name="M:CPF_experiment.PDB.Expand(CPF_experiment.WorldState,System.Int32,System.Collections.Generic.ICollection{CPF_experiment.WorldState},System.Collections.Generic.ICollection{CPF_experiment.Move})">
+            <summary>
+            Expands a node. This is done recursively - generating agent possibilities one at a time.
+            This includes:
+            - Generating the children
+            - Inserting them into OPEN
+            - Insert node into CLOSED
+            </summary>
+            <param name="currentNode">The node to expand</param>
+            <param name="agentIndex">The index of the agent to expand children for</param>
+            <param name="children">A list in which to set the children states</param>
+            <param name="previousMoves">A collection of moves performed by the previous agents in this time step (needed to verify that no collisions occur)</param>
+        </member>
+        <member name="M:CPF_experiment.PDB.IsValid(CPF_experiment.Move,System.Int32,System.Collections.Generic.ICollection{CPF_experiment.Move})">
+            <summary>
+            Check if the move is valid, i.e. not colliding into walls or other agents.
+            </summary>
+            <param name="possibleMove">The proposed move (to check if it is valid)</param>
+            <param name="agentNum">The index of the agent that is proposed to perform the move</param>
+            <param name="previousAgentMoves">A collection of moves that will be done by the other agents</param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.PDB.OutputStatisticsHeader(System.IO.TextWriter)">
+            <summary>
+            Prints header of statistics of a single run to the given output. 
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.PDB.OutputStatistics(System.IO.TextWriter)">
+            <summary>
+            Prints statistics of a single run to the given output.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.PDB.ClearStatistics">
+            <summary>
+            Clears statistics.
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.ProblemInstance">
+            <summary>
+            This class represents a cooperative pathfinding problem instance. This includes:
+            - The grid in which the agents are located
+            - An array of initial state for every agent.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.ProblemInstance.EXPORT_DELIMITER">
+            <summary>
+            Delimiter used for export/import purposes
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.ProblemInstance.parameters">
+            <summary>
+            This contains extra data of this problem instance (used for special problem instances, e.g. subproblems of a bigger problem instance).
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.ProblemInstance.m_vAgents">
+            <summary>
+            We keep a reference to the array of agents in the original problem.
+            This will only change when IndependenceDetection's algorithm determines in another
+            iteration that a new set of agents must be jointly planned due
+            to their mutual conflicts.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.ProblemInstance.singleAgentOptimalCosts">
+            <summary>
+            This is a matrix that contains the cost of the optimal path to the goal of every agent from any point in the grid.
+            The first dimension of the matrix is the number of agents.
+            The second dimension of the matrix is the cardinality of the location from which we want the shortest path.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.ProblemInstance.singleAgentOptimalMoves">
+            <summary>
+            This is a matrix that contains the best move towards the goal of every agent from any point in the grid.
+            The first dimension of the matrix is the number of agents.
+            The second dimension of the matrix is the cardinality of the location from which we want the shortest path.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.ProblemInstance.instanceId">
+            <summary>
+            This field is used to identify an instance when running a set of experiments
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.ProblemInstance.m_vCardinality">
+            <summary>
+            Enumerates all of the empty spots in the grid. The indices
+            correspond directly to those used in the grid, where the major
+            index corresponds to the x-axis and the minor index corresponds to
+            the y-axis.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.Subproblem(CPF_experiment.AgentState[])">
+            <summary>
+            Create a subproblem of this problem instance, in which only part of the agents are regarded.
+            </summary>
+            <param name="selectedAgents">The selected agent states that will be the root of the subproblem.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.Init(CPF_experiment.AgentState[],System.Boolean[][],System.Int32,System.Int32,System.UInt64[],System.Int32[0:,0:])">
+            <summary>
+            Initialize the members of this object, such that the given agent states are the start state of this instance.
+            </summary>
+            <param name="agentStartStates"></param>
+            <param name="grid"></param>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.ComputeSingleAgentShortestPaths">
+            <summary>
+            Compute the shortest path to the goal of every agent in the problem instance, from every location in the grid.
+            Current implementation is a simple breadth-first search from every location in the graph.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.GetSingleAgentOptimalCost(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns the length of the shortest path between a given coordinate and the goal location of the given agent.
+            </summary>
+            <param name="agentNum"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns>The length of the shortest path from x,y to the goal of the agent.</returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.GetSingleAgentOptimalCost(System.Int32,CPF_experiment.Move)">
+            <summary>
+            Returns the length of the shortest path between a given coordinate and the goal location of the given agent.
+            </summary>
+            <param name="agentNum"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns>The length of the shortest path from x,y to the goal of the agent.</returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.GetSingleAgentOptimalCost(CPF_experiment.AgentState)">
+            <summary>
+            Returns the length of the shortest path between a given agent's location and the goal of that agent.
+            </summary>
+            <param name="agent"></param>
+            <returns>The length of the shortest path between a given agent's location and the goal of that agent</returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.GetSingleAgentOptimalMove(CPF_experiment.AgentState)">
+            <summary>
+            Returns the optimal move towards the goal of the given agent. Move isn't necessarily unique.
+            </summary>
+            <param name="agent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.GetSingleAgentOptimalPlan(CPF_experiment.AgentState,System.Collections.Generic.Dictionary{System.Int32,System.Int32}@,System.Collections.Generic.Dictionary{System.Int32,System.Collections.Generic.List{System.Int32}}@)">
+            <summary>
+            The returned plan wasn't constructed considering a CAT, so it's possible there's an alternative plan with the same cost and less collisions.
+            </summary>
+            <param name="agentState"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.GetNumOfAgents">
+            <summary>
+            Utility function that returns the number of agents in this problem instance.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.GetMaxX">
+            <summary>
+            Utility function that returns the x dimension of the grid
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.GetMaxY">
+            <summary>
+            Utility function that returns the y dimension of the grid
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.Init(CPF_experiment.AgentState[])">
+            <summary>
+            Roni: I am not sure when should this be used. It doesn't initialize the grid, 
+            so I assume that this is meant to be used when a single problem instance object is used and 
+            modified during the search. This should be used with caution, as we are talking about references
+            (so if one will change m_vAgents, all the other references to that instance will also point to the same, changed, instance.
+            </summary>
+            <param name="ags"></param>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.Import(System.String)">
+            <summary>
+            Imports a problem instance from a given file
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.Export(System.String)">
+            <summary>
+            Exports a problem instance to a file
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.GetCardinality(CPF_experiment.Move)">
+            <summary>
+            Given an agent located at the nth location on our board that is
+            not occupied by an obstacle, we return n.
+            </summary>
+            <param name="location">An agent's current location.</param>
+            <returns>n, where the agent is located at the nth non-obstacle
+            location in our grid.</returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.IsValid(CPF_experiment.Move)">
+            <summary>
+            Check if the tile is valid, i.e. in the grid and without an obstacle.
+            NOT checking the direction. A Move could be declared valid even if it came to an edge tile from outside the grid!
+            NOT checking if the move is illegal
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns>True if the given location is a valid grid location with no obstacles</returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.IsValid(CPF_experiment.TimedMove)">
+            <summary>
+            Also checks if the move is illegal
+            </summary>
+            <param name="toCheck"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CPF_experiment.Move">
+            <summary>
+            This class represents a single move of an agent. 
+            It includes the target location of the move and the direction of the move.
+            The start location can be extracted using the direction, with the method GetSource().
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Move.Direction.NO_DIRECTION">
+            <summary>
+            This constant is set to the direction field to mark that this move does not hold a direction.
+            <remarks> 
+            Directionless moves are a poor design choice instead of making a class that represents a 2D point,
+            but will probably be more efficient.
+            </remarks>
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Move.deltasToDirection">
+            <remarks>
+            Deltas have to be used +1
+            </remarks>
+        </member>
+        <member name="M:CPF_experiment.Move.GetNextMoves">
+            <summary>
+            A generator yielding new adjacent Moves
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.Move.Update(CPF_experiment.Move.Direction)">
+            <summary>
+            Change coordinates in specified direction.
+            </summary>
+            <param name="direction"></param>
+        </member>
+        <member name="M:CPF_experiment.Move.GetMoveWithoutDirection">
+            <summary>
+            Returns a copy of this move, where the direction is set to Move.Direction.NO_DIRECTION
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.Move.setOppositeMove">
+            <summary>
+            Changes this move to represent its opposite. Warning: Changes the hash. Not safe after the object is put in a hash table!
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Move.RemoveDirection">
+            <summary>
+            Removes the direction of this Move
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Move.IsColliding(CPF_experiment.Move)">
+            <summary>
+            Check if the given move collides with this move.
+            This includes:
+            1. Head on collision
+            2. When other move targets the same location.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.Move.IsColliding(System.Int32,System.Int32,CPF_experiment.Move.Direction)">
+            <summary>
+            Check if colliding with an agent moving to the given x,y from the given direction.
+            This includes:
+            1. Head on collision
+            2. When other move targets the same location.
+            TODO: When diagonal moves are allowed, need to also check for diagonal collisions, e.g., (0,0)->(1,1) and (0,1)->(1,0) and such.
+            No rush, though. We don't currently work with diagonal moves.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.Move.Equals(System.Object)">
+            <summary>
+            Compare two Move objects. 
+            If one of the Move objects does not have a direction that is set (i.e. direction == Move.Direction.NO_DIRECTION)
+            then the direction part of the Move is ignored.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CPF_experiment.Program">
+            <summary>
+            This is the entry point of the application. 
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Program.SimpleRun">
+            <summary>
+            Simplest run possible with a randomly generated problem instance.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Program.RunInstance(System.String)">
+            <summary>
+            Runs a single instance, imported from a given filename.
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:CPF_experiment.Program.RunExperimentSet(System.Int32[],System.Int32[],System.Int32[],System.Int32)">
+            <summary>
+            Runs a set of experiments.
+            This function will generate a random instance (or load it from a file if it was already generated)
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Program.RunDragonAgeExperimentSet(System.Int32,System.String[])">
+            <summary>
+            Dragon Age experiment
+            </summary>
+            <param name="numInstances"></param>
+            <param name="mapFileNames"></param>
+        </member>
+        <member name="M:CPF_experiment.Program.Main(System.String[])">
+            <summary>
+            This is the starting point of the program. 
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.Run">
+            <summary>
+            This class is responsible for running the experiments.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Run.RESULTS_DELIMITER">
+            <summary>
+            Delimiter character used when writing the results of the runs to the output file.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Run.RANDOM_WALK_STEPS">
+            <summary>
+            Number of random steps performed when generating a new problem instance for choosing a start-goal pair.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Run.startTime">
+            <summary>
+            Indicates the starting time in ms for timing the different algorithms.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Run.resultsWriter">
+            <summary>
+            This hold an open stream to the results file.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Run.rand">
+            <summary>
+            EH: I introduced this variable so that debugging and experiments
+            can have deterministic results.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Run.Dispose(System.Boolean)">
+            <summary>
+            Calls resultsWriter.Dispose()
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Run.OpenResultsFile(System.String)">
+            <summary>
+            Open the results file for output. Currently the file is opened in append mode.
+            </summary>
+            <param name="fileName">The name of the results file</param>
+        </member>
+        <member name="M:CPF_experiment.Run.CloseResultsFile">
+            <summary>
+            Closes the results file.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Run.solvers">
+            <summary>
+            all types of algorithms to be run
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Run.heuristics">
+            <summary>
+            all types of heuristics used
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.Run.outOfTimeCounters">
+            <summary>
+            Counts the number of times each algorithm went out of time consecutively
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Run.#ctor">
+            <summary>
+            Construct with chosen algorithms.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Run.GenerateProblemInstance(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Generates a problem instance, including a board, start and goal locations of desired number of agents
+            and desired precentage of obstacles
+            TODO: Refactor to use operators.
+            </summary>
+            <param name="gridSize"></param>
+            <param name="agentsNum"></param>
+            <param name="obstaclesNum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.Run.GenerateDragonAgeProblemInstance(System.String,System.Int32)">
+            <summary>
+            Generates a problem instance based on a DAO map file.
+            TODO: Fix code dup with GenerateProblemInstance and Import later.
+            </summary>
+            <param name="agentsNum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.Run.SolveGivenProblem(CPF_experiment.ProblemInstance)">
+            <summary>
+            Solve given instance with a list of algorithms 
+            </summary>
+            <param name="instance">The instance to solve</param>
+        </member>
+        <member name="M:CPF_experiment.Run.run(CPF_experiment.ISolver,CPF_experiment.ProblemInstance)">
+            <summary>
+            Solve a given instance with the given solver
+            </summary>
+            <param name="solver">The solver</param>
+            <param name="instance">The problem instance that will be solved</param>
+        </member>
+        <member name="M:CPF_experiment.Run.PrintResultsFileHeader">
+            <summary>
+            Print the header of the results file
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Run.PrintStatistics(CPF_experiment.ProblemInstance,CPF_experiment.ISolver,System.Double)">
+            <summary>
+            Print the solver statistics to the results file.
+            </summary>
+            <param name="instance">The problem instance that was solved. Not used!</param>
+            <param name="solver">The solver that solved the problem instance</param>
+            <param name="runtimeInMillis">The time it took the given solver to solve the given instance</param>
+        </member>
+        <member name="T:CPF_experiment.Silver">
+            <summary>
+            Runs Silver's CA*.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.Silver.OutputStatistics(System.IO.TextWriter)">
+            <summary>
+            Prints statistics of a single run to the given output. 
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.CostTreeSearchSolver">
+            <summary>
+            This class solves an instance of the MAPF problem using the cost tree search algorithm.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CostTreeSearchSolver.GetName">
+            <summary>
+            Return the name of the solver, useful for outputting results.
+            </summary>
+            <returns>The name of the solver</returns>
+        </member>
+        <member name="M:CPF_experiment.CostTreeSearchSolver.Setup(CPF_experiment.ProblemInstance,System.Int32,CPF_experiment.Run,System.Int32)">
+            <summary>
+            Setup the relevant data structures for a run.
+            </summary>
+            <param name="problemInstance"></param>
+            <param name="minDepth"></param>
+            <param name="runner"></param>
+            <param name="minCost">Not taken into account, just added to comply with ICbsSolver</param>
+        </member>
+        <member name="M:CPF_experiment.CostTreeSearchSolver.Clear">
+            <summary>
+            Clears the relevant data structures and variables to free memory usage.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CostTreeSearchSolver.GetSolutionCost">
+            <summary>
+            Returns the cost of the solution found, or error codes otherwise.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CostTreeSearchSolver.OutputStatistics(System.IO.TextWriter)">
+            <summary>
+            Prints statistics of a single run to the given output. 
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CostTreeSearchSolver.Solve">
+            <summary>
+            Solves the instance that was set by a call to Setup()
+            </summary>
+            <param name="runner"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CPF_experiment.CostTreeNodeSolver">
+            <summary>
+            This class tries to find a solution to a problem instance of a given cost. 
+            (this is used in the CostTreeSearchSolver)
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CostTreeNodeSolver.#ctor(CPF_experiment.ProblemInstance,CPF_experiment.Run,System.Int32[],CPF_experiment.CostTreeNode)">
+            <summary>
+            
+            </summary>
+            <param name="problem"></param>
+            <param name="runner"></param>
+            <param name="agentNums"></param>
+            <param name="costsNode">Of all the agents, not just the ones selected</param>
+        </member>
+        <member name="M:CPF_experiment.CostTreeNodeSolver.#ctor(CPF_experiment.ProblemInstance,CPF_experiment.CostTreeNode,CPF_experiment.Run)">
+            <summary>
+            Automatically calls Setup with the given costsNode
+            </summary>
+            <param name="problem"></param>
+            <param name="costsNode">TODO: Maybe just pass the array of costs here?</param>
+            <param name="runner"></param>
+        </member>
+        <member name="M:CPF_experiment.CostTreeNodeSolver.Solve(System.Collections.Generic.Dictionary{CPF_experiment.TimedMove,System.Collections.Generic.List{System.Int32}},System.Collections.Generic.Dictionary{CPF_experiment.TimedMove,System.Collections.Generic.List{System.Int32}})">
+            <summary>
+            Tries to find a solution for the agents with the given cost.
+            </summary>
+            <returns>The solution if found or null otherwise</returns>
+        </member>
+        <member name="T:CPF_experiment.CostTreeNodeSolverOldMatching">
+            <summary>
+            Use this one!
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.CostTreeNodeSolverOldMatching.Solve(System.Collections.Generic.Dictionary{CPF_experiment.TimedMove,System.Collections.Generic.List{System.Int32}},System.Collections.Generic.Dictionary{CPF_experiment.TimedMove,System.Collections.Generic.List{System.Int32}})">
+            <summary>
+            Prunes the individual agent MDDs and, if possible, matches them to return a non-conflicting configuration of
+            paths of the given costs.
+            </summary>
+            <param name="conflictTable"></param>
+            <param name="CBS_CAT"></param>
+            <returns>
+            null if no solution is found.
+            </returns>
+        </member>
+        <member name="M:CPF_experiment.CostTreeNodeSolverOldMatching.Prune">
+            <summary>
+            Prunes the individual agent MDDs and prepares data for matching them
+            </summary>
+            <returns>Whether everything was pruned</returns>
+        </member>
+        <member name="T:CPF_experiment.TimedMove">
+            <summary>
+            Describes a Move at a given timestep.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.TimedMove.GetNextMoves">
+            <summary>
+            A generator yielding new adjacent TimedMoves. Reimplemented to avoid creating temporary Moves.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.TimedMove.Update(CPF_experiment.Move.Direction)">
+            <summary>
+            Change coordinates in specified direction and increment timestep.
+            </summary>
+            <param name="direction"></param>
+        </member>
+        <member name="M:CPF_experiment.TimedMove.IsColliding(CPF_experiment.TimedMove)">
+            <summary>
+            Check if the given move collides with this move.
+            This includes:
+            0. Same time
+            1. Head on collision
+            2. When other moves target the same location.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.TimedMove.GetOppositeMove">
+            <summary>
+            Reimplemented to avoid creating temporary Move objects
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.TimedMove.setup(CPF_experiment.Move,System.Int32)">
+            <summary>
+            Isn't used anywhere
+            </summary>
+            <param name="cpy"></param>
+            <param name="time"></param>
+        </member>
+        <member name="M:CPF_experiment.TimedMove.setup(CPF_experiment.TimedMove)">
+            <summary>
+            
+            </summary>
+            <param name="cpy"></param>
+        </member>
+        <member name="M:CPF_experiment.TimedMove.setup(System.Int32,System.Int32,CPF_experiment.Move.Direction,System.Int32)">
+            <summary>
+            Almost isn't used anywhere
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="direction"></param>
+            <param name="time"></param>
+        </member>
+        <member name="M:CPF_experiment.TimedMove.GetColliding(System.Collections.Generic.IReadOnlyDictionary{CPF_experiment.TimedMove,System.Int32})">
+            <summary>
+            Gets a dictionary mapping TimedMoves to the agent that already made them
+            and returns a list of agents this TimedMove collides with.
+            </summary>
+            <param name="timedMovesToAgentIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.TimedMove.GetColliding(System.Collections.Generic.IReadOnlyDictionary{CPF_experiment.TimedMove,System.Collections.Generic.List{System.Int32}})">
+            <summary>
+            Gets a dictionary mapping TimedMoves to the agents that already made them
+            and returns a list of agents this TimedMove collides with.
+            </summary>
+            <param name="timedMovesToAgentNumLists"></param>
+            <returns></returns>
+        </member>
+        <member name="F:CPF_experiment.IndependenceDetection.plan">
+            <summary>
+            The complete plan for all the agents that was found.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.IndependenceDetection.CalculateJointPlan">
+            <summary>
+            Calculate the full plan for all the agents that has been found by the algorithm
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.IndependenceDetection.OutputStatistics(System.IO.TextWriter)">
+            <summary>
+            Prints statistics of a single run to the given output. 
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.IndependenceDetection.GetMaxGroupSize">
+            <summary>
+            Also calculates min group size and max solution depth on the way.
+            FIXME: Code dup!
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.IndependenceDetection.FindConflictingGroups">
+            <summary>
+            Simulates the execution of the plans found for the different groups. 
+            If there are conflicting plans - return the conflicting groups.
+            </summary>
+            <returns>A conflict object with data about the found conflict, or null if no conflict exists</returns>
+        </member>
+        <member name="M:CPF_experiment.IndependenceDetection.SimpleID(CPF_experiment.Run)">
+            <summary>
+            Search for an optimal solution using the Simple Independence Detection algorithm in Trevor Standley's paper.
+            </summary>
+            <param name="runner"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.IndependenceDetection.ImprovedID(CPF_experiment.Run)">
+            <summary>
+            Search for an optimal solution using the Independence Detection algorithm in Standley's paper,
+            which utilises a CAT.
+            </summary>
+            <param name="runner"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.IndependenceDetection.JoinGroups(CPF_experiment.Conflict)">
+            <summary>
+            Join the conflicting groups into a single group
+            </summary>
+            <param name="conflict">An object that describes the conflict</param>
+            <returns>The composite group of agents</returns>
+        </member>
+        <member name="M:CPF_experiment.IndependenceDetection.Solve">
+            <summary>
+            Run the A* algorithm with Standley's ID and OD improvements.
+            </summary>
+            <returns>true if optimal solution has been found</returns>
+        </member>
+        <member name="T:CPF_experiment.AgentsGroup">
+            <summary>
+            This class represents a group of agents that need to be solved together.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AgentsGroup.Solve(CPF_experiment.Run)">
+            <summary>
+            Solve the group of agents together.
+            </summary>
+            <param name="runner"></param>
+            <returns>true if optimal solution for the group of agents were found, false otherwise</returns>
+        </member>
+        <member name="M:CPF_experiment.AgentsGroup.GetPlan">
+            <summary>
+            Returns the plan for the group of agents. This is a collection of Moves for every time step until all the agents reach their goal.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AgentsGroup.Join(CPF_experiment.AgentsGroup)">
+            <summary>
+            Joins this and another group to a single group with all of the agents together.
+            </summary>
+            <param name="other"></param>
+            <returns>A new Trevor_Group object with the agents from both this and the other group</returns>
+        </member>
+        <member name="M:CPF_experiment.AgentsGroup.Size">
+            <summary>
+            Returns the number of agents in the group.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.AgentsGroup.ReplanUnderConstraints(CPF_experiment.Plan,CPF_experiment.Run)">
+            <summary>
+            Tries to find a plan for this group, that will not conflict with the given plan,
+            and still has the same solution cost as the current solution cost.
+            This is used in the ImprovedID() method.
+            </summary>
+            <param name="plan"></param>
+            <param name="runner"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CPF_experiment.WorldState">
+            <summary>
+            Describes a node in the A* search space.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldState.potentialConflictsCount">
+            <summary>
+            For Independence Detection only
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldState.cbsInternalConflicts">
+            <summary>
+            Maps from agent num to the number of times the path up to this node collides with that agent
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldState.conflictTimes">
+            <summary>
+            Maps from agent num to the time of the first conflict with it
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldState.minDepth">
+            <summary>
+            The min depth (makespan) from which a node may be considered a goal.
+            TODO: Consider moving out of the node object to a static variable or something.
+                  It doesn't change between nodes.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldState.minCost">
+            <summary>
+            The min cost (g) from which a node may be considered a goal.
+            TODO: Consider moving out of the node object to a static variable or something.
+                  It doesn't change between nodes.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldState.currentMoves">
+            <summary>
+            The last move of all agents that have already moved in this turn.
+            Used for making sure the next agent move doesn't collide with moves already made.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldState.expandedCountWhenGenerated">
+            <summary>
+            For computing expansion delay
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldState.collisionSets">
+            <summary>
+            For MStar.
+            Disjoint sets of agent indices, since only internal agents are considered.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.WorldState.#ctor(CPF_experiment.AgentState[],System.Int32,System.Int32)">
+            <summary>
+            Create a state with the given state for every agent.
+            </summary>
+            <param name="allAgentsState"></param>
+        </member>
+        <member name="M:CPF_experiment.WorldState.#ctor(CPF_experiment.WorldState)">
+            <summary>
+            Copy constructor.
+            </summary>
+            <param name="cpy"></param>
+        </member>
+        <member name="M:CPF_experiment.WorldState.#ctor(CPF_experiment.AgentState[],System.Collections.Generic.List{System.UInt32})">
+            <summary>
+            Creates a new state by extracting a subset of the agents from
+            the original Trevor_WorldState. We overload the constructor because
+            while building our pattern database, we rewrite the problem and
+            therefore need to make a deep copy of the state data structures so
+            as to not overwrite the original problem. The ultimate solution
+            would be to rework the code to remove static variables so that we
+            can instantiate subproblems without affecting the original data
+            structures.
+            </summary>
+            <param name="allAgentsState">A set of agent states in the original problem.</param>
+            <param name="vAgents">A list of indices referring to the subset of agents we want to extract.</param>
+        </member>
+        <member name="M:CPF_experiment.WorldState.SetSolution(CPF_experiment.SinglePlan[])">
+            <summary>
+            Set the optimal solution of this node as a problem instance.
+            </summary>
+            <param name="solution"></param>
+        </member>
+        <member name="M:CPF_experiment.WorldState.GetPlan">
+            <summary>
+            Returns the optimal plan to the goal through this node, if this is a goal node (of any kind),
+            else returns the optimal plan to this node.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldState.GetGoalCost">
+            <summary>
+            Returns the optimal cost to the goal from the start through this node.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldState.SetGoalCost(System.Int32)">
+            <summary>
+            Set the optimal cost from the start to the goal through this node
+            </summary>
+            <param name="cost"></param>
+        </member>
+        <member name="M:CPF_experiment.WorldState.SetSingleCosts(System.Int32[])">
+            <summary>
+            Set the optimal cost from the start to the goal through this node for every agent
+            
+            </summary>
+            <param name="cost"></param>
+        </member>
+        <member name="M:CPF_experiment.WorldState.CompareTo(CPF_experiment.IBinaryHeapItem)">
+            <summary>
+            Used when WorldState objects are put in the open list priority queue
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldState.CalculateG">
+            <summary>
+            Calculate and set the g of the state as the sum of the different agent g values.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.WorldState.Clear">
+            <summary>
+            Prepare for re-insertion into the open list
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.WorldState.GetAgentsMoves">
+            <summary>
+            Returns the last move of all the agents in this state.
+            </summary>
+            <returns>A list of Moves</returns>
+        </member>
+        <member name="M:CPF_experiment.WorldState.GetSingleAgentMove(System.Int32)">
+            <summary>
+            Returns the last move of the requested agent.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldState.GetIndexInHeap">
+            <summary>
+            BH_Item implementation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldState.SetIndexInHeap(System.Int32)">
+            <summary>
+            BH_Item implementation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldState.isValid">
+            <summary>
+            Checks for internal conflicts
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldState.GetHashCode">
+            <summary>
+            Only the agent states are used in the hash.
+            The g, makespan, h, potentialConflictsCount, cbsInternalConflictsCount and others are ignored, as neccesary.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldState.Equals(System.Object)">
+            <summary>
+            Only the AgentStates are compared.
+            g, makespan, h, potentialConflictsCount, cbsInternalConflictsCount and others are ignored, as necessary.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldState.UpdateConflictCounts(System.Collections.Generic.IReadOnlyDictionary{CPF_experiment.TimedMove,System.Collections.Generic.List{System.Int32}})">
+            <summary>
+            Counts the number of times this node collides with each agent move in the conflict avoidance table.
+            </summary>
+            <param name="conflictAvoidance"></param>
+            <returns></returns>
+        </member>
+        <member name="F:CPF_experiment.WorldStateForPartialExpansion.targetDeltaF">
+            <summary>
+            Starts at zero, incremented after a node is expanded once. Set on Expand.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldStateForPartialExpansion.remainingDeltaF">
+            <summary>
+            Remaining delta F towards targetDeltaF. Reset on Expand.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldStateForPartialExpansion.singleAgentDeltaFs">
+            <summary>
+            For each agent and each direction it can go, the effect of that move on F
+            byte.MaxValue means this is an illegal move. Only computed on demand.
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldStateForPartialExpansion.maxDeltaF">
+            <summary>
+            Only computed on demand
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldStateForPartialExpansion.fLookup">
+            <summary>
+            Per each agent and delta F, has 1 if that delta F is achievable by moving the agents starting from this one on,
+            -1 if it isn't, and 0 if we don't know yet.
+            Only computed on demand
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.WorldStateForPartialExpansion.#ctor(CPF_experiment.AgentState[],System.Int32,System.Int32)">
+            <summary>
+            Create a state with the given state for every agent.
+            </summary>
+            <param name="allAgentsState"></param>
+        </member>
+        <member name="M:CPF_experiment.WorldStateForPartialExpansion.#ctor(CPF_experiment.WorldStateForPartialExpansion)">
+            <summary>
+            Copy constructor
+            </summary>
+            <param name="cpy"></param>
+        </member>
+        <member name="M:CPF_experiment.WorldStateForPartialExpansion.ClearExpansionData">
+            <summary>
+            From generated nodes. Allows expansion table to be garbage collected before all generated nodes are expanded.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.WorldStateForPartialExpansion.calcSingleAgentDeltaFs(CPF_experiment.ProblemInstance,CPF_experiment.WorldStateForPartialExpansion.ValidityChecker)">
+            <summary>
+            Calculates for each agent and each direction it can go, the effect of that move on F. Illegal moves get byte.MaxValue.
+            Also calcs maxDeltaF.
+            Implicitly uses the SIC heuristic.
+            </summary>
+            <param name="problem">For GetSingleAgentOptimalCost</param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldStateForPartialExpansion.hasMoreChildren">
+            <summary>
+            Returns whether all possible f values were generated from this node already
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldStateForPartialExpansion.existsChildForF(System.Int32,System.UInt16)">
+            <summary>
+            Recursive func. Kind of dynamic programming as it updates the lookup table as it goes to refrain from computing answers twice.
+            </summary>
+            <param name="agentNum"></param>
+            <param name="remainingTargetDeltaF"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldStateForPartialExpansion.UpdateRemainingDeltaF(System.Int32)">
+            <summary>
+            An agent was moved between calculating the singleAgentDeltaFs and this call.
+            Using the data that describes its delta F potential before the move.
+            </summary>
+            <param name="agentIndex"></param>
+        </member>
+        <member name="M:CPF_experiment.WorldStateForPartialExpansion.Clear">
+            <summary>
+            For fully expanded nodes.
+            Notice ClearExpansionData does a similar thing, but for different reasons.
+            </summary>
+        </member>
+        <member name="T:CPF_experiment.WorldStateWithOD">
+            <summary>
+            This class represents a state in the A* search with operator decomposition, as proposed by IndependenceDetection Scott Standley's AAAI paper in 2010.
+            More specifically, states can represent a partial move, in which only some of the agents have moved
+            and the other have not yet moved in this turn. 
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.WorldStateWithOD.agentTurn">
+            <summary>
+            Marks the index of the agent that will move next. 
+            All agents with index less than agentTurn are assumed to have already chosen their move for this time step,
+            while agents with higher index have not chosen their move yet.
+            </summary>
+        </member>
+        <member name="M:CPF_experiment.WorldStateWithOD.#ctor(CPF_experiment.AgentState[],System.Collections.Generic.List{System.UInt32})">
+            <summary>
+            Used for PDB stuff only
+            </summary>
+            <param name="states"></param>
+            <param name="relevantAgents"></param>
+        </member>
+        <member name="M:CPF_experiment.WorldStateWithOD.SetSolution(CPF_experiment.SinglePlan[])">
+            <summary>
+            Set the optimal solution of this node as a problem instance.
+            </summary>
+            <param name="solution"></param>
+        </member>
+        <member name="M:CPF_experiment.WorldStateWithOD.GetHashCode">
+            <summary>
+            Returns a hash value for the given state (used in Hash based data structures).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldStateWithOD.CompareTo(CPF_experiment.IBinaryHeapItem)">
+            <summary>
+            Used when WorldStateWithOD objects are put in the open list priority queue.
+            All other things being equal, prefers nodes where more agents have moved.
+            G is already preferred, but this helps when the last move was a WAIT at the
+            goal, which doesn't increment G.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.WorldStateWithOD.UpdateConflictCounts(System.Collections.Generic.IReadOnlyDictionary{CPF_experiment.TimedMove,System.Collections.Generic.List{System.Int32}})">
+            <summary>
+            Counts for last agent to move only, the counts from the previous agents to move are accumulated from the parent node.
+            </summary>
+            <param name="conflictAvoidance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ExtensionMethods.MyExtensions.MaxByKeyFunc``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Like Python's max(x, key=func)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="R"></typeparam>
+            <param name="sequence"></param>
+            <param name="mapping"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ExtensionMethods.MyExtensions.IndicesOfMax``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Based on MaxIndex By Jon Skeet: http://stackoverflow.com/questions/462699/how-do-i-get-the-index-of-the-highest-value-in-an-array-using-linq
+            </summary>
+            <param name="sequence"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

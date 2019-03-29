@@ -1,0 +1,10 @@
+C:\Users\USER\Desktop\desktop\eli.boyarski-mapf-438b78fb27c0\eli.boyarski-mapf-438b78fb27c0\obj\Debug\CPF-experiment.csprojAssemblyReference.cache
+C:\Users\USER\Desktop\desktop\eli.boyarski-mapf-438b78fb27c0\eli.boyarski-mapf-438b78fb27c0\obj\Debug\CPF_experiment.Properties.Resources.resources
+C:\Users\USER\Desktop\desktop\eli.boyarski-mapf-438b78fb27c0\eli.boyarski-mapf-438b78fb27c0\obj\Debug\CPF-experiment.csproj.GenerateResource.cache
+C:\Users\USER\Desktop\desktop\eli.boyarski-mapf-438b78fb27c0\eli.boyarski-mapf-438b78fb27c0\obj\Debug\CPF-experiment.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\desktop\eli.boyarski-mapf-438b78fb27c0\eli.boyarski-mapf-438b78fb27c0\bin\Debug\d0.exe.config
+C:\Users\USER\Desktop\desktop\eli.boyarski-mapf-438b78fb27c0\eli.boyarski-mapf-438b78fb27c0\bin\Debug\d0.xml
+C:\Users\USER\Desktop\desktop\eli.boyarski-mapf-438b78fb27c0\eli.boyarski-mapf-438b78fb27c0\bin\Debug\d0.exe
+C:\Users\USER\Desktop\desktop\eli.boyarski-mapf-438b78fb27c0\eli.boyarski-mapf-438b78fb27c0\bin\Debug\d0.pdb
+C:\Users\USER\Desktop\desktop\eli.boyarski-mapf-438b78fb27c0\eli.boyarski-mapf-438b78fb27c0\obj\Debug\d0.exe
+C:\Users\USER\Desktop\desktop\eli.boyarski-mapf-438b78fb27c0\eli.boyarski-mapf-438b78fb27c0\obj\Debug\d0.pdb
