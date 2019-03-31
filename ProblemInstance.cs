@@ -502,9 +502,9 @@ namespace CPF_experiment
         /// <returns>True if the given location is a valid grid location with no obstacles</returns>
         public bool IsValid(Move aMove)
         {
-            return IsValidTile(aMove.x, aMove.y);
+            return !HasObstacleAt(aMove.x, aMove.y);
         }
-
+            
         /// <summary>
         /// Also checks if the move is illegal
         /// </summary>
@@ -512,7 +512,7 @@ namespace CPF_experiment
         /// <returns></returns>
         public bool IsValid(TimedMove toCheck)
         {
-            if (IsValidTile(toCheck.x, toCheck.y) == false)
+            if (HasObstacleAt(toCheck.x, toCheck.y))
                 return false;
 
             if (parameters.ContainsKey(IndependenceDetection.ILLEGAL_MOVES_KEY))
@@ -525,13 +525,13 @@ namespace CPF_experiment
             return true;
         }
 
-        public bool IsValidTile(int x, int y)
+        public bool HasObstacleAt(int x, int y)
         {
             if (x < 0 || x >= GetMaxX())
-                return false;
+                return true;
             if (y < 0 || y >= GetMaxY())
-                return false;
-            return !m_vGrid[x][y];
+                return true;
+            return m_vGrid[x][y];
         }
 
         public override string ToString()

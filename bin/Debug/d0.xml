@@ -480,6 +480,22 @@
             <param name="item"></param>
             <returns></returns>
         </member>
+        <member name="T:CPF_experiment.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CPF_experiment.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
         <member name="M:CPF_experiment.RandomChoiceOfHeuristic.#ctor(CPF_experiment.HeuristicCalculator,CPF_experiment.HeuristicCalculator,System.Double,System.Int32)">
             <summary>
             
@@ -1552,22 +1568,6 @@
         <member name="T:CPF_experiment.AStarWithRID">
             <summary>
             This Solver runs A* but from time to time tries to solve completely the expanded node, by using Standley's independent detection.
-            </summary>
-        </member>
-        <member name="T:CPF_experiment.Properties.Resources">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:CPF_experiment.Properties.Resources.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:CPF_experiment.Properties.Resources.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
             </summary>
         </member>
         <member name="T:CPF_experiment.SumIndividualCosts">
