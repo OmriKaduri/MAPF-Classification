@@ -13,14 +13,14 @@ namespace CPF_experiment
         public enum Direction : int
         {
             Wait = 0,
-            North,
-            East,
-            South,
-            West,
-            NorthEast,
-            SouthEast,
-            SouthWest,
-            NorthWest,
+            North = 1,
+            East = 2,
+            South = 3,
+            West = 4,
+            NorthEast = 5,
+            SouthEast = 6,
+            SouthWest = 7,
+            NorthWest= 8,
             /// <summary>
             /// This constant is set to the direction field to mark that this move does not hold a direction.
             /// <remarks> 
@@ -57,7 +57,7 @@ namespace CPF_experiment
             this.direction = cpy.direction;
         }
 
-        protected static readonly int[,] directionToDeltas = {
+        protected static readonly int[,] directionToDeltas = { //First entry means Y-axis (-1 North, 1 South), Second entry means X-axis (-1 West, 1 East)
             {0,   0, }, // Wait
             {-1,  0, }, // N
             {0,   1, }, // E
@@ -71,7 +71,8 @@ namespace CPF_experiment
         };
 
         // This exists for the marginal gain of not having to lookup the opposite direction and then its deltas
-        protected static readonly int[,] directionToOppositeDeltas = {
+        // IMPORTANT to keep same indices as directionToDeltas. TODO: Can't be saved with *-1?
+        protected static readonly int[,] directionToOppositeDeltas = { 
             {0,   0, }, // Wait to Wait
             {1,   0, }, // N to S
             {0,  -1, }, // E to W

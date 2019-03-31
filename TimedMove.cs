@@ -31,8 +31,9 @@ namespace CPF_experiment
                 directions = Move.validDirectionsNoDiag;
             foreach (Direction op in directions)
             {
-                yield return new TimedMove(this.x + Move.directionToDeltas[(int)op, 0],
-                                           this.y + Move.directionToDeltas[(int)op, 1], op, this.time + 1);
+                yield return new TimedMove(x: this.x + Move.directionToDeltas[(int)op, 0],
+                                           y: this.y + Move.directionToDeltas[(int)op, 1],
+                                           direction: op, time: this.time + 1);
             }
         }
 

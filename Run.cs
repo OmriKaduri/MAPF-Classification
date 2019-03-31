@@ -568,12 +568,14 @@ namespace CPF_experiment
             bool[][] grid = new bool[gridSize][];
             bool[][] goals = new bool[gridSize][];
 
-            // Generate a random grid
+
             for (int i = 0; i < gridSize; i++)
             {
                 grid[i] = new bool[gridSize];
                 goals[i] = new bool[gridSize];
             }
+
+            // Generate random obstacles on grid
             for (int i = 0; i < obstaclesNum; i++)
             {
                 x = rand.Next(gridSize);
@@ -588,7 +590,7 @@ namespace CPF_experiment
             {
                 x = rand.Next(gridSize);
                 y = rand.Next(gridSize);
-                if (goals[x][y] || grid[x][y])
+                if (goals[x][y] || grid[x][y]) // Already an obstacle or goal
                     i--;
                 else
                 {
@@ -647,7 +649,8 @@ namespace CPF_experiment
         public ProblemInstance GenerateDragonAgeProblemInstance(string mapFileName, int agentsNum)
         {
             Debug.WriteLine(string.Format("Generating instance with {0} agents", agentsNum));
-            TextReader input = new StreamReader(mapFileName);
+            TextReader input = new StreamReader(Path.Combine(Directory.GetCurrentDirectory(), mapFileName));
+            //"C:\\Users\\omri\\Projects\\study\\2019semB\\agentsPlanning\\MAPF\\bin\\Debug\\dao_maps\\den502d.map");
             string[] lineParts;
             string line;
 
