@@ -79,24 +79,27 @@
   <ItemGroup>
     <Compile Include="Agent.cs" />
     <Compile Include="AgentState.cs" />
-    <Compile Include="AStarMDD.cs">
+    <Compile Include="Solvers\AStar\AStarMDD.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AStarWithOD.cs">
+    <Compile Include="Solvers\AStar\AStarWithOD.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AStarWithPartialExpansion.cs" />
-    <Compile Include="AStarWithPartialExpansionBasic.cs" />
-    <Compile Include="CBS.cs" />
-    <Compile Include="CbsHeuristic.cs" />
-    <Compile Include="CBS_IDA.cs" />
-    <Compile Include="CbsConflict.cs" />
+    <Compile Include="Solvers\AStar\AStarWithPartialExpansion.cs" />
+    <Compile Include="Solvers\AStar\AStarWithPartialExpansionBasic.cs" />
+    <Compile Include="Solvers\CBS\CBS.cs" />
+    <Compile Include="Solvers\CBS\CbsHeuristic.cs" />
+    <Compile Include="Solvers\CBS\CBS_IDA.cs" />
+    <Compile Include="Solvers\CBS\CbsConflict.cs" />
     <Compile Include="DisjointSets.cs" />
     <Compile Include="MyExtensions.cs" />
     <Compile Include="ConflictAvoidanceTable.cs" />
     <Compile Include="Dictionary_U.cs" />
     <Compile Include="DynamicRationalLazyOpenList.cs" />
     <Compile Include="IStatisticsCsvWriter.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="OpenList.cs" />
     <Compile Include="DynamicLazyOpenList.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -111,16 +114,16 @@
     <Compile Include="BinaryHeap.cs" />
     <Compile Include="AdditivePDBs.cs" />
     <Compile Include="Conflict.cs" />
-    <Compile Include="CbsNode.cs" />
-    <Compile Include="CbsConstraint.cs" />
+    <Compile Include="Solvers\CBS\CbsNode.cs" />
+    <Compile Include="Solvers\CBS\CbsConstraint.cs" />
     <Compile Include="MDD.cs" />
     <Compile Include="HeuristicCalculator.cs" />
-    <Compile Include="ClassicAStar.cs" />
+    <Compile Include="Solvers\AStar\ClassicAStar.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ISolver.cs" />
     <Compile Include="MddMatchAndPrune.cs" />
     <Compile Include="Plan.cs" />
-    <Compile Include="AStarWithRID.cs" />
+    <Compile Include="Solvers\AStar\AStarWithRID.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -139,14 +142,48 @@
     <Compile Include="CostTreeNodeSolver.cs" />
     <Compile Include="TimedMove.cs" />
     <Compile Include="IndependenceDetection.cs" />
-    <Compile Include="WorldState.cs" />
+    <Compile Include="Solvers\AStar\WorldState.cs" />
     <Compile Include="WorldStateForPartialExpansion.cs" />
     <Compile Include="WorldStateWithOD.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".hgignore" />
+    <None Include=".hgtags" />
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="bin\Debug\d0.csv" />
+    <None Include="bin\Debug\d0.exe.config" />
+    <None Include="bin\Debug\dao_maps\brc202d.map" />
+    <None Include="bin\Debug\dao_maps\den502d.map" />
+    <None Include="bin\Debug\dao_maps\ost003d.map" />
+    <None Include="bin\Debug\instances\brc202d-10-0" />
+    <None Include="bin\Debug\instances\brc202d-15-0" />
+    <None Include="bin\Debug\instances\brc202d-20-0" />
+    <None Include="bin\Debug\instances\brc202d-25-0" />
+    <None Include="bin\Debug\instances\brc202d-30-0" />
+    <None Include="bin\Debug\instances\brc202d-5-0" />
+    <None Include="bin\Debug\instances\current problem-d0" />
+    <None Include="bin\Debug\instances\den520d-10-0" />
+    <None Include="bin\Debug\instances\den520d-15-0" />
+    <None Include="bin\Debug\instances\den520d-20-0" />
+    <None Include="bin\Debug\instances\den520d-25-0" />
+    <None Include="bin\Debug\instances\den520d-30-0" />
+    <None Include="bin\Debug\instances\den520d-35-0" />
+    <None Include="bin\Debug\instances\Instance-4-0-3-0" />
+    <None Include="bin\Debug\instances\ost003d-10-0" />
+    <None Include="bin\Debug\instances\ost003d-15-0" />
+    <None Include="bin\Debug\instances\ost003d-20-0" />
+    <None Include="bin\Debug\instances\ost003d-25-0" />
+    <None Include="bin\Debug\instances\ost003d-30-0" />
+    <None Include="bin\Debug\instances\ost003d-5-0" />
+    <None Include="example_instances\Instance-8-15-5-17 - hard one - cost 29 and some corridors" />
+    <None Include="obj\Debug\CPF-experiment.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\CPF-experiment.csproj.GenerateResource.cache" />
+    <None Include="obj\Debug\CPF-experiment.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\CPF-experiment.csproj.CoreCompileInputs.cache" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -175,10 +212,29 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="obj\Debug\CPF_experiment.Properties.Resources.resources" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include=".hg_archival.txt" />
+    <Content Include="bin\Debug\add_sorted_runtime_column.py" />
+    <Content Include="bin\Debug\d0.exe" />
+    <Content Include="bin\Debug\d0.pdb" />
+    <Content Include="bin\Debug\d0.xml" />
+    <Content Include="bin\Debug\runtimes_and_successes.py" />
+    <Content Include="bin\Debug\split_by_grid.py" />
+    <Content Include="bin\Debug\split_by_solution_depth.py" />
+    <Content Include="obj\Debug\CPF-experiment.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\d0.exe" />
+    <Content Include="obj\Debug\d0.pdb" />
+    <Content Include="obj\Debug\TempPE\Properties.Resources.Designer.cs.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
