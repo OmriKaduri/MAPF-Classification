@@ -19,10 +19,23 @@ At the ctor we init solvers and heuristics lists. they will be used by inner fun
 At `GenerateProblemInstance` we generate a grid by size, number of agents and number of obstacles.
 	obstacles and agent locations choosen randomly.
 
+## Currently implemented Solvers ##
+1. AStar and it's variations (Operator Decompsition, PartialExpansion)
+2. CBS and it's variations ()
+
+## Currently implemented Hueristics ##
+1. SIC - Sum of Individual costs
+
+## Solvers TODO list ##
+- [ ] A Star with Standley's independent detection.
+- [ ] M Star (Refactor it out from ClassicAStar)
+- [ ] Solve MAPF as a SAT problem
+- [ ] Solve MAPF as a combinatorial auction problem
+
 ## Refactoring TODO List & Questions ##
 - [ ] Create enum for obstacles
 - [ ] What are the names of the map files (brc202d, ost003d) meaning?
 - [ ] At `Program.cs` - runMazesWidth1 will cause exception due to missing grid definition files 
 - [ ] Create `GridDefinitions` class for handling reading of definition files 
-- [ ] Move all 'ISolver' implementations to different folder
-- [ ]
+- [x] Move all 'ISolver' implementations to different folder
+- [ ] 

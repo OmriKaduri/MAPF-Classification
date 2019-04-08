@@ -111,6 +111,7 @@ namespace CPF_experiment
             var astar = new ClassicAStar(sic);
             var cbs = new CBS_LocalConflicts(astar, astar, -1);
             var astar_with_od = new AStarWithOD(sic);
+            var astar_with_partial_expansion = new AStarWithPartialExpansion(sic);
             var epea = new AStarWithPartialExpansion(sic);
             var macbsLocal5Epea = new CBS_LocalConflicts(astar, epea, 5);
             var macbsLocal50Epea = new CBS_LocalConflicts(astar, epea, 50);
@@ -154,8 +155,7 @@ namespace CPF_experiment
 
             //soldier: solvers.Add(new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false,
             //soldier:             CBS_LocalConflicts.ConflictChoice.MOST_CONFLICTING, false, false)); // CBS/EPEA*
-            solvers.Add(new IndependenceDetection(astar, new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false,
-                        CBS_LocalConflicts.ConflictChoice.MOST_CONFLICTING, false, false), sic)); // CBS/EPEA* + choosing most conflicting agent's conflict
+            //solvers.Add(new IndependenceDetection(astar, new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.MOST_CONFLICTING, false, false), sic)); // CBS/EPEA* + choosing most conflicting agent's conflict
             //soldier: solvers.Add(new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false,
             //soldier:     CBS_LocalConflicts.ConflictChoice.CARDINAL_MDD, false, false)); // CBS/EPEA* Cardinal using MDDs
             //solvers.Add(new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false,
@@ -258,8 +258,7 @@ namespace CPF_experiment
             //    false, CBS_LocalConflicts.ConflictChoice.CARDINAL_MDD, false, false, 1, true)); // MA-CBS(8)/EPEA* + cardinal + BP1 + restart
             //solvers.Add(new CBS_GlobalConflicts(astar, epea, 16, false, CBS_LocalConflicts.BypassStrategy.FIRST_FIT_LOOKAHEAD,
             //    false, CBS_LocalConflicts.ConflictChoice.CARDINAL_MDD, false, false, 1, true)); // MA-CBS(16)/EPEA* + cardinal + BP1 + restart
-            solvers.Add(new CBS_GlobalConflicts(astar, epea, 25, false, CBS_LocalConflicts.BypassStrategy.FIRST_FIT_LOOKAHEAD,
-                false, CBS_LocalConflicts.ConflictChoice.CARDINAL_MDD, false, false, 1, true)); // MA-CBS(25)/EPEA* + cardinal + BP1 + restart, AKA ICBS(25)
+            //solvers.Add(new CBS_GlobalConflicts(astar, epea, 25, false, CBS_LocalConflicts.BypassStrategy.FIRST_FIT_LOOKAHEAD, false, CBS_LocalConflicts.ConflictChoice.CARDINAL_MDD, false, false, 1, true)); // MA-CBS(25)/EPEA* + cardinal + BP1 + restart, AKA ICBS(25)
             //solvers.Add(new CBS_GlobalConflicts(astar, epea, 32, false, CBS_LocalConflicts.BypassStrategy.FIRST_FIT_LOOKAHEAD,
             //    false, CBS_LocalConflicts.ConflictChoice.CARDINAL_MDD, false, false, 1, true)); // MA-CBS(32)/EPEA* + cardinal + BP1 + restart
             //solvers.Add(new CBS_GlobalConflicts(astar, epea, 50, false, CBS_LocalConflicts.BypassStrategy.FIRST_FIT_LOOKAHEAD,
@@ -481,7 +480,7 @@ namespace CPF_experiment
             solver.openList = dynamicRationalLazyOpenList6;
             solvers.Add(new CBS_LocalConflicts(astar, solver, 0));
              */
-            
+
             /*
             //soldier: but can't handle 50 agents
             // dynamic rational lazy EPEA* / MA-CBS-local-5 / EPEA* / SIC:
@@ -534,6 +533,13 @@ namespace CPF_experiment
             //solvers.Add(new CBS_NoDDb3(new ClassicAStar()));
             //solvers.Add(new CBS_GlobalConflicts(new ClassicAStar(), 1, 1)); // Run this!
 
+
+            solvers.Add(astar);
+            solvers.Add(astar_with_od);
+            solvers.Add(astar_with_partial_expansion);
+
+            solvers.Add(cbs);
+            solvers.Add()
             outOfTimeCounters = new int[solvers.Count];
             for (int i = 0; i < outOfTimeCounters.Length; i++)
             {
@@ -637,7 +643,7 @@ namespace CPF_experiment
             // TODO: There is some repetition here of previous instantiation of ProblemInstance. Think how to elegantly bypass this.
             problem = new ProblemInstance();
             problem.Init(aStart, grid);
-            return problem;            
+            return problem;  
         }
 
         /// <summary>
