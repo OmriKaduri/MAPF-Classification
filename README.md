@@ -39,3 +39,4 @@ At `GenerateProblemInstance` we generate a grid by size, number of agents and nu
 - [ ] Create `GridDefinitions` class for handling reading of definition files 
 - [x] Move all 'ISolver' implementations to different folder
 - [ ] Create `Parser` for parsing the `GridDefinitions` (`Parser` Interface and `textFileParser` implementation, leaving space for future format parsers) 
+- [ ] 

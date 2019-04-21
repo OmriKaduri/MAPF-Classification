@@ -77,8 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agent.cs" />
-    <Compile Include="AgentState.cs" />
+    <Compile Include="Problem\Agent.cs" />
+    <Compile Include="Problem\AgentState.cs" />
     <Compile Include="Solvers\AStar\AStarMDD.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -88,63 +88,62 @@
     <Compile Include="Solvers\AStar\AStarWithPartialExpansion.cs" />
     <Compile Include="Solvers\AStar\AStarWithPartialExpansionBasic.cs" />
     <Compile Include="Solvers\CBS\CBS.cs" />
-    <Compile Include="Solvers\CBS\CbsHeuristic.cs" />
+    <Compile Include="Heuristics\CbsHeuristic.cs" />
     <Compile Include="Solvers\CBS\CBS_IDA.cs" />
     <Compile Include="Solvers\CBS\CbsConflict.cs" />
-    <Compile Include="DisjointSets.cs" />
+    <Compile Include="Utilities\DisjointSets.cs" />
     <Compile Include="MyExtensions.cs" />
-    <Compile Include="ConflictAvoidanceTable.cs" />
-    <Compile Include="Dictionary_U.cs" />
-    <Compile Include="DynamicRationalLazyOpenList.cs" />
-    <Compile Include="IStatisticsCsvWriter.cs" />
+    <Compile Include="Solvers\ConflictAvoidanceTable.cs" />
+    <Compile Include="Utilities\Dictionary_U.cs" />
+    <Compile Include="Problem\DynamicRationalLazyOpenList.cs" />
+    <Compile Include="Solvers\IStatisticsCsvWriter.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="OpenList.cs" />
-    <Compile Include="DynamicLazyOpenList.cs" />
+    <Compile Include="Utilities\OpenList.cs" />
+    <Compile Include="Problem\DynamicLazyOpenList.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RandomChoiceOfHeuristic.cs" />
-    <Compile Include="HashSet_U.cs" />
-    <Compile Include="IBinaryHeapItem.cs" />
-    <Compile Include="CostTreeSearch.cs" />
-    <Compile Include="BinaryHeap.cs" />
-    <Compile Include="AdditivePDBs.cs" />
-    <Compile Include="Conflict.cs" />
+    <Compile Include="Utilities\HashSet_U.cs" />
+    <Compile Include="Utilities\IBinaryHeapItem.cs" />
+    <Compile Include="Utilities\BinaryHeap.cs" />
+    <Compile Include="Heuristics\AdditivePDBs.cs" />
+    <Compile Include="Solvers\Conflict.cs" />
     <Compile Include="Solvers\CBS\CbsNode.cs" />
     <Compile Include="Solvers\CBS\CbsConstraint.cs" />
-    <Compile Include="MDD.cs" />
-    <Compile Include="HeuristicCalculator.cs" />
+    <Compile Include="Heuristics\MDD.cs" />
+    <Compile Include="Heuristics\HeuristicCalculator.cs" />
     <Compile Include="Solvers\AStar\ClassicAStar.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="ISolver.cs" />
-    <Compile Include="MddMatchAndPrune.cs" />
-    <Compile Include="Plan.cs" />
+    <Compile Include="Solvers\ISolver.cs" />
+    <Compile Include="Heuristics\MddMatchAndPrune.cs" />
+    <Compile Include="Problem\Plan.cs" />
     <Compile Include="Solvers\AStar\AStarWithRID.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SumIndividualCosts.cs" />
-    <Compile Include="EnumeratedPDB.cs" />
-    <Compile Include="PDB.cs" />
-    <Compile Include="ProblemInstance.cs" />
-    <Compile Include="Move.cs" />
+    <Compile Include="Heuristics\SumIndividualCosts.cs" />
+    <Compile Include="Heuristics\EnumeratedPDB.cs" />
+    <Compile Include="Heuristics\PDB.cs" />
+    <Compile Include="Problem\ProblemInstance.cs" />
+    <Compile Include="Problem\Move.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Run.cs" />
-    <Compile Include="Silver.cs" />
-    <Compile Include="CostTreeSearchSolver.cs" />
-    <Compile Include="CostTreeNodeSolver.cs" />
-    <Compile Include="TimedMove.cs" />
-    <Compile Include="IndependenceDetection.cs" />
-    <Compile Include="Solvers\AStar\WorldState.cs" />
-    <Compile Include="WorldStateForPartialExpansion.cs" />
-    <Compile Include="WorldStateWithOD.cs" />
+    <Compile Include="Solvers\Silver.cs" />
+    <Compile Include="Solvers\CostTreeSearchSolver.cs" />
+    <Compile Include="Solvers\CostTreeNodeSolver.cs" />
+    <Compile Include="Problem\TimedMove.cs" />
+    <Compile Include="Solvers\IndependenceDetection.cs" />
+    <Compile Include="Problem\WorldState.cs" />
+    <Compile Include="Problem\WorldStateForPartialExpansion.cs" />
+    <Compile Include="Problem\WorldStateWithOD.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".hgignore" />

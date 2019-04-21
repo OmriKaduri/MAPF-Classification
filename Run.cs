@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Collections;
 
 namespace CPF_experiment
 {
@@ -534,12 +535,11 @@ namespace CPF_experiment
             //solvers.Add(new CBS_GlobalConflicts(new ClassicAStar(), 1, 1)); // Run this!
 
 
-            solvers.Add(astar);
-            solvers.Add(astar_with_od);
-            solvers.Add(astar_with_partial_expansion);
+            //solvers.Add(astar);
+            //solvers.Add(astar_with_od);
+            //solvers.Add(astar_with_partial_expansion);
 
             solvers.Add(cbs);
-            solvers.Add()
             outOfTimeCounters = new int[solvers.Count];
             for (int i = 0; i < outOfTimeCounters.Length; i++)
             {
@@ -910,42 +910,34 @@ namespace CPF_experiment
         /// </summary>
         public void PrintResultsFileHeader()
         {
-            this.resultsWriter.Write("Grid Name");
-            this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-            this.resultsWriter.Write("Grid Rows");
-            this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-            this.resultsWriter.Write("Grid Columns");
-            this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-            this.resultsWriter.Write("Num Of Agents");
-            this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-            this.resultsWriter.Write("Num Of Obstacles");
-            this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-            this.resultsWriter.Write("Instance Id");
-            this.resultsWriter.Write(Run.RESULTS_DELIMITER);
+            List<String> headers = new List<String>(){
+                "GridName", "GridRows", "GridColumns", "NumOfAgents", "NumOfObstacles", "InstanceId",
+                "BranchingFactor","ObstacleDensity", "AvgDistanceToGoal",
+                "MaxDistanceToGoal","MinDistanceToGoal","AvgStartDistances",
+                "AvgGoalDistances","PointsAtSPRatio"};
 
-            for (int i = 0; i < solvers.Count; i++)
+            foreach(string header in headers)
             {
-                var solver = solvers[i];
-                this.resultsWriter.Write(solver + " Success");
-                this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-                this.resultsWriter.Write(solver + " Runtime");
-                this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-                this.resultsWriter.Write(solver + " Solution Cost");
-                this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-                solver.OutputStatisticsHeader(this.resultsWriter);
-                this.resultsWriter.Write(solver + " Max Group");
-                this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-                this.resultsWriter.Write(solver + " Solution Depth");
-                this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-
-                //this.resultsWriter.Write(name + "Min Group / G&D");
-                //this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-                //this.resultsWriter.Write(name + "Max depth");
-                //this.resultsWriter.Write(Run.RESULTS_DELIMITER);
-                //this.resultsWriter.Write(name + "Memory Used");
-                //this.resultsWriter.Write(Run.RESULTS_DELIMITER);
+                this.writeCellToCsv(header);
             }
+
+            foreach(ISolver solver in solvers)
+            {
+                this.writeCellToCsv(solver + " Success");
+                this.writeCellToCsv(solver + " Runtime");
+                this.writeCellToCsv(solver + " Solution Cost");
+                solver.OutputStatisticsHeader(this.resultsWriter);
+                this.writeCellToCsv(solver + " Max Group");
+                this.writeCellToCsv(solver + " Solution Depth");
+            }
+
             this.ContinueToNextLine();
+        }
+
+        private void writeCellToCsv(Object value)
+        {
+            this.resultsWriter.Write(value);
+            this.resultsWriter.Write(Run.RESULTS_DELIMITER);
         }
 
         /// <summary>
@@ -976,21 +968,53 @@ namespace CPF_experiment
 
         private void PrintProblemStatistics(ProblemInstance instance)
         {
+            int numberOfAgents = instance.m_vAgents.Length;
+            int numOfRows = instance.m_vGrid.Length;
+            int numOfCols = instance.m_vGrid[0].Length;
+            int gridSize = numOfCols * numOfRows;
+            int numOfObstacles = (int)instance.m_nObstacles;
+
             // Grid Name col:
             if (instance.parameters.ContainsKey(ProblemInstance.GRID_NAME_KEY))
-                this.resultsWriter.Write(instance.parameters[ProblemInstance.GRID_NAME_KEY] + RESULTS_DELIMITER);
+                this.writeCellToCsv(instance.parameters[ProblemInstance.GRID_NAME_KEY]);
             else
-                this.resultsWriter.Write(RESULTS_DELIMITER);
+                this.writeCellToCsv("Unknown");
             // Grid Rows col:
-            this.resultsWriter.Write(instance.m_vGrid.Length + RESULTS_DELIMITER);
+            this.writeCellToCsv(numOfRows);
             // Grid Columns col:
-            this.resultsWriter.Write(instance.m_vGrid[0].Length + RESULTS_DELIMITER);
+            this.writeCellToCsv(numOfCols);
             // Num Of Agents col:
-            this.resultsWriter.Write(instance.m_vAgents.Length + RESULTS_DELIMITER);
+            this.writeCellToCsv(numberOfAgents);
             // Num Of Obstacles col:
-            this.resultsWriter.Write(instance.m_nObstacles + RESULTS_DELIMITER);
+            this.writeCellToCsv(numOfObstacles);
             // Instance Id col:
-            this.resultsWriter.Write(instance.instanceId + RESULTS_DELIMITER);
+            this.writeCellToCsv(instance.instanceId);
+
+            // Branching Factor col:
+            int numberOfLegalMoves = Constants.ALLOW_DIAGONAL_MOVE ? Move.NUM_DIRECTIONS : Move.NUM_NON_DIAG_MOVES;
+            this.writeCellToCsv(Math.Pow(numberOfLegalMoves, numberOfAgents));
+
+            // Obstacle Density col:
+            this.writeCellToCsv((float)numOfObstacles / (float)gridSize);
+
+            // AvgDistanceToGoal col:
+            this.writeCellToCsv(instance.agentDistancesToGoal.Average());
+
+            // MaxDistanceToGoal col
+            this.writeCellToCsv(instance.agentDistancesToGoal.Max());
+
+            // MinDistanceToGoal col
+            this.writeCellToCsv(instance.agentDistancesToGoal.Min());
+
+            // AvgStartDistances col:
+            this.writeCellToCsv(instance.AverageStartDistances());
+
+            // AvgGoalDistances col:
+            this.writeCellToCsv(instance.AverageGoalDistances());
+
+            // PointsAtSPRatio col:
+            this.writeCellToCsv(instance.RatioOfPointsAtSP());
+
         }
 
         private void ContinueToNextLine()

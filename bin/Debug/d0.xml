@@ -1840,6 +1840,21 @@
             The second dimension of the matrix is the cardinality of the location from which we want the shortest path.
             </summary>
         </member>
+        <member name="F:CPF_experiment.ProblemInstance.agentDistancesToGoal">
+            <summary>
+            Matrix that contains for each agent it's distance (shortest path) to goal
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.ProblemInstance.distanceBetweenAgentStartPoints">
+            <summary>
+            Matrix that contains for each two agents the distance between their starting points
+            </summary>
+        </member>
+        <member name="F:CPF_experiment.ProblemInstance.distanceBetweenAgentGoals">
+            <summary>
+            Matrix that contains for each two agents the distance between their goals
+            </summary>
+        </member>
         <member name="F:CPF_experiment.ProblemInstance.instanceId">
             <summary>
             This field is used to identify an instance when running a set of experiments
@@ -1872,6 +1887,22 @@
             Compute the shortest path to the goal of every agent in the problem instance, from every location in the grid.
             Current implementation is a simple breadth-first search from every location in the graph.
             </summary>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.AllShortestPathsTo(CPF_experiment.AgentState)">
+            <summary>
+            Computes the shortest path to the goal for a given agent from every location in the grid.
+            Current implementation is a simple breadth-first search from every location in the graph.
+            </summary>
+            <param name="state">Agent's goal state</param>
+            <returns>Tuple with shortestPathLengths and optimalMoves </returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.ShortestPathFromAToB(CPF_experiment.AgentState,CPF_experiment.Move)">
+            <summary>
+            Compute shortest path from starting state to goal
+            </summary>
+            <param name="startState"></param>
+            <param name="goal"></param>
+            <returns></returns>
         </member>
         <member name="M:CPF_experiment.ProblemInstance.GetSingleAgentOptimalCost(System.Int32,System.Int32,System.Int32)">
             <summary>
@@ -1910,6 +1941,24 @@
             The returned plan wasn't constructed considering a CAT, so it's possible there's an alternative plan with the same cost and less collisions.
             </summary>
             <param name="agentState"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.AverageStartDistances">
+            <summary>
+            Compute Average distance between starting points of all agents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.AverageGoalDistances">
+            <summary>
+            Compute Average distance between goals of all agents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CPF_experiment.ProblemInstance.RatioOfPointsAtSP">
+            <summary>
+            Compute the ratio of points at the grid which are part of a shortest path
+            </summary>
             <returns></returns>
         </member>
         <member name="M:CPF_experiment.ProblemInstance.GetNumOfAgents">

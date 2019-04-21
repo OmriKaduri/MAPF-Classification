@@ -282,11 +282,11 @@ namespace CPF_experiment
             
             if (runGrids == true)
             {
-                int[] gridSizes = new int[] { 4, };
+                int[] gridSizes = new int[] { 10, 20, 30, 40 , 50, 60 ,70 ,80 ,90, 100};
                 //int[] agentListSizes = new int[] { 2, 3, 4 };
                 
                 //int[] gridSizes = new int[] { 6, };
-                int[] agentListSizes = new int[] { /*2,*/ 3/*, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 */};
+                int[] agentListSizes = new int[] { /*2,*/ 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, /*13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 */};
                 // Note that success rate drops almost to zero for EPEA* and A*+OD/SIC on 40 agents.
             
                 //int[] gridSizes = new int[] { 32, };
@@ -295,7 +295,7 @@ namespace CPF_experiment
 
                 //int[] obstaclesPercents = new int[] { 20, };
                 //int[] obstaclesPercents = new int[] { /*0, 5, 10, 15, 20, 25, 30, 35, */20, 30, 40};
-                int[] obstaclesPercents = new int[] { 0, /*5, 10,*/ /*15,*/ /*20, 25, 30, 35, 20, 30, 40*/ };
+                int[] obstaclesPercents = new int[] { 0, 5, 10, 15, /*20, 25, 30, 35, 20, 30, 40*/ };
                 me.RunExperimentSet(gridSizes, agentListSizes, obstaclesPercents, instances);
             }
             else if (runDragonAge == true)
@@ -304,9 +304,10 @@ namespace CPF_experiment
                 me.RunDragonAgeExperimentSet(instances, Program.mazeMapFilenames); // Obstacle percents and grid sizes built-in to the maps.
             else if (runSpecific == true)
             {
+                me.RunInstance("brc202d-5-0");
                 //me.RunInstance("instance-2-0-2-0");
-                me.RunInstance("Instance-4-0-3-0"); 
-                //me.RunInstance("Instance-5-15-3-792");
+                //me.RunInstance("Instance-4-0-3-0"); 
+                //me.RunInstance("Instance-60-0-8-0");
                 //me.RunInstance("Instance-5-15-3-792-4rows");
                 //me.RunInstance("Instance-5-15-3-792-3rows");
                 //me.RunInstance("Instance-5-15-3-792-2rows");
