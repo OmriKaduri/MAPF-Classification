@@ -49,6 +49,21 @@ namespace CPF_experiment
         /// </summary>
         public Move[][] singleAgentOptimalMoves;
 
+        /// <summary>
+        /// Matrix that contains for each agent it's distance (shortest path) to goal
+        /// </summary>
+        public int[] agentDistancesToGoal;
+
+        /// <summary>
+        /// Matrix that contains for each two agents the distance between their starting points
+        /// </summary>
+        public int[,] distanceBetweenAgentStartPoints;
+
+        /// <summary>
+        /// Matrix that contains for each two agents the distance between their goals
+        /// </summary>
+        public int[,] distanceBetweenAgentGoals;
+
         public uint m_nObstacles;
         public uint m_nLocations;
         public UInt64[] m_vPermutations; // What are these?
@@ -119,7 +134,12 @@ namespace CPF_experiment
                 PrecomputeCardinality();
             else
                 m_vCardinality = cardinality;
+
+            agentDistancesToGoal = new int[m_vAgents.Length];
+            distanceBetweenAgentGoals = new int[m_vAgents.Length,m_vAgents.Length];
+            distanceBetweenAgentStartPoints = new int[m_vAgents.Length,m_vAgents.Length];
         }
+
         
         /// <summary>
         /// Compute the shortest path to the goal of every agent in the problem instance, from every location in the grid.
@@ -136,44 +156,15 @@ namespace CPF_experiment
             for (int agentId = 0; agentId < this.GetNumOfAgents(); agentId++)
             {
                 // Run a single source shortest path algorithm from the _goal_ of the agent
-                var shortestPathLengths = new int[this.m_nLocations];
-                var optimalMoves = new Move[this.m_nLocations];
-                for (int i = 0; i < m_nLocations; i++)
-                    shortestPathLengths[i] = -1;
-                var openlist = new Queue<AgentState>();
 
                 // Create initial state
                 var agentStartState = this.m_vAgents[agentId];
                 var agent = agentStartState.agent;
                 var goalState = new AgentState(agent.Goal.x, agent.Goal.y, -1, -1, agentId);
-                int goalIndex = this.GetCardinality(goalState.lastMove);
-                shortestPathLengths[goalIndex] = 0;
-                optimalMoves[goalIndex] = new Move(goalState.lastMove);
-                openlist.Enqueue(goalState);
 
-                while (openlist.Count > 0)
-                {
-                    AgentState state = openlist.Dequeue();
-
-                    // Generate child states
-                    foreach (TimedMove aMove in state.lastMove.GetNextMoves())
-                    {
-                        if (IsValid(aMove))
-                        {
-                            int entry = m_vCardinality[aMove.x, aMove.y];
-                            // If move will generate a new or better state - add it to the queue
-                            if ((shortestPathLengths[entry] == -1) || (shortestPathLengths[entry] > state.g + 1))
-                            {
-                                var childState = new AgentState(state);
-                                childState.MoveTo(aMove);
-                                shortestPathLengths[entry] = childState.g;
-                                optimalMoves[entry] = new Move(aMove.GetOppositeMove());
-                                openlist.Enqueue(childState);
-                            }
-                        }
-                    }
-
-                }
+                var result = AllShortestPathsTo(goalState);
+                var shortestPathLengths = result.Item1;
+                var optimalMoves = result.Item2;
 
                 int start = this.GetCardinality(agentStartState.lastMove);
                 if (shortestPathLengths[start] == -1)
@@ -181,9 +172,81 @@ namespace CPF_experiment
                     throw new Exception(String.Format("Unsolvable instance! Agent {0} cannot reach its goal", agentId));
                 }
 
+                this.agentDistancesToGoal[agentId] = shortestPathLengths[start];
                 this.singleAgentOptimalCosts[agentId] = shortestPathLengths;
                 this.singleAgentOptimalMoves[agentId] = optimalMoves;
+
+                for(int otherAgentId=0; otherAgentId< this.GetNumOfAgents(); otherAgentId++)
+                {
+                    var otherAgentState = this.m_vAgents[otherAgentId];
+                    this.distanceBetweenAgentGoals[agentId, otherAgentId] = GetSingleAgentOptimalCost(agentId, otherAgentState.agent.Goal); //Distance from this agent to other agent goal
+                    this.distanceBetweenAgentStartPoints[agentId, otherAgentId] = ShortestPathFromAToB(agentStartState, otherAgentState.lastMove);
+                }
             }
+        }
+
+        /// <summary>
+        /// Computes the shortest path to the goal for a given agent from every location in the grid.
+        /// Current implementation is a simple breadth-first search from every location in the graph.
+        /// </summary>
+        /// <param name="state">Agent's goal state</param>
+        /// <returns>Tuple with shortestPathLengths and optimalMoves </returns>
+        public Tuple<int[],Move[]> AllShortestPathsTo(AgentState state)
+        {
+            var openlist = new Queue<AgentState>();
+            var shortestPathLengths = new int[this.m_nLocations];
+            var optimalMoves = new Move[this.m_nLocations];
+
+            for (int i = 0; i < m_nLocations; i++)
+                shortestPathLengths[i] = -1;
+
+            openlist.Enqueue(state);
+            
+            int goalIndex = this.GetCardinality(state.lastMove);
+            shortestPathLengths[goalIndex] = 0;
+            optimalMoves[goalIndex] = new Move(state.lastMove);
+            while (openlist.Count > 0)
+            {
+                AgentState nextState = openlist.Dequeue();
+                // Generate child states
+                foreach (TimedMove aMove in nextState.lastMove.GetNextMoves())
+                {
+                    if (IsValid(aMove))
+                    {
+                        int entry = m_vCardinality[aMove.x, aMove.y];
+                        // If move will generate a new or better state - add it to the queue
+                        if ((shortestPathLengths[entry] == -1) || (shortestPathLengths[entry] > nextState.g + 1))
+                        {
+                            var childState = new AgentState(nextState);
+                            childState.MoveTo(aMove);
+                            shortestPathLengths[entry] = childState.g;
+                            optimalMoves[entry] = new Move(aMove.GetOppositeMove());
+                            openlist.Enqueue(childState);
+                        }
+                    }
+                }
+            }
+            return Tuple.Create<int[], Move[]>(shortestPathLengths,optimalMoves);
+        }
+
+        /// <summary>
+        /// Compute shortest path from starting state to goal
+        /// </summary>
+        /// <param name="startState"></param>
+        /// <param name="goal"></param>
+        /// <returns></returns>
+        public int ShortestPathFromAToB(AgentState startState, Move goal)
+        {
+            var result = AllShortestPathsTo(startState);
+            var shortestPathLengths = result.Item1;
+
+            int start = this.GetCardinality(goal);
+            if (shortestPathLengths[start] == -1)
+            {
+                return -1;
+            }
+
+            return shortestPathLengths[start];
         }
 
         /// <summary>
@@ -270,6 +333,74 @@ namespace CPF_experiment
             conflictCountPerAgent = conflictCounts;
             conflictTimesPerAgent = conflictTimes;
             return new SinglePlan(moves, agentNum);
+        }
+
+        /// <summary>
+        /// Compute Average distance between starting points of all agents
+        /// </summary>
+        /// <returns></returns>
+        public float AverageStartDistances()
+        {
+            int sumOfStartDistances = 0;
+            int counter = 0;
+            for(int i = 0; i < distanceBetweenAgentStartPoints.GetLength(0); i++)
+            {
+                for(int j = i; j < distanceBetweenAgentStartPoints.GetLength(1); j++) //Symmetric matrix therfore iterate only half of it
+                {
+                    sumOfStartDistances += distanceBetweenAgentStartPoints[i, j];
+                    counter++;
+                }
+            }
+            return (float)sumOfStartDistances / (float)counter;
+        }
+
+        /// <summary>
+        /// Compute Average distance between goals of all agents
+        /// </summary>
+        /// <returns></returns>
+        public float AverageGoalDistances()
+        {
+            int sumOfGoalDistances = 0;
+            int counter = 0;
+            for (int i = 0; i < distanceBetweenAgentGoals.GetLength(0); i++)
+            {
+                for (int j = i; j < distanceBetweenAgentGoals.GetLength(1); j++) //Symmetric matrix therfore iterate only half of it
+                {
+                    sumOfGoalDistances += distanceBetweenAgentGoals[i, j];
+                    counter++;
+                }
+            }
+            return (float)sumOfGoalDistances / (float)counter;
+        }
+
+        /// <summary>
+        /// Compute the ratio of points at the grid which are part of a shortest path
+        /// </summary>
+        /// <returns></returns>
+        public float RatioOfPointsAtSP()
+        {
+            bool[,] pointAtSP = new bool[m_vGrid.GetLength(0), m_vGrid[0].GetLength(0)];
+            int NumOfPointsAtSp = 0;
+            for (int agentId = 0; agentId < this.GetNumOfAgents(); agentId++)
+            {
+                var agentStartState = this.m_vAgents[agentId];
+                var conflictCountsPerAgent = new Dictionary<int, int>[this.GetNumOfAgents()]; 
+                var conflictTimesPerAgent = new Dictionary<int, List<int>>[this.GetNumOfAgents()];
+                var optimalPlan = GetSingleAgentOptimalPlan(agentStartState, out conflictCountsPerAgent[agentId], out conflictTimesPerAgent[agentId]);
+                foreach(Move currMove in optimalPlan.locationAtTimes){
+                    pointAtSP[currMove.x, currMove.y] = true;
+                }
+            }
+            
+            for(int row = 0; row < pointAtSP.GetLength(0); row++)
+            {
+                for(int col=0;col < pointAtSP.GetLength(1); col++)
+                {
+                    NumOfPointsAtSp += pointAtSP[row,col] ? 1 : 0;
+                }
+            }
+
+            return (float)NumOfPointsAtSp / ((float)pointAtSP.Length);
         }
 
         /// <summary>
