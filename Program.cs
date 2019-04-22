@@ -260,7 +260,9 @@ namespace CPF_experiment
         static void Main(string[] args)
         {
             Program me = new Program();
-            Program.RESULTS_FILE_NAME = Process.GetCurrentProcess().ProcessName + ".csv";
+            var resultsFileName = System.Guid.NewGuid();
+            Program.RESULTS_FILE_NAME =  resultsFileName + ".csv";
+            Console.WriteLine("Writing results to: {0}", resultsFileName);
             TextWriterTraceListener tr1 = new TextWriterTraceListener(System.Console.Out);
             Debug.Listeners.Add(tr1);
             if (System.Diagnostics.Debugger.IsAttached)
@@ -275,10 +277,10 @@ namespace CPF_experiment
 
             int instances = 1;
 
-            bool runGrids = false;
+            bool runGrids = true;
             bool runDragonAge = false;
             bool runMazesWidth1 = false;
-            bool runSpecific = true;
+            bool runSpecific = false;
             
             if (runGrids == true)
             {
@@ -286,7 +288,7 @@ namespace CPF_experiment
                 //int[] agentListSizes = new int[] { 2, 3, 4 };
                 
                 //int[] gridSizes = new int[] { 6, };
-                int[] agentListSizes = new int[] { /*2,*/ 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, /*13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 */};
+                int[] agentListSizes = new int[] { 2, 3, 4, 5, 6, /*7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32*/};
                 // Note that success rate drops almost to zero for EPEA* and A*+OD/SIC on 40 agents.
             
                 //int[] gridSizes = new int[] { 32, };
@@ -295,7 +297,7 @@ namespace CPF_experiment
 
                 //int[] obstaclesPercents = new int[] { 20, };
                 //int[] obstaclesPercents = new int[] { /*0, 5, 10, 15, 20, 25, 30, 35, */20, 30, 40};
-                int[] obstaclesPercents = new int[] { 0, 5, 10, 15, /*20, 25, 30, 35, 20, 30, 40*/ };
+                int[] obstaclesPercents = new int[] { 0, 5, 10, 15, 20, /*25, 30, 35, 20, 30, 40 */};
                 me.RunExperimentSet(gridSizes, agentListSizes, obstaclesPercents, instances);
             }
             else if (runDragonAge == true)
