@@ -2252,16 +2252,6 @@
             <param name="solver">The solver that solved the problem instance</param>
             <param name="runtimeInMillis">The time it took the given solver to solve the given instance</param>
         </member>
-        <member name="T:CPF_experiment.Silver">
-            <summary>
-            Runs Silver's CA*.
-            </summary>
-        </member>
-        <member name="M:CPF_experiment.Silver.OutputStatistics(System.IO.TextWriter)">
-            <summary>
-            Prints statistics of a single run to the given output. 
-            </summary>
-        </member>
         <member name="T:CPF_experiment.CostTreeSearchSolver">
             <summary>
             This class solves an instance of the MAPF problem using the cost tree search algorithm.

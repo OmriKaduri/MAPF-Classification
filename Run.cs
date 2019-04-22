@@ -156,11 +156,9 @@ namespace CPF_experiment
 
             //soldier: solvers.Add(new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false,
             //soldier:             CBS_LocalConflicts.ConflictChoice.MOST_CONFLICTING, false, false)); // CBS/EPEA*
-            solvers.Add(new IndependenceDetection(astar, new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.MOST_CONFLICTING, false, false), sic)); // CBS/EPEA* + choosing most conflicting agent's conflict
             
             //soldier: solvers.Add(new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false,
             //soldier:     CBS_LocalConflicts.ConflictChoice.CARDINAL_MDD, false, false)); // CBS/EPEA* Cardinal using MDDs
-            solvers.Add(new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.CARDINAL_LOOKAHEAD, false, false)); // CBS/EPEA* Cardinal not using MDDs
 
             //soldier: 
             //solvers.Add(new CBS_GlobalConflicts(astar, epea, 2, false, CBS_LocalConflicts.BypassStrategy.NONE, false,
@@ -353,15 +351,12 @@ namespace CPF_experiment
             //solvers.Add(new CBS_LocalConflicts(astar, epea, 5));
             //solvers.Add(new CBS_GlobalConflicts(epea, epea, 5));
             //solvers.Add(new CBS_LocalConflicts(epea, epea, 10));
-            solvers.Add(new CBS_LocalConflicts(astar, epea, 10));
-            solvers.Add(new CBS_GlobalConflicts(epea, epea, 10));
             //solvers.Add(new CBS_LocalConflicts(epea, epea, 100));
             //solvers.Add(new CBS_LocalConflicts(astar, epea, 100));
             //solvers.Add(new CBS_GlobalConflicts(epea, epea, 100));
             //solvers.Add(new CBS_LocalConflicts(epea, epea, 500));
             //solvers.Add(new CBS_GlobalConflicts(epea, epea, 500));
             
-            solvers.Add(new CBS_LocalConflicts(astar_with_od, astar_with_od, -1));
             //solvers.Add(new CBS_GlobalConflicts(astar_with_od, astar_with_od, -1)); // Should be identical since no merging is done.
             //solvers.Add(new CBS_LocalConflicts(astar_with_od, astar_with_od, 0));
             //solvers.Add(new CBS_LocalConflicts(astar, astar_with_od, 0));
@@ -372,8 +367,6 @@ namespace CPF_experiment
             //solvers.Add(new CBS_LocalConflicts(astar, astar_with_od, 5));
             //solvers.Add(new CBS_GlobalConflicts(astar_with_od, astar_with_od, 5));
             //solvers.Add(new CBS_LocalConflicts(astar_with_od, astar_with_od, 10));
-            solvers.Add(new CBS_LocalConflicts(astar, astar_with_od, 10));
-            solvers.Add(new CBS_GlobalConflicts(astar_with_od, astar_with_od, 10));
             //solvers.Add(new CBS_LocalConflicts(astar_with_od, astar_with_od, 100));
             //solvers.Add(new CBS_LocalConflicts(astar, astar_with_od, 100));
             //solvers.Add(new CBS_GlobalConflicts(astar_with_od, astar_with_od, 100));
@@ -490,13 +483,13 @@ namespace CPF_experiment
             solver.openList = dynamicRationalLazyOpenList8;
             solvers.Add(solver);
              */
-
             //solvers.Add(new CostTreeSearchSolverNoPruning());
             //solvers.Add(new CostTreeSearchSolverKMatch(2));
             //solvers.Add(new CostTreeSearchSolverOldMatching(2));
             //solvers.Add(new CostTreeSearchSolverRepeatedMatch(2));
             //solvers.Add(new CostTreeSearchSolverKMatch(3));
-            //!@# USE ME solvers.Add(new CostTreeSearchSolverOldMatching(3)); // Use this parameter. Best according to paper. 3RE
+            ////!@# USE ME 
+            //solvers.Add(new CostTreeSearchSolverOldMatching(3)); // Use this parameter. Best according to paper. 3RE
             //solvers.Add(new CostTreeSearchSolverRepeatedMatch(3));
 
             //solvers.Add(new CostTreeSearchNoPruning());
@@ -538,8 +531,33 @@ namespace CPF_experiment
             //solvers.Add(astar);
             //solvers.Add(astar_with_od);
             //solvers.Add(astar_with_partial_expansion);
-            solvers.Add(new IndependenceDetection(sic));
-            //solvers.Add(cbs);
+
+            solvers.Add(new IndependenceDetection(sic)); // AStar + OD + ID
+
+            // MA-CBS-Global-10/(A*+OD/SIC) choosing the first conflict in CBS nodes
+            solvers.Add(new CBS_GlobalConflicts(astar_with_od, astar_with_od, 10));
+
+            // MA-CBS-Local-10/(single:A*/SIC multi:A*+OD/SIC) choosing the first conflict in CBS nodes
+            solvers.Add(new CBS_LocalConflicts(astar, astar_with_od, 10));
+
+            // Basic-CBS/(A*+OD/SIC) choosing the first conflict in CBS nodes
+            solvers.Add(new CBS_LocalConflicts(astar_with_od, astar_with_od, -1));
+
+            // MA - CBS - Global - 10 / (EPEA */ SIC) choosing the first conflict in CBS nodes
+            solvers.Add(new CBS_GlobalConflicts(epea, epea, 10));
+
+            // MA - CBS - Local - 10 / (single: A */ SIC multi: EPEA */ SIC) choosing the first conflict in CBS nodes
+            solvers.Add(new CBS_LocalConflicts(astar, epea, 10));
+
+            // Basic-CBS/(A*/SIC) choosing cardinal conflicts using lookahead
+            solvers.Add(new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.CARDINAL_LOOKAHEAD, false, false));
+
+            // Basic-CBS/(A*/SIC)+ID - Use ID, for single agent solve vith A*, for groups use Basic-CBS which will use A* (again) for single agent, and epea* for groups
+            solvers.Add(new IndependenceDetection(astar, new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.MOST_CONFLICTING, false, false), sic));
+
+            // ICTS 2RE
+            solvers.Add(new CostTreeSearchSolverRepeatedMatch(2));
+
             outOfTimeCounters = new int[solvers.Count];
             for (int i = 0; i < outOfTimeCounters.Length; i++)
             {

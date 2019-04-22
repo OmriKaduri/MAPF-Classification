@@ -5,6 +5,8 @@ namespace CPF_experiment
     {
         public static int MAX_TIME = 300000;
 
+        public static int ICTS_MAX_TIME = 600000;
+
         /// <summary>
         /// The cost that is set to the algorithms when all the states have been expanded and no goal was found 
         /// </summary>

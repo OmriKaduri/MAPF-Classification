@@ -589,7 +589,7 @@ namespace CPF_experiment
             int sumSubGroupA;
             int sumSubGroupB;
             //TODO if no solution found the algorithm will never stop
-            while (runner.ElapsedMilliseconds() < Constants.MAX_TIME)
+            while (runner.ElapsedMilliseconds() < Constants.ICTS_MAX_TIME)
             {
                 sw.Reset();
                 costTreeNode = openList.Peek();
@@ -620,8 +620,8 @@ namespace CPF_experiment
                     ans = next.Solve(ID_CAT, CBS_CAT);
                     sw.Stop();
                     Console.WriteLine(sw.ElapsedMilliseconds);
-                    if (sw.ElapsedMilliseconds > 0)
-                        Console.ReadLine();
+                    //if (sw.ElapsedMilliseconds > 0)
+                    //    Console.ReadLine(); TODO: Why?
                     generatedLL += next.getGenerated();
                     if (ans != null)
                     {
