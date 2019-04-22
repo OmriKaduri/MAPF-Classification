@@ -154,7 +154,7 @@ namespace CPF_experiment
             runner.CloseResultsFile();                    
         }
 
-        protected static readonly string[] daoMapFilenames = { "dao_maps\\den520d.map", "dao_maps\\ost003d.map", "dao_maps\\brc202d.map"};
+        protected static readonly string[] daoMapFilenames = { "dao_maps\\den502d.map", "dao_maps\\ost003d.map", "dao_maps\\brc202d.map"};
 
         protected static readonly string[] mazeMapFilenames = { "mazes-width1-maps\\maze512-1-6.map", "mazes-width1-maps\\maze512-1-2.map",
                                                 "mazes-width1-maps\\maze512-1-9.map" };
