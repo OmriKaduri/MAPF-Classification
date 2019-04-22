@@ -21,13 +21,13 @@ At `GenerateProblemInstance` we generate a grid by size, number of agents and nu
 
 ## Currently implemented Solvers ##
 1. AStar and it's variations (Operator Decompsition, PartialExpansion)
-2. CBS and it's variations ()
+2. CBS and it's variations (MA-CBS, )
+3. ICTS 
 
 ## Currently implemented Hueristics ##
 1. SIC - Sum of Individual costs
 
 ## Solvers TODO list ##
-- [ ] A Star with Standley's independent detection.
 - [ ] M Star (Refactor it out from ClassicAStar)
 - [ ] Solve MAPF as a SAT problem
 - [ ] Solve MAPF as a combinatorial auction problem
