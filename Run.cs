@@ -556,7 +556,7 @@ namespace CPF_experiment
             solvers.Add(new IndependenceDetection(astar, new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.MOST_CONFLICTING, false, false), sic));
 
             // ICTS 2RE
-            solvers.Add(new CostTreeSearchSolverRepeatedMatch(2));
+            //solvers.Add(new CostTreeSearchSolverRepeatedMatch(2));
 
             outOfTimeCounters = new int[solvers.Count];
             for (int i = 0; i < outOfTimeCounters.Length; i++)

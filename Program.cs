@@ -277,20 +277,20 @@ namespace CPF_experiment
 
             Program.onlyReadInstances = false;
 
-            int instances = 1;
+            int instances = 3;
 
-            bool runGrids = false;
-            bool runDragonAge = true;
+            bool runGrids = true;
+            bool runDragonAge = false;
             bool runMazesWidth1 = false;
             bool runSpecific = false;
             
             if (runGrids == true)
             {
-                int[] gridSizes = new int[] { 10, 20, 30, 40 , 50, 60 ,70 ,80 ,90, 100, 120, 140, 160, 180, 200};
+                int[] gridSizes = new int[] { /*10, 20, */ 30, 40 , 50, 60 ,70 ,80 ,90, 100, 120, 140, 160, 180, 200};
                 //int[] agentListSizes = new int[] { 2, 3, 4 };
                 
                 //int[] gridSizes = new int[] { 6, };
-                int[] agentListSizes = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, /*17, 18, 19, 20,/* 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32*/};
+                int[] agentListSizes = new int[] { /*2, 3, 4, 5, 6, 7, 8, 9, 10, 11,*/ 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
                 // Note that success rate drops almost to zero for EPEA* and A*+OD/SIC on 40 agents.
             
                 //int[] gridSizes = new int[] { 32, };
