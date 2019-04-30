@@ -268,7 +268,7 @@ namespace CPF_experiment
             if (System.Diagnostics.Debugger.IsAttached)
                 //Constants.MAX_TIME = int.MaxValue;
                 //For generating lots of data, we need lower maxtime - for now 5 minutes
-                Constants.MAX_TIME = 180000;
+                Constants.MAX_TIME = 300000;
 
             if (Directory.Exists(Directory.GetCurrentDirectory() + "\\Instances") == false)
             {
