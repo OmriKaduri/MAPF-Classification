@@ -1,4 +1,7 @@
+## This is a fork of (roni stern's MAPF Project)[https://github.com/ronistern/mapf] ##
+
 # MAPF - Multi Agent Path Finding
+
 A suite of multi-agent path finding algorithm implementations and simulator.
 
 ## How to run ##
@@ -20,8 +23,8 @@ At `GenerateProblemInstance` we generate a grid by size, number of agents and nu
 	obstacles and agent locations choosen randomly.
 
 ## Currently implemented Solvers ##
-1. AStar and it's variations (Operator Decompsition, PartialExpansion)
-2. CBS and it's variations (MA-CBS, )
+1. AStar and it's variations (Operator Decompsition, PartialExpansion, Independence Detection)
+2. CBS and it's variations
 3. ICTS 
 
 ## Currently implemented Hueristics ##
@@ -34,9 +37,7 @@ At `GenerateProblemInstance` we generate a grid by size, number of agents and nu
 
 ## Refactoring TODO List & Questions ##
 - [ ] Create enum for obstacles
-- [ ] What are the names of the map files (brc202d, ost003d) meaning?
 - [ ] At `Program.cs` - runMazesWidth1 will cause exception due to missing grid definition files 
 - [ ] Create `GridDefinitions` class for handling reading of definition files 
 - [x] Move all 'ISolver' implementations to different folder
 - [ ] Create `Parser` for parsing the `GridDefinitions` (`Parser` Interface and `textFileParser` implementation, leaving space for future format parsers) 
-- [ ] 
