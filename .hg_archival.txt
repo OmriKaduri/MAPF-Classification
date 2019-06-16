@@ -1,6 +1,0 @@
-repo: 3ff5be9e0536991cc42b780f8828dec25c24f6e8
-node: 438b78fb27c09251738fb1731493954b7e3a17d3
-branch: block-commit
-latesttag: oded-base
-latesttagdistance: 64
-changessincelatesttag: 64
