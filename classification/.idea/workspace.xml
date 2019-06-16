@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2591c2b2-089b-41b3-bc09-ead0aac7a1eb" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/data/76aef71a-7a88-4d68-be60-ecb3486a94c6.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/9363bb18-7cee-42ec-a9ec-7b0b28bcec34.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AddYLabelToCSV.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/AddYLabelToCSV.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CrossValidition.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrossValidition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/H2O-AutoML-Test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/H2O-AutoML-Test.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sklearn-tests.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sklearn-tests.ipynb" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="CrossValidition.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CrossValidition.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-15">
+              <caret line="142" column="20" lean-forward="true" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataSetsGetter.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DataSetsGetter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="492">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parsers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/pandas/io/parsers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="183">
+              <caret line="685" selection-end-line="3449" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>csv</find>
+      <find>tree</find>
+      <find>?</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/pyZ/models/tree.py" />
+        <option value="$PROJECT_DIR$/data/transfusion.csv" />
+        <option value="$PROJECT_DIR$/data/breast-cancer-wisconsin.csv" />
+        <option value="$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/ensemble/forest.py" />
+        <option value="$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/tree/tree.py" />
+        <option value="$PROJECT_DIR$/pyZ/doc.txt" />
+        <option value="$PROJECT_DIR$/pyZ/RandomForestAss.py" />
+        <option value="$PROJECT_DIR$/H2O-AutoML-Test.ipynb" />
+        <option value="$PROJECT_DIR$/CrossValidition.py" />
+        <option value="$PROJECT_DIR$/DataSetsGetter.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="949" />
+    <option name="width" value="980" />
+    <option name="height" value="1031" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mapf_c" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mapf_c" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mapf_c" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mapf_c" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mapf_c" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mapf_c" type="462c0819:PsiDirectoryNode" />
+              <item name="mapf_automl_leader_model" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\אבישי\Documents\mapf_c\data" />
+      <recent name="C:\projectz\projectz\data" />
+      <recent name="C:\projectz\projectz\pyZ\models" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.RandomForestAss">
+    <configuration name="RandomForestAss" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="projectz" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pyZ" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyZ/RandomForestAss.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="globals" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="projectz" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pyZ" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyZ/globals.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="rfcnb" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="projectz" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pyZ" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyZ/rfcnb.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.rfcnb" />
+      <item itemvalue="Python.RandomForestAss" />
+      <item itemvalue="Python.globals" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.RandomForestAss" />
+        <item itemvalue="Python.globals" />
+        <item itemvalue="Python.rfcnb" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2591c2b2-089b-41b3-bc09-ead0aac7a1eb" name="Default" comment="" />
+      <created>1544985828440</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1544985828440</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="633" y="0" width="653" height="687" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.41314554" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.30068728" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.19931272" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/tree/tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="51" selection-end-line="1494" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyZ/tree.py" />
+    <entry file="file://$PROJECT_DIR$/pyZ/RandomForestAss.py" />
+    <entry file="file://$PROJECT_DIR$/pyZ/forest.py" />
+    <entry file="file://$PROJECT_DIR$/data/transfusion.csv" />
+    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/ensemble/forest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="78" column="59" lean-forward="true" selection-end-line="2025" />
+          <folding>
+            <element signature="e#1554#1585#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/tree/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/tree/tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="51" lean-forward="true" selection-end-line="1494" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyZ/tree.py" />
+    <entry file="file://$PROJECT_DIR$/pyZ/Data.py" />
+    <entry file="file://$PROJECT_DIR$/pyZ/models/IF.py" />
+    <entry file="file://$PROJECT_DIR$/pyZ/models/tree.py" />
+    <entry file="file://$USER_HOME$/Desktop/תזה/avishay/thesis-csv/software/AnomalyDetection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/anaconda/Lib/abc.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyZ/rfcnb.py" />
+    <entry file="file://$PROJECT_DIR$/pyZ/models/IF.py" />
+    <entry file="file://$PROJECT_DIR$/pyZ/globals.py" />
+    <entry file="file://$PROJECT_DIR$/pyZ/models/tree.py" />
+    <entry file="file://$PROJECT_DIR$/data/winequality-red.csv" />
+    <entry file="file://$PROJECT_DIR$/data/messidor_features.csv" />
+    <entry file="file://$PROJECT_DIR$/data/zoo.csv" />
+    <entry file="file://$PROJECT_DIR$/data/haberman.csv" />
+    <entry file="file://$PROJECT_DIR$/data/PhishingData.csv" />
+    <entry file="file://$PROJECT_DIR$/data/breast-cancer.csv" />
+    <entry file="file://$PROJECT_DIR$/data/banknote_authentication.csv" />
+    <entry file="file://$PROJECT_DIR$/data/cmc.csv" />
+    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/tree/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/seeds_dataset.csv" />
+    <entry file="file://$PROJECT_DIR$/data/abalone.csv" />
+    <entry file="file://$PROJECT_DIR$/data/breast-cancer-wisconsin.csv" />
+    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/datasets/samples_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/EEG Eye State.csv" />
+    <entry file="file://$PROJECT_DIR$/pyZ/tree.py" />
+    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/tree/tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25092">
+          <caret line="1505" column="47" selection-start-line="1505" selection-start-column="47" selection-end-line="1505" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tfs/tf292.txt" />
+    <entry file="file://$PROJECT_DIR$/pyZ/feature_extraction/FeatureHandlerRawData.py" />
+    <entry file="file://$PROJECT_DIR$/pyZ/forest.py" />
+    <entry file="file://$PROJECT_DIR$/data/transfusion.csv" />
+    <entry file="file://$PROJECT_DIR$/pyZ/Data.py" />
+    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/ensemble/forest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32793">
+          <caret line="1954" selection-start-line="1954" selection-end-line="1954" />
+          <folding>
+            <element signature="e#1554#1585#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyZ/doc.txt" />
+    <entry file="file://$USER_HOME$/PycharmProjects/lemida2/src/forest.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyZ/RandomForestAss.py" />
+    <entry file="file://$PROJECT_DIR$/data/10grid2-15agents0-30obstacle_ratio.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AddYLabelToCSV.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/confusion-matrix.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sklearn-tests.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/H2O-AutoML-Test.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrossValidition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15">
+          <caret line="142" column="20" lean-forward="true" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/pandas/io/parsers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="685" selection-end-line="3449" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataSetsGetter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
