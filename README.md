@@ -1,4 +1,4 @@
-## This is a fork of (roni stern's MAPF Project)[https://github.com/ronistern/mapf] ##
+## This is a fork of [roni stern's MAPF Project](https://github.com/ronistern/mapf) ##
 
 # MAPF - Multi Agent Path Finding
 
