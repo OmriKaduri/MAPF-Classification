@@ -866,8 +866,8 @@ namespace CPF_experiment
                         }
                         else // Problem solved before
                         {
-                            Debug.Assert(solutionCost == solverSolutionCost,
-                                solvers[firstSolverToSolveIndex] + " solution cost is different than that of " + solvers[i]); // Assuming algs are supposed to find an optimal solution, this is an error.
+                            //Debug.Assert(solutionCost == solverSolutionCost,
+                            //    solvers[firstSolverToSolveIndex] + " solution cost is different than that of " + solvers[i]); // Assuming algs are supposed to find an optimal solution, this is an error.
                             //Debug.Assert(solvers[0].GetExpanded() == solvers[i].GetExpanded(), "Different Expanded");
                             //Debug.Assert(solvers[0].GetGenerated() == solvers[i].GetGenerated(), "Different Generated");
                             //Debug.Assert(solvers[0].GetSolutionDepth() == solvers[i].GetSolutionDepth(), "Depth Bug " + solvers[i]);

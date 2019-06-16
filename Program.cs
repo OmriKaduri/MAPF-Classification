@@ -286,15 +286,15 @@ namespace CPF_experiment
             
             if (runGrids == true)
             {
-                int[] gridSizes = new int[] { /*10, 20, */ 30, 40 , 50, 60 ,70 ,80 ,90, 100, 120, 140, 160, 180, 200};
+                int[] gridSizes = new int[] { /*10, 20, 30, 40 , 50, 60 ,*/ 70 ,80 ,90, 100, 120, 140, 160, 180, 200};
                 //int[] agentListSizes = new int[] { 2, 3, 4 };
                 
                 //int[] gridSizes = new int[] { 6, };
-                int[] agentListSizes = new int[] { /*2, 3, 4, 5, 6, 7, 8, 9, 10, 11,*/ 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
+                int[] agentListSizes = new int[] { /*2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
                 // Note that success rate drops almost to zero for EPEA* and A*+OD/SIC on 40 agents.
             
                 //int[] gridSizes = new int[] { 32, };
-                //int[] agentListSizes = new int[] { /*5, 10, 15, 20, 25, 30, 35,*/ 40, /*45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150*/ };
+                //int[] agentListSizes = new int[] { /*5, 10, 15, 20, 25, */ 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, /*90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150*/ };
                 //int[] agentListSizes = new int[] { 10, 20, 30, 40, 50, 60 };
 
                 //int[] obstaclesPercents = new int[] { 20, };
