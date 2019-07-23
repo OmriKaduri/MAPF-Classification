@@ -535,28 +535,34 @@ namespace CPF_experiment
             solvers.Add(new IndependenceDetection(sic)); // AStar + OD + ID
 
             // MA-CBS-Global-10/(A*+OD/SIC) choosing the first conflict in CBS nodes
-            solvers.Add(new CBS_GlobalConflicts(astar_with_od, astar_with_od, 10));
+            //solvers.Add(new CBS_GlobalConflicts(astar_with_od, astar_with_od, 10));
 
             // MA-CBS-Local-10/(single:A*/SIC multi:A*+OD/SIC) choosing the first conflict in CBS nodes
-            solvers.Add(new CBS_LocalConflicts(astar, astar_with_od, 10));
+            //solvers.Add(new CBS_LocalConflicts(astar, astar_with_od, 10));
 
             // Basic-CBS/(A*+OD/SIC) choosing the first conflict in CBS nodes
-            solvers.Add(new CBS_LocalConflicts(astar_with_od, astar_with_od, -1));
+            //solvers.Add(new CBS_LocalConflicts(astar_with_od, astar_with_od, -1));
 
             // MA - CBS - Global - 10 / (EPEA */ SIC) choosing the first conflict in CBS nodes
             solvers.Add(new CBS_GlobalConflicts(epea, epea, 10));
 
             // MA - CBS - Local - 10 / (single: A */ SIC multi: EPEA */ SIC) choosing the first conflict in CBS nodes
-            solvers.Add(new CBS_LocalConflicts(astar, epea, 10));
+            //solvers.Add(new CBS_LocalConflicts(astar, epea, 10));
 
             // Basic-CBS/(A*/SIC) choosing cardinal conflicts using lookahead
-            solvers.Add(new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.CARDINAL_LOOKAHEAD, false, false));
+            //solvers.Add(new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.CARDINAL_LOOKAHEAD, false, false));
 
             // Basic-CBS/(A*/SIC)+ID - Use ID, for single agent solve vith A*, for groups use Basic-CBS which will use A* (again) for single agent, and epea* for groups
             solvers.Add(new IndependenceDetection(astar, new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.MOST_CONFLICTING, false, false), sic));
 
             // ICTS 2RE
             //solvers.Add(new CostTreeSearchSolverRepeatedMatch(2));
+
+            // ICTS + ID 
+            solvers.Add(new IndependenceDetection(astar, new CostTreeSearchSolverOldMatching(3), sic));
+
+            // EPEA* + ID
+            solvers.Add(new IndependenceDetection(astar, astar_with_partial_expansion, sic));
 
             outOfTimeCounters = new int[solvers.Count];
             for (int i = 0; i < outOfTimeCounters.Length; i++)

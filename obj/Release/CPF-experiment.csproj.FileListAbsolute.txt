@@ -1,0 +1,10 @@
+C:\Users\omri\Projects\study\2019semB\agentsPlanning\MAPF\bin\Release\d0.exe.config
+C:\Users\omri\Projects\study\2019semB\agentsPlanning\MAPF\bin\Release\d0.xml
+C:\Users\omri\Projects\study\2019semB\agentsPlanning\MAPF\bin\Release\d0.exe
+C:\Users\omri\Projects\study\2019semB\agentsPlanning\MAPF\bin\Release\d0.pdb
+C:\Users\omri\Projects\study\2019semB\agentsPlanning\MAPF\obj\Release\CPF-experiment.csprojAssemblyReference.cache
+C:\Users\omri\Projects\study\2019semB\agentsPlanning\MAPF\obj\Release\CPF_experiment.Properties.Resources.resources
+C:\Users\omri\Projects\study\2019semB\agentsPlanning\MAPF\obj\Release\CPF-experiment.csproj.GenerateResource.cache
+C:\Users\omri\Projects\study\2019semB\agentsPlanning\MAPF\obj\Release\CPF-experiment.csproj.CoreCompileInputs.cache
+C:\Users\omri\Projects\study\2019semB\agentsPlanning\MAPF\obj\Release\d0.exe
+C:\Users\omri\Projects\study\2019semB\agentsPlanning\MAPF\obj\Release\d0.pdb

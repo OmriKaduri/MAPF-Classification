@@ -80,7 +80,7 @@ namespace CPF_experiment
                 lastProblemFile.Close();
                 continueFromLastRun = true;
             }
-            
+            //0,5,9,4,0,12,0,0,0  --> 0,4,13,2,0,0,0,0,0
             for (int gs = 0; gs < gridSizes.Length; gs++)
             {
                 for (int obs = 0; obs < obstaclesProbs.Length; obs++)
@@ -102,7 +102,7 @@ namespace CPF_experiment
                             if (continueFromLastRun)  //set the latest problem
                             {
                                 gs = int.Parse(LastProblemDetails[0]); //grid size index
-                                obs = int.Parse(LastProblemDetails[1]); // obstable percent index
+                                obs = int.Parse(LastProblemDetails[1]); // obstacle percent index
                                 ag = int.Parse(LastProblemDetails[2]); // num of agent index
                                 i = int.Parse(LastProblemDetails[3]); // instance id?
                                 for (int j = 4; j < LastProblemDetails.Length; j++)
@@ -153,6 +153,8 @@ namespace CPF_experiment
             }
             runner.CloseResultsFile();                    
         }
+
+        protected static readonly string[] daoStorageFileNames = { "dao_maps\\kiva_0.map" };
 
         protected static readonly string[] daoMapFilenames = { "dao_maps\\den502d.map", "dao_maps\\ost003d.map", "dao_maps\\brc202d.map"};
 
@@ -269,6 +271,7 @@ namespace CPF_experiment
                 //Constants.MAX_TIME = int.MaxValue;
                 //For generating lots of data, we need lower maxtime - for now 5 minutes
                 Constants.MAX_TIME = 300000;
+            Constants.MAX_TIME = 300000;
 
             if (Directory.Exists(Directory.GetCurrentDirectory() + "\\Instances") == false)
             {
@@ -277,24 +280,25 @@ namespace CPF_experiment
 
             Program.onlyReadInstances = false;
 
-            int instances = 3;
+            int instances = 10;
 
-            bool runGrids = true;
+            bool runGrids = false;
             bool runDragonAge = false;
             bool runMazesWidth1 = false;
             bool runSpecific = false;
-            
+            bool runStorage = true;
+
             if (runGrids == true)
             {
-                int[] gridSizes = new int[] { /*10, 20, 30, 40 , 50, 60 ,*/ 70 ,80 ,90, 100, 120, 140, 160, 180, 200};
+                int[] gridSizes = new int[] { /*10, 20, 30, 40 , 50, */ 60, 70 ,80 /*, 90, 100, 110 , 120, 130, 140 , 150, 160, 170 ,180, 190 , 200/**/};
                 //int[] agentListSizes = new int[] { 2, 3, 4 };
                 
-                //int[] gridSizes = new int[] { 6, };
-                int[] agentListSizes = new int[] { /*2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
+                //int[] gridSizes = new int[] { 20};
+                //int[] agentListSizes = new int[] { 3, 4, 5, 6, 7, 8, 9, 10 /*, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32*/};
                 // Note that success rate drops almost to zero for EPEA* and A*+OD/SIC on 40 agents.
             
                 //int[] gridSizes = new int[] { 32, };
-                //int[] agentListSizes = new int[] { /*5, 10, 15, 20, 25, */ 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, /*90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150*/ };
+                int[] agentListSizes = new int[] { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, /*90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150 */};
                 //int[] agentListSizes = new int[] { 10, 20, 30, 40, 50, 60 };
 
                 //int[] obstaclesPercents = new int[] { 20, };
@@ -330,6 +334,9 @@ namespace CPF_experiment
                 //me.RunInstance("corridor2");
                 //me.RunInstance("corridor3");
                 //me.RunInstance("corridor4");
+            }else if(runStorage == true)
+            {
+                me.RunDragonAgeExperimentSet(instances, Program.daoStorageFileNames); // Obstacle percents and grid sizes built-in to the maps.
             }
 
             // A function to be used by Eric's PDB code
