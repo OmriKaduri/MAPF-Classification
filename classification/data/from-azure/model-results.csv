@@ -1,0 +1,28 @@
+Model,Accuracy,Coverage,Cumsum (minutes),Notes
+Random Baseline,20.42%,89.77%,1075,
+A*+OD+ID,4.62%,93.55%,799,
+MA-CBS-Global-10/(EPEA*/SIC),59.69%,74.10%,2342,"Important to note that though MA-CBS accuracy is high, it has very low coverage relative and high cumsum"
+Basic-CBS/(A*/SIC)+ID,9.05%,85.77%,1415,
+ICTS 3E +ID,14.52%,97.30%,489,Highest coverage at ICTS and lowest cumsum
+EPEA*+ID,12.09%,95.25%,623,
+Optimal Solver,100.00%,100.00%,203,
+XGBoost Model ,63.80%,87.84%,1261,
+Regression based classification,55.74%,94.95%,661.69,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+,,,,IMPORTANT TO NOTE that problems which no solver solved under than 5 minutes didn't taken into account
+,,,,Maybe show results on the datasets only when obstacledensity > 0.5
+,,,,At > 0.5 the results are more significant (High accuracy and low cumsum)
+,,,,
+CNN Models,Accuracy,Coverage,Cumsum,Notes
+"Pretrained VGG16, GAP layer, softmax (5)",59.70%,74.46%,2308,Overfitted to choose ma-cbs (No fine tuning to vgg) 
+"Pretrained VGG16, GAP layer, softmax (5)",64.68%,88.32%,1219,Fine tuning vgg from layer 8 - better than XGBoost!
+"Pretrained VGG16, GAP layer, softmax (5)",62.91%,86.93%,1390,Fine tuning vgg from layer 4 
+"Pretrained VGG16, GAP layer, FC 64, softmax (5)",63.52%,88.32%,1224,"Fine tuning vgg from layer 8, add dense layer with 64 neurons after"
+"Pretrained VGG16, GAP layer, features concat, softmax (5)",59.69%,74.10%,2342,"After the GAP, 12 features (used for xgboost) concatanated (therefore 524 length vector going into softmax layer) "
+"Pretrained VGG16, GAP layer, features concat, softmax (5)",65.04%,84.13%,1566,Fine tuning vgg from layer 8  + features concat
+"Pretrained VGG16, GAP layer, FC 64, features concat, softmax (5)",63.89%,88.75%,1190,Fine tuning vgg from layer 8 + dense layer with 64 neurons + features concat
+,,,,
+,,,,
+,,,,"All CNNs trained with learning rate 0.0001, rmsprop optimizer, and categorical cross entropy loss. "
+,,,,Class weights were added to penalize the model (because the data is somewhat imbalanced) 
+,,,,All images were resized to 224x224x3
+,,,,In the multi input model (with 12 hand crafted features) the features are normalized to unit norm by max normalization
