@@ -58,6 +58,9 @@ class MapfGraph:
     def save_graph_to(self, filename):
         nx.write_edgelist(self.G, filename)
 
+    def save_gexf_graph_to(self, filename):
+        nx.write_gexf(self.G, filename)
+
     def draw_graph_to(self, filename):
         normal_pos = dict((n, (n // self.grid_size[1], n % self.grid_size[1])) for n in self.G.nodes())
         pos = {k: rotate_positions_90_clockwise(*v) for k, v in normal_pos.items()}

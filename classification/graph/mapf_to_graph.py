@@ -11,12 +11,21 @@ for file in glob.glob('../data/from-azure/' + mapf_dir + '/*'):
     if 'current' in file:
         continue
 
+    if 'Instance-110-10-80-0' not in file:
+        continue
     filename = file.split('\\')[-1]
-    if os.path.isfile('../edgelists/' + mapf_dir + '/' + filename + ".png"):
-        continue  # NOT REDO INSTANCES ALREADY EVALUATED
+    # if os.path.isfile('../edgelists/' + mapf_dir + '/' + filename + ".png"):
+    #     continue  # NOT REDO INSTANCES ALREADY EVALUATED
+
+    # if os.path.isfile('../edgelists/' + mapf_dir + '/' + filename + ".gexf"):
+    #     continue  # NOT REDO INSTANCES ALREADY EVALUATED
+
+    if 'brc' in file or 'ost' in file or 'den' in file:
+        continue
+
 
     print("Working on ", filename)
     graph = MapfGraph(file)
     graph.create_graph()
-    graph.draw_graph_to('../edgelists/' + mapf_dir + '/' + filename + ".png")
-    graph.save_graph_to('../edgelists/' + mapf_dir + '/' + filename + ".edgelists")
+    # graph.draw_graph_to('../edgelists/' + mapf_dir + '/' + filename + ".png")
+    graph.save_gexf_graph_to('../edgelists/' + mapf_dir + '/' + filename + ".gexf")
