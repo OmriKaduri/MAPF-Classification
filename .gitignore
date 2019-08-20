@@ -6,3 +6,4 @@ Properties/
 classification/edgelists - Copy/
 classification/edgelists/
 classification/data/from-azure/splitted/cnn_models/
+classification/src/models/pretrained/
