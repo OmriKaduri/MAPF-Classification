@@ -84,7 +84,7 @@ y_test = pd.read_csv('data/splitted/test_labels.csv')
 
 But you can ofcourse just use scikit-learn to split your new data:
 ```python
-X_train, X_test, y_train, y_test = train_test_split(solved_df, solved_df['Y'], test_size=0.25)
+X_train, X_test, y_train, y_test = train_test_split(df, df['Y'], test_size=0.25)
 ```
 
 It is recommended to save the output of the split before any training and save it (or just using the same random_state for the split)
