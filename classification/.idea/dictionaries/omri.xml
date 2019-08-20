@@ -1,7 +1,18 @@
 <component name="ProjectDictionaryState">
   <dictionary name="omri">
     <words>
+      <w>csvfile</w>
+      <w>cumsum</w>
+      <w>dataset</w>
+      <w>epea</w>
+      <w>icts</w>
+      <w>maxtime</w>
       <w>networkx</w>
+      <w>pred</w>
+      <w>preds</w>
+      <w>preprocess</w>
+      <w>withbridges</w>
+      <w>xgboost</w>
     </words>
   </dictionary>
 </component>

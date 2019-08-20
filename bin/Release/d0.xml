@@ -1985,7 +1985,7 @@
             </summary>
             <param name="ags"></param>
         </member>
-        <member name="M:CPF_experiment.ProblemInstance.Import(System.String)">
+        <member name="M:CPF_experiment.ProblemInstance.Import(System.String,System.String)">
             <summary>
             Imports a problem instance from a given file
             </summary>
