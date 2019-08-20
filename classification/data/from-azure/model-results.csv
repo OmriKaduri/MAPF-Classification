@@ -7,10 +7,18 @@ ICTS 3E +ID,14.52%,97.30%,489,Highest coverage at ICTS and lowest cumsum
 EPEA*+ID,12.09%,95.25%,623,
 Optimal Solver,100.00%,100.00%,203,
 XGBoost Model ,63.80%,87.84%,1261,
-Regression based classification,55.74%,94.95%,661.69,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+Regression based classification,57.38%,96.35%,536,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+XGBoost + regression output,65.89%,89.30%,1173,
+XGBoost + regression output + sample weights,64.86%,91.24%,1009,sample weights - for each sample a weight given as the log transform of the standard deviation of all algorithm runtime results
+"Pretrained VGG16, GAP layer, features concat, Linear regression (5)",22.24%,97.87%,434,Fine tune vgg from layer 12 
 ,,,,IMPORTANT TO NOTE that problems which no solver solved under than 5 minutes didn't taken into account
 ,,,,Maybe show results on the datasets only when obstacledensity > 0.5
 ,,,,At > 0.5 the results are more significant (High accuracy and low cumsum)
+,,,,
+XGBoost (trained on balanced dataset),45.77%,96.41%,575,NEED TO REPRODUCE!
+Regression based classification (trained on balanced dataset),37.75%,97.44%,467,NEED TO REPRODUCE!
+,,,,
+,,,,
 ,,,,
 CNN Models,Accuracy,Coverage,Cumsum,Notes
 "Pretrained VGG16, GAP layer, softmax (5)",59.70%,74.46%,2308,Overfitted to choose ma-cbs (No fine tuning to vgg) 
@@ -20,9 +28,12 @@ CNN Models,Accuracy,Coverage,Cumsum,Notes
 "Pretrained VGG16, GAP layer, features concat, softmax (5)",59.69%,74.10%,2342,"After the GAP, 12 features (used for xgboost) concatanated (therefore 524 length vector going into softmax layer) "
 "Pretrained VGG16, GAP layer, features concat, softmax (5)",65.04%,84.13%,1566,Fine tuning vgg from layer 8  + features concat
 "Pretrained VGG16, GAP layer, FC 64, features concat, softmax (5)",63.89%,88.75%,1190,Fine tuning vgg from layer 8 + dense layer with 64 neurons + features concat
+"Pretrained VGG16, GAP layer, Linear regression 5",20.85%,97.22%,491,"Regression based classification, with sample weights & class weights"
+"Pretrained VGG16, GAP layer, features concat, Linear regression (5)",22.24%,97.87%,434,Fine tune vgg from layer 12 
 ,,,,
 ,,,,
-,,,,"All CNNs trained with learning rate 0.0001, rmsprop optimizer, and categorical cross entropy loss. "
+,,,,
+,,,,"All CNNs trained with learning rate 0.0001, rmsprop optimizer, and categorical cross entropy loss, and early stopping of 5"
 ,,,,Class weights were added to penalize the model (because the data is somewhat imbalanced) 
 ,,,,All images were resized to 224x224x3
 ,,,,In the multi input model (with 12 hand crafted features) the features are normalized to unit norm by max normalization

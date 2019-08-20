@@ -778,12 +778,12 @@ namespace CPF_experiment
         /// Solve given instance with a list of algorithms 
         /// </summary>
         /// <param name="instance">The instance to solve</param>
-        public void SolveGivenProblem(ProblemInstance instance)
+        public bool SolveGivenProblem(ProblemInstance instance)
         {
             //return; // add for generator
             // Preparing a list of agent indices (not agent nums) for the heuristics' Init() method
             List<uint> agentList = Enumerable.Range(0, instance.m_vAgents.Length).Select<int, uint>(x=> (uint)x).ToList<uint>(); // FIXME: Must the heuristics really receive a list of uints?
-            
+
             // Solve using the different algorithms
             Debug.WriteLine("Solving " + instance);
             this.PrintProblemStatistics(instance);
@@ -878,12 +878,12 @@ namespace CPF_experiment
                             //Debug.Assert(solvers[0].GetGenerated() == solvers[i].GetGenerated(), "Different Generated");
                             //Debug.Assert(solvers[0].GetSolutionDepth() == solvers[i].GetSolutionDepth(), "Depth Bug " + solvers[i]);
                         }
-
                         Console.WriteLine("+SUCCESS+ (:");
                     }
                     else
                     {
                         outOfTimeCounters[i]++;
+
                         Console.WriteLine("-FAILURE- ):");
                     }
                 }
@@ -893,7 +893,78 @@ namespace CPF_experiment
                 Console.WriteLine();
             }
             this.ContinueToNextLine();
+            return solutionCost != -1;
         }
+
+        ///// <summary>
+        ///// Solve given instance with a list of algorithms 
+        ///// </summary>
+        ///// <param name="instance">The instance to solve</param>
+        //public void SolveGivenProblemIncrementally(ProblemInstance instance)
+        //{
+        //    // Preparing a list of agent indices (not agent nums) for the heuristics' Init() method
+        //    List<uint> agentList = Enumerable.Range(0, instance.m_vAgents.Length).Select(x => (uint)x).ToList(); // FIXME: Must the heuristics really receive a list of uints?
+
+        //    AStarWithOD cooperativeAStar = new AStarWithOD();
+        //    cooperativeAStar.Setup(instance, this);
+        //    this.startTime = this.ElapsedMillisecondsTotal();
+        //    double handlingStartTime = this.ElapsedMillisecondsTotal();
+        //    double elapsedTime = 0;
+
+        //    foreach (var agentIndex in Enumerable.Range(0, instance.m_vAgents.Length))
+        //    {
+        //        // Solve using the different algorithms
+        //        Console.WriteLine($"Solving {instance} agent {agentIndex}");
+        //        this.PrintProblemStatistics(instance);
+
+        //        GC.Collect();
+        //        GC.WaitForPendingFinalizers();
+
+        //        this.startTime += this.ElapsedMillisecondsTotal() - handlingStartTime;
+        //        bool solved = cooperativeAStar.AddOneAgent(agentIndex);
+        //        elapsedTime = this.ElapsedMilliseconds();
+        //        handlingStartTime = this.ElapsedMillisecondsTotal();
+        //        if (solved)
+        //        {
+        //            Console.WriteLine("Total cost: {0}", cooperativeAStar.GetSolutionCost());
+        //            Console.WriteLine("Solution depth: {0}", cooperativeAStar.GetSolutionDepth());
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("Failed to solve");
+        //            Console.WriteLine("Solution depth lower bound: {0}", cooperativeAStar.GetSolutionDepth());
+        //        }
+        //        Console.WriteLine();
+
+        //        Console.WriteLine("Time In milliseconds: {0}", elapsedTime);
+
+        //        this.PrintStatistics(instance, cooperativeAStar, elapsedTime + instance.shortestPathComputeTime, seed: 123);
+
+        //        Console.WriteLine();
+
+        //        int solverSolutionCost = cooperativeAStar.GetSolutionCost();
+
+        //        if (solverSolutionCost >= 0) // Solved successfully
+        //        {
+        //            Plan plan = cooperativeAStar.GetPlan();
+        //            int planSize = plan.GetSize();
+        //            if (planSize < 50)
+        //                plan.PrintPlan();
+        //            else
+        //                Console.WriteLine($"Plan is too long to print ({planSize} steps).");
+
+        //            Console.WriteLine("+SUCCESS+ (:");
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("-FAILURE- ):");
+        //            break;
+        //        }
+
+        //        Console.WriteLine();
+        //        this.ContinueToNextLine();
+        //    }
+        //}
 
         /// <summary>
         /// Solve a given instance with the given solver

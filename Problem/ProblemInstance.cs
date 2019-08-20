@@ -19,6 +19,7 @@ namespace CPF_experiment
         private static readonly char EXPORT_DELIMITER = ',';
 
         public static readonly string GRID_NAME_KEY = "Grid Name";
+        public static readonly string INSTANCE_NAME_KEY = "Instance Name";
 
         /// <summary>
         /// This contains extra data of this problem instance (used for special problem instances, e.g. subproblems of a bigger problem instance).
@@ -148,6 +149,7 @@ namespace CPF_experiment
         public void ComputeSingleAgentShortestPaths()
         {
             Debug.WriteLine("Computing the single agent shortest path for all agents...");
+            Console.WriteLine("Computing the single agent shortest path for all agents...");
             //return; // Add for generator
 
             this.singleAgentOptimalCosts = new int[this.GetNumOfAgents()][];
@@ -441,93 +443,323 @@ namespace CPF_experiment
             PrecomputePermutations();
         }
         
-        /// <summary>
-        /// Imports a problem instance from a given file
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        public static ProblemInstance Import(string fileName)
+        public static ProblemInstance ImportFromAgentsFile(String fileName, string mapFilePath = null)
         {
-            TextReader input = new StreamReader(fileName);
-            //return new ProblemInstance(); // DELETE ME!!!
-            string[] lineParts;
-            string line;
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
             int instanceId = 0;
-            string gridName = "Random Grid"; // The default
-
-            line = input.ReadLine();
-            if (line.StartsWith("Grid:") == false)
+            string mapfileName;
+            if (mapFilePath == null)
             {
-                lineParts = line.Split(',');
-                instanceId = int.Parse(lineParts[0]);
-                if (lineParts.Length > 1)
-                    gridName = lineParts[1];
-                line = input.ReadLine();
+                mapfileName = fileName.Substring(0, fileName.IndexOf('_') + 1 + 1) + ".map"; // FIXME: only supports singl
+                mapFilePath = Path.Combine(Path.GetDirectoryName(fileName), "..", "maps", mapfileName);
+                instanceId = int.Parse(fileName.Split('_').Last());
+            }
+            else
+            {
+                mapfileName = Path.GetFileNameWithoutExtension(mapFilePath);
             }
 
-            //instanceId = int.Parse(fileName.Split('-')[4]);
-            // First/second line is Grid:
-            Debug.Assert(line.StartsWith("Grid:"));
+            Console.WriteLine("map file name: {0} ", mapfileName);
 
-            // Read grid dimensions
-            line = input.ReadLine();
-            lineParts = line.Split(',');
-            int maxX = int.Parse(lineParts[0]);
-            int maxY = int.Parse(lineParts[1]);
-            bool[][] grid = new bool[maxX][];
-            char cell;
-            for (int i = 0; i < maxX; i++)
+            bool[][] grid;
+            string line;
+            string[] lineParts;
+            using (TextReader input = new StreamReader(mapFilePath))
             {
-                grid[i] = new bool[maxY];
+                // Read grid dimensions
                 line = input.ReadLine();
-                for (int j = 0; j < maxY; j++)
+                lineParts = line.Split(',');
+                int maxX = int.Parse(lineParts[0]);
+                int maxY = int.Parse(lineParts[1]);
+                grid = new bool[maxX][];
+                char cell;
+                // Read grid
+                for (int i = 0; i < maxX; i++)
                 {
-                    cell = line.ElementAt(j);
-                    if (cell == '@' || cell == 'O' || cell == 'T' || cell == 'W' /* Water isn't traversable from land */)
-                        grid[i][j] = true;
-                    else
-                        grid[i][j] = false;
+                    grid[i] = new bool[maxY];
+                    line = input.ReadLine();
+                    for (int j = 0; j < maxY; j++)
+                    {
+                        cell = line.ElementAt(j);
+                        if (cell == '1')
+                            grid[i][j] = true;
+                        else
+                            grid[i][j] = false;
+                    }
                 }
             }
 
-            // Next line is Agents:
-            line = input.ReadLine();
-            Debug.Assert(line.StartsWith("Agents:"));
-
-            // Read the number of agents
-            line = input.ReadLine();
-            int numOfAgents = int.Parse(line);
-
-            // Read the agents' start and goal states
-            AgentState[] states = new AgentState[numOfAgents];
-            AgentState state;
-            Agent agent;
-            int agentNum;
-            int goalX;
-            int goalY;
-            int startX;
-            int startY;
-            for (int i = 0; i < numOfAgents; i++)
+            AgentState[] states;
+            using (TextReader input = new StreamReader(fileName))
             {
+                // Read the number of agents
                 line = input.ReadLine();
-                lineParts = line.Split(EXPORT_DELIMITER);
-                agentNum = int.Parse(lineParts[0]);
-                goalX = int.Parse(lineParts[1]);
-                goalY = int.Parse(lineParts[2]);
-                startX = int.Parse(lineParts[3]);
-                startY = int.Parse(lineParts[4]);
-                agent = new Agent(goalX, goalY, agentNum);
-                state = new AgentState(startX, startY, agent);
-                states[i] = state;
+                int numOfAgents = int.Parse(line);
+
+                // Read the agents' start and goal states
+                states = new AgentState[numOfAgents];
+                AgentState state;
+                Agent agent;
+                int agentNum;
+                int goalX;
+                int goalY;
+                int startX;
+                int startY;
+                for (int i = 0; i < numOfAgents; i++)
+                {
+                    line = input.ReadLine();
+                    lineParts = line.Split(EXPORT_DELIMITER);
+                    //agentNum = int.Parse(lineParts[0]);
+                    goalX = int.Parse(lineParts[0]);
+                    goalY = int.Parse(lineParts[1]);
+                    startX = int.Parse(lineParts[2]);
+                    startY = int.Parse(lineParts[3]);
+                    agent = new Agent(goalX, goalY, i);
+                    state = new AgentState(startX, startY, agent);
+                    states[i] = state;
+                }
             }
 
             // Generate the problem instance
             ProblemInstance instance = new ProblemInstance();
             instance.Init(states, grid);
             instance.instanceId = instanceId;
-            instance.parameters[ProblemInstance.GRID_NAME_KEY] = gridName;
+            instance.parameters[ProblemInstance.GRID_NAME_KEY] = mapfileName;
+            instance.parameters[ProblemInstance.INSTANCE_NAME_KEY] = fileNameWithoutExtension + ".agents";
             instance.ComputeSingleAgentShortestPaths();
             return instance;
+        }
+
+        public static ProblemInstance ImportFromScenFile(string fileName)
+        {
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+            int instanceId = int.Parse(fileNameWithoutExtension.Split('-').Last());
+            string mapfileName = fileNameWithoutExtension.Substring(0, length: fileNameWithoutExtension.LastIndexOf("-even"));  // Passing a length parameter is like specifying a non-inclusive end index
+            string mapFilePath = Path.Combine(Path.GetDirectoryName(fileName), "..","..", "maps", mapfileName+".map");
+            Console.WriteLine("map file path {0} {1}", Path.GetDirectoryName(fileName), mapFilePath);
+            bool[][] grid;
+            string line;
+            string[] lineParts;
+            int maxX;
+            int maxY;
+            using (TextReader input = new StreamReader(mapFilePath))
+            {
+                // Read grid dimensions
+                line = input.ReadLine();
+                Debug.Assert(line.StartsWith("type octile"));
+                line = input.ReadLine();
+                lineParts = line.Split(' ');
+                Debug.Assert(lineParts.Length == 2);
+                Debug.Assert(lineParts[0].Equals("height"));
+                maxY = int.Parse(lineParts[1]);  // The height is the number of rows
+                line = input.ReadLine();
+                lineParts = line.Split(' ');
+                Debug.Assert(lineParts.Length == 2);
+                Debug.Assert(lineParts[0].Equals("width"));
+                maxX = int.Parse(lineParts[1]);  // The width is the number of columns
+                grid = new bool[maxY][];
+
+                line = input.ReadLine();
+                Debug.Assert(line.StartsWith("map"));
+
+                char cell;
+                // Read grid
+                for (int i = 0; i < maxY; i++)
+                {
+                    grid[i] = new bool[maxX];
+                    line = input.ReadLine();
+                    for (int j = 0; j < maxX; j++)
+                    {
+                        cell = line.ElementAt(j);
+                        if (cell == '@' || cell == 'O' || cell == 'T' || cell == 'W' /* Water isn't traversable from land */)
+                            grid[i][j] = true;
+                        else
+                            grid[i][j] = false;
+                    }
+                }
+            }
+
+            List<AgentState> stateList = new List<AgentState>();
+            Run runner = new Run();
+            Console.WriteLine("Starting scen file {0}", fileName);
+            using (TextReader input = new StreamReader(fileName))
+            {
+                // Read the format version number
+                line = input.ReadLine();
+                lineParts = line.Split(' ');
+                Debug.Assert(lineParts[0].Equals("version"));
+                int version = int.Parse(lineParts[1]);
+                Debug.Assert(version == 1, "Only version 1 is currently supported");
+
+                // Read the agents' start and goal states
+                AgentState state;
+                Agent agent;
+                int agentNum = 0;
+                int block;
+                int goalX;
+                int goalY;
+                int startX;
+                int startY;
+                string mapFileName;
+                int mapRows;
+                int mapCols;
+                double optimalCost;  // Assuming diagonal moves are allowed and cost sqrt(2)
+                while (true)
+                {
+                    line = input.ReadLine();
+                    if (string.IsNullOrWhiteSpace(line))
+                        break;
+                    lineParts = line.Split('\t');
+                    block = int.Parse(lineParts[0]);
+                    mapFileName = lineParts[1];
+                    mapRows = int.Parse(lineParts[2]);
+                    Debug.Assert(mapRows == maxX);
+                    mapCols = int.Parse(lineParts[3]);
+                    Debug.Assert(mapRows == maxY);
+
+                    startY = int.Parse(lineParts[4]);
+                    startX = int.Parse(lineParts[5]);
+                    goalY = int.Parse(lineParts[6]);
+                    goalX = int.Parse(lineParts[7]);
+                    optimalCost = double.Parse(lineParts[8]);
+                    agent = new Agent(goalX, goalY, agentNum);
+                    state = new AgentState(startX, startY, agent);
+                    stateList.Add(state);
+                    agentNum++;
+                    String instanceName;
+                    bool resultsFileExisted = File.Exists(Program.RESULTS_FILE_NAME);
+                    runner.OpenResultsFile(Program.RESULTS_FILE_NAME);
+
+                    if (resultsFileExisted == false)
+                        runner.PrintResultsFileHeader();
+                    runner.CloseResultsFile();
+                    TextWriter output;
+
+                    string[] cur_lineParts = null;
+
+
+                    Console.WriteLine("Starting scen with {0} agents", agentNum);
+                    // Generate the problem instance
+                    ProblemInstance instance = new ProblemInstance();
+                    instance.Init(stateList.ToArray(), grid);
+                    instance.instanceId = instanceId;
+                    instance.parameters[ProblemInstance.GRID_NAME_KEY] = mapfileName;
+                    instance.parameters[ProblemInstance.INSTANCE_NAME_KEY] = fileNameWithoutExtension + ".scen";
+                    instance.ComputeSingleAgentShortestPaths();
+                    runner.OpenResultsFile(Program.RESULTS_FILE_NAME);
+                    if (resultsFileExisted == false)
+                        runner.PrintResultsFileHeader();
+                    Boolean solved = runner.SolveGivenProblem(instance);
+                    runner.CloseResultsFile();
+                    if (!solved)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            
+            return null;
+        }
+
+        /// <summary>
+        /// Imports a problem instance from a given file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static ProblemInstance Import(string fileName,string mapFilePath = null)
+        {
+            if (fileName.EndsWith(".agents"))
+            {
+                return ImportFromAgentsFile(fileName, mapFilePath);
+            }
+            else if (fileName.EndsWith(".scen"))
+            {
+                return ImportFromScenFile(fileName);
+            }
+            else
+            {
+                TextReader input = new StreamReader(fileName);
+                //return new ProblemInstance(); // DELETE ME!!!
+                string[] lineParts;
+                string line;
+                int instanceId = 0;
+                string gridName = "Random Grid"; // The default
+
+                line = input.ReadLine();
+                if (line.StartsWith("Grid:") == false)
+                {
+                    lineParts = line.Split(',');
+                    instanceId = int.Parse(lineParts[0]);
+                    if (lineParts.Length > 1)
+                        gridName = lineParts[1];
+                    line = input.ReadLine();
+                }
+                //instanceId = int.Parse(fileName.Split('-')[4]);
+                // First/second line is Grid:
+                Debug.Assert(line.StartsWith("Grid:"));
+
+                // Read grid dimensions
+                line = input.ReadLine();
+                lineParts = line.Split(',');
+                int maxX = int.Parse(lineParts[0]);
+                int maxY = int.Parse(lineParts[1]);
+                bool[][] grid = new bool[maxX][];
+                char cell;
+                for (int i = 0; i < maxX; i++)
+                {
+                    grid[i] = new bool[maxY];
+                    line = input.ReadLine();
+                    for (int j = 0; j < maxY; j++)
+                    {
+                        cell = line.ElementAt(j);
+                        if (cell == '@' || cell == 'O' || cell == 'T' || cell == 'W' /* Water isn't traversable from land */)
+                            grid[i][j] = true;
+                        else
+                            grid[i][j] = false;
+                    }
+                }
+
+                // Next line is Agents:
+                line = input.ReadLine();
+                Debug.Assert(line.StartsWith("Agents:"));
+
+                // Read the number of agents
+                line = input.ReadLine();
+                int numOfAgents = int.Parse(line);
+
+                // Read the agents' start and goal states
+                AgentState[] states = new AgentState[numOfAgents];
+                AgentState state;
+                Agent agent;
+                int agentNum;
+                int goalX;
+                int goalY;
+                int startX;
+                int startY;
+                for (int i = 0; i < numOfAgents; i++)
+                {
+                    line = input.ReadLine();
+                    lineParts = line.Split(EXPORT_DELIMITER);
+                    agentNum = int.Parse(lineParts[0]);
+                    goalX = int.Parse(lineParts[1]);
+                    goalY = int.Parse(lineParts[2]);
+                    startX = int.Parse(lineParts[3]);
+                    startY = int.Parse(lineParts[4]);
+                    agent = new Agent(goalX, goalY, agentNum);
+                    state = new AgentState(startX, startY, agent);
+                    states[i] = state;
+                }
+
+                // Generate the problem instance
+                ProblemInstance instance = new ProblemInstance();
+                instance.Init(states, grid);
+                instance.instanceId = instanceId;
+                instance.parameters[ProblemInstance.GRID_NAME_KEY] = gridName;
+                instance.parameters[ProblemInstance.INSTANCE_NAME_KEY] = Path.GetFileName(fileName);
+                instance.ComputeSingleAgentShortestPaths();
+                return instance;
+            }
         }
 
         /// <summary>

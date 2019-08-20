@@ -12,7 +12,7 @@ namespace CPF_experiment
     /// </summary>
     class Program
     {
-        private static string RESULTS_FILE_NAME = "Results.csv"; // Overridden by Main
+        public static string RESULTS_FILE_NAME = "Results.csv"; // Overridden by Main
         private static bool onlyReadInstances = false;
 
         /// <summary>
@@ -160,7 +160,33 @@ namespace CPF_experiment
 
         protected static readonly string[] mazeMapFilenames = { "mazes-width1-maps\\maze512-1-6.map", "mazes-width1-maps\\maze512-1-2.map",
                                                 "mazes-width1-maps\\maze512-1-9.map" };
-        
+
+        protected static readonly string[] scenMapFileNames = { "mapf-scen-even\\scen-even\\Berlin_1_256-even-4.scen",
+                        "mapf-scen-even\\scen-even\\maze-128-128-10.map", "mapf-scen-even\\scen-even\\maze-32-32-4.map",
+                        "mapf-scen-even\\scen-even\\orz900d.map", "mapf-scen-even\\scen-even\\Paris_1_256.map",
+                        "mapf-scen-even\\scen-even\\room-64-64-16.map", "mapf-scen-even\\scen-even\\w_woundedcoast.map",
+                        "mapf-scen-even\\scen-even\\room-32-32-4.map"};
+
+        protected static readonly string[] scenFileNames = { "mapf-map\\Berlin_1_256.map",
+         "mapf-map\\scen-even\\maze-128-128-10.map", "mapf-map\\maze-32-32-4.map",
+                        "mapf-map\\orz900d.map", "mapf-map\\Paris_1_256.map",
+                        "mapf-map\\room-64-64-16.map", "mapf-map\\w_woundedcoast.map",
+                        "mapf-map\\room-32-32-4.map"};
+
+        public void RunNathanExperimentSet(String scenMapFileName)
+        {
+            try
+            {
+
+                ProblemInstance.Import(Directory.GetCurrentDirectory() + "\\" + scenMapFileName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(String.Format("Skipping bad problem instance {0}. Error: {1}", scenMapFileNames[0], e.Message));
+                return;
+            }
+        }
+
         /// <summary>
         /// Dragon Age experiment
         /// </summary>
@@ -286,7 +312,8 @@ namespace CPF_experiment
             bool runDragonAge = false;
             bool runMazesWidth1 = false;
             bool runSpecific = false;
-            bool runStorage = true;
+            bool runStorage = false;
+            bool runNathan = true;
 
             if (runGrids == true)
             {
@@ -337,6 +364,18 @@ namespace CPF_experiment
             }else if(runStorage == true)
             {
                 me.RunDragonAgeExperimentSet(instances, Program.daoStorageFileNames); // Obstacle percents and grid sizes built-in to the maps.
+            }
+            else if(runNathan == true)
+            {
+                string[] scenDirs = {Path.Combine("scen", "scen1")};
+                foreach (var dirName in scenDirs)
+                {
+                    foreach (var scenPath in Directory.GetFiles(dirName))
+                    {
+                        Console.WriteLine(scenPath);
+                        me.RunNathanExperimentSet(scenPath);
+                    }
+                }
             }
 
             // A function to be used by Eric's PDB code
