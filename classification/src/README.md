@@ -19,6 +19,7 @@ GridRows, GridColumns, NumOfAgents, NumOfObstacles, BranchingFactor, ObstacleDen
 *Clarification* - `PointsAtSPRatio` computed as the number of cells at the grid that exists in a shortest path of some agent divided by the total number of cells at the grid. All other features should be self-describing. Otherwise - contact me (Omri) :)
 
 Ofcourse that using the repository MAPF project to solve the problems would generate the output at the desired format.
+You can see how to solve MAPF problems using the repo's code [here](https://github.com/OmriKaduri/MAPF-Classification/blob/master/README.md#how-to-run-solve-mapf-problems)
 
 ## Labels
 After generating the data, we need to add labels to it in order to train the supervised models.
