@@ -4,6 +4,10 @@
 
 A suite of multi-agent path finding algorithm implementations and simulator.
 
+## Classification - who is the best MAPF for the job? ##
+In order to find which is the best MAPF algorithm for every task, we trained an XGBoost and a VGG16-based classifiers and regressors.
+The data & notebooks for training can be found under `classification` directory.
+
 ## How to run (solve MAPF problems) ##
 In `Run.cs` you need to add your `ISolver` implementation to `solvers` List. 
 After your addition, go to `Program.cs`. 
@@ -18,10 +22,6 @@ At the main function you can choose to run in either one of the next modes:
 At the ctor we init solvers and heuristics lists. they will be used by inner functions.
 At `GenerateProblemInstance` we generate a grid by size, number of agents and number of obstacles.
 	obstacles and agent locations choosen randomly.
-
-## Classification - who is the best MAPF for the job? ##
-In order to find which is the best MAPF algorithm for every task, we trained an XGBoost and a VGG16-based classifiers and regressors.
-The data & notebooks for training can be found under `classification` directory.
 
 ### Detailed explanation of the best algorithm classification can be foune [here](https://github.com/OmriKaduri/MAPF-Classification/tree/master/classification/src) ###
 
