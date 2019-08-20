@@ -27,7 +27,7 @@ class XGBClfModel(MapfModel):
         self.xg_cls.fit(self.X_train[self.features_cols], self.y_train, sample_weight=self.train_samples_weight)
         self.trained = True
 
-    def print_results(self, results_file='xgbmodel-results.csv'):
+    def print_results(self, results_file='model-results.csv'):
         if not self.trained:
             print("ERROR! Can't print model results before training")
             return

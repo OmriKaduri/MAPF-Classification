@@ -69,7 +69,7 @@ class XGBRegModel(MapfModel):
 
         return self.X_train, self.X_test, features_with_reg_cols
 
-    def print_results(self, results_file='xgbmodel-results.csv'):
+    def print_results(self, results_file='model-results.csv'):
         if not self.trained:
             print("ERROR! Can't print model results before training")
             return

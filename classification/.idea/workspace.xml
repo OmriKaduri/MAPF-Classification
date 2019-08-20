@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2591c2b2-089b-41b3-bc09-ead0aac7a1eb" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/mapf_eda.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/metrics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/baselines.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/xgb_clf_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/xgb_reg_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xgb_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Constants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Constants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Problem/ProblemInstance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem/ProblemInstance.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Run.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Run.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bin/Release/d0.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/Release/d0.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bin/Release/d0.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/Release/d0.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bin/Release/d0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/Release/d0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/omri.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/omri.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/AddLabelsToGridImages-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/AddLabelsToGridImages-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Untitled-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Untitled-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/sklearn-tests-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/sklearn-tests-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AddLabelsToGridImages.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/AddLabelsToGridImages.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Untitled.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapf.Labels" beforeDir="false" afterPath="$PROJECT_DIR$/mapf.Labels" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../obj/Release/d0.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../obj/Release/d0.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../obj/Release/d0.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../obj/Release/d0.pdb" afterDir="false" />
-    </list>
+    <list default="true" id="2591c2b2-089b-41b3-bc09-ead0aac7a1eb" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+            <state relative-caret-position="134">
+              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -49,12 +23,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/cnn_reg_model.py">
+        <entry file="file://$PROJECT_DIR$/src/models/baselines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="320" column="71" selection-start-line="320" selection-start-column="71" selection-end-line="320" selection-end-column="71" />
+            <state relative-caret-position="220">
+              <caret line="15" column="43" lean-forward="true" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
               <folding>
-                <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/src/models/xgb_reg_model.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="100">
-              <caret line="83" column="31" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="31" />
+              <caret line="71" column="21" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="21" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -73,10 +47,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/models/xgb_clf_model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/mapf_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="16" column="54" selection-start-line="16" selection-end-line="17" />
+            <state relative-caret-position="147">
+              <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -87,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mapf_eda.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+            <state relative-caret-position="8">
+              <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -106,22 +92,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/xgb_clf_model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-196">
-              <caret line="22" column="24" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#42#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/preprocess.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="38" column="94" selection-start-line="38" selection-start-column="94" selection-end-line="38" selection-end-column="94" />
+            <state relative-caret-position="59">
+              <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -155,7 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>featur</find>
       <find>df</find>
       <find>train_samples</find>
       <find>train_samples_weight</find>
@@ -180,11 +153,12 @@
       <find>to_ca</find>
       <find>v</find>
       <find>train(</find>
-      <find>accuracy_sc</find>
       <find>self.modelname</find>
       <find>Notes =</find>
-      <find>only_alg_runtime_cols</find>
       <find>runtime_cols</find>
+      <find>baselines</find>
+      <find>accuracy_sc</find>
+      <find>only_alg_runtime_cols</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -217,12 +191,12 @@
         <option value="$PROJECT_DIR$/src/metrics.py" />
         <option value="$PROJECT_DIR$/src/mapf_eda.py" />
         <option value="$PROJECT_DIR$/src/xgb_model.py" />
+        <option value="$PROJECT_DIR$/src/models/cnn_reg_model.py" />
+        <option value="$PROJECT_DIR$/src/preprocess.py" />
         <option value="$PROJECT_DIR$/src/models/baselines.py" />
         <option value="$PROJECT_DIR$/src/models/xgb_reg_model.py" />
         <option value="$PROJECT_DIR$/src/models/xgb_clf_model.py" />
         <option value="$PROJECT_DIR$/src/models/mapf_model.py" />
-        <option value="$PROJECT_DIR$/src/models/cnn_reg_model.py" />
-        <option value="$PROJECT_DIR$/src/preprocess.py" />
         <option value="$PROJECT_DIR$/src/main.py" />
       </list>
     </option>
@@ -587,36 +561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/baselines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-400">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/xgb_clf_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-196">
-          <caret line="22" column="24" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/xgb_reg_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="83" column="31" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/cnn_reg_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -641,26 +585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mapf_eda.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/mapf_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="16" column="54" selection-start-line="16" selection-end-line="17" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/io/common.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
@@ -670,15 +594,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/preprocess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="38" column="94" selection-start-line="38" selection-start-column="94" selection-end-line="38" selection-end-column="94" />
+        <state relative-caret-position="59">
+          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mapf_eda.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8">
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/xgb_reg_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="71" column="21" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/xgb_clf_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/mapf_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/baselines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="15" column="43" lean-forward="true" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+        <state relative-caret-position="134">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>

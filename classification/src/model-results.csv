@@ -1,0 +1,12 @@
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Random baseline,20.18%,88.81%,1157,
+EPEA*+ID Runtime,12.10%,95.26%,623,
+MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime,59.70%,74.10%,2342,
+ICTS 3E +ID Runtime,14.53%,97.33%,489,
+A*+OD+ID Runtime,4.62%,93.56%,799,
+Basic-CBS/(A*/SIC)+ID Runtime,9.06%,85.78%,1415,
+Optimal Oracle,100.00%,100.00%,203,
+Regression based classification,52.40%,96.35%,536,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+Regression based classification - balanced,42.13%,96.96%,510,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+XGBoost Classification Model ,60.49%,89.97%,1095,
+XGBoost Classification Model  - balanced,43.47%,94.47%,743,

@@ -20,7 +20,8 @@ runtime_cols = ['EPEA*+ID Runtime',
                 'Y Runtime']
 
 preprocess = Preprocess(max_runtime, runtime_cols)
-labelled_results = preprocess.label_raw_results('AllData.csv')
+results_file = 'data/AllData.csv'
+labelled_results = preprocess.label_raw_results(results_file)
 df = preprocess.load_labelled_results(labelled_results)
 
 mapf_eda = MapfEDA(df, runtime_cols)
@@ -32,8 +33,8 @@ y_train = pd.read_csv('data/splitted/train_labels.csv')
 X_test = pd.read_csv('data/splitted/test_features.csv')
 y_test = pd.read_csv('data/splitted/test_labels.csv')
 #
-# baselines = baselines(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
-# baselines.print_results()
+baselines = baselines(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
+baselines.print_results()
 
 cnn_reg = CNNRegModel(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
 cnn_reg.prepare_data()

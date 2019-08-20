@@ -27,5 +27,5 @@ class MapfModel:
     }
 
     @abstractmethod
-    def print_results(self, results_file='xgbmodel-results.csv'):
+    def print_results(self, results_file='model-results.csv'):
         pass
