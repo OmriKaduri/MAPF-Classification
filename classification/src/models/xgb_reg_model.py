@@ -6,9 +6,12 @@ from src.metrics import coverage_score, cumsum_score
 from sklearn.compose import TransformedTargetRegressor
 import xgboost as xgb
 import csv
+<<<<<<< HEAD
 from src.preprocess import Preprocess
 from sklearn.model_selection import RandomizedSearchCV
 from scipy import stats
+=======
+>>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28
 
 
 class XGBRegModel(MapfModel):
@@ -63,6 +66,7 @@ class XGBRegModel(MapfModel):
             self.xg_regs.append(xg_reg_trans)
             self.trained = True
 
+<<<<<<< HEAD
     def train_cv(self):
         if self.balanced:
             self.X_train = Preprocess.balance_dataset_by_label(self.X_train)
@@ -108,6 +112,8 @@ class XGBRegModel(MapfModel):
             self.xg_regs.append(reg.best_estimator_)
             self.trained = True
 
+=======
+>>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28
     def add_regression_as_features_to_data(self):
         features_with_reg_cols = self.features_cols.copy()
         for key, conversion in self.conversions.items():
@@ -117,7 +123,11 @@ class XGBRegModel(MapfModel):
 
         return self.X_train, self.X_test, features_with_reg_cols
 
+<<<<<<< HEAD
     def print_results(self, results_file='model-results.csv'):
+=======
+    def print_results(self, results_file='xgbmodel-results.csv'):
+>>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28
         if not self.trained:
             print("ERROR! Can't print model results before training")
             return
@@ -128,7 +138,11 @@ class XGBRegModel(MapfModel):
         self.xg_test_res = np.array(self.xg_test_res)
 
         test_preds = [self.conversions[index] for index in self.xg_test_res.argmin(axis=0)]
+<<<<<<< HEAD
         self.X_test['P'] = test_preds
+=======
+
+>>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28
         model_acc = accuracy_score(self.y_test, test_preds)
         model_coverage = coverage_score(self.X_test, test_preds)
         model_cumsum = cumsum_score(self.X_test, test_preds)
@@ -142,5 +156,8 @@ class XGBRegModel(MapfModel):
                                  'Cumsum(minutes)': int(model_cumsum),
                                  'Notes': 'This model is a super-model of 5 Regression models - one for each model'
                                           ' - and then argmin for each regression output gives the classification'})
+<<<<<<< HEAD
 
         return self.X_test
+=======
+>>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28

@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 import operator
+<<<<<<< HEAD
 from src.preprocess import Preprocess
+=======
+
+>>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28
 import numpy as np
 
 
@@ -64,6 +68,7 @@ class MapfEDA:
 
             index += 1
         fig.savefig(histograms_filename, format="jpg")
+<<<<<<< HEAD
 
     def create_cumsum_histogram(self, df, predict_col='P', filename='cumsum_histogram.jpg'):
 
@@ -88,3 +93,5 @@ class MapfEDA:
         fig, ax = plt.subplots(figsize=(20, 10))
         ax.bar(*zip(*runtime_per_algo.items()))
         fig.savefig(filename, format="jpg")
+=======
+>>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28
