@@ -8,3 +8,4 @@ classification/edgelists/
 classification/data/from-azure/splitted/cnn_models/
 classification/src/models/pretrained/
 bfg-1.13.0.jar
+classification/.idea/

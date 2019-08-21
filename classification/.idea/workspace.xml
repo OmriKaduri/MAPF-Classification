@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2591c2b2-089b-41b3-bc09-ead0aac7a1eb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AddYLabelToCSV.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/AddYLabelToCSV.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CreateGridFromMapFile.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/CreateGridFromMapFile.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graph/model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/0cdfea44-b4f7-4c5c-b059-586488955cf4.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/0f1f70b5-756a-4a33-8fa2-54d17fe1e9b7.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/30a13237-34ef-4a03-a993-b5ec912968c6.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/4cb6da39-bbc3-4b10-9772-fb2165a8c2cb.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/58ef5c8c-999a-4c66-8037-9afb0f67dc27.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/6abd4aa7-a0f4-40b6-ac0d-117bba2c5c23.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/b9803970-a5b3-4695-8061-c32dcc6713c9.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/bf4c339a-08ef-4b07-8e37-92dd1c6ecc09.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/ebb3decf-7b9c-4042-9316-b1c0dbd53143.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/f5e625d5-1f6c-4faf-9037-3b4a1a75206f.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mapf_eda.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mapf_eda.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/cnn_reg_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/cnn_reg_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/xgbmodel-results.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/xgbmodel-results.csv" afterDir="false" />
-    </list>
+    <list default="true" id="2591c2b2-089b-41b3-bc09-ead0aac7a1eb" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/models/xgb_reg_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-170">
-              <caret line="74" column="47" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
+            <state relative-caret-position="527">
+              <caret line="100" column="49" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -183,12 +165,6 @@
               <item name="classification" type="b2602c69:ProjectViewProjectNode" />
               <item name="classification" type="462c0819:PsiDirectoryNode" />
               <item name="graph" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="classification" type="b2602c69:ProjectViewProjectNode" />
-              <item name="classification" type="462c0819:PsiDirectoryNode" />
-              <item name="graph" type="462c0819:PsiDirectoryNode" />
-              <item name="base-maps" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="classification" type="b2602c69:ProjectViewProjectNode" />
@@ -336,6 +312,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20111288" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -684,8 +661,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/xgb_reg_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret line="74" column="47" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
+        <state relative-caret-position="527">
+          <caret line="100" column="49" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
