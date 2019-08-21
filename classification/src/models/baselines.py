@@ -7,11 +7,7 @@ from src.metrics import coverage_score, cumsum_score
 
 class baselines(MapfModel):
 
-<<<<<<< HEAD
     def print_results(self, results_file='model-results.csv'):
-=======
-    def print_results(self, results_file='xgbmodel-results.csv'):
->>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28
         with open(results_file, 'a+', newline='') as csvfile:
             fieldnames = ['Model', 'Accuracy', 'Coverage', 'Cumsum(minutes)', 'Notes']
             res_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)

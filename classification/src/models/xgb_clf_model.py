@@ -4,11 +4,8 @@ from src.models.mapf_model import MapfModel
 import xgboost as xgb
 import csv
 from src.preprocess import Preprocess
-<<<<<<< HEAD
 from sklearn.model_selection import RandomizedSearchCV
 from scipy import stats
-=======
->>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28
 
 
 class XGBClfModel(MapfModel):
@@ -28,7 +25,6 @@ class XGBClfModel(MapfModel):
         if self.balanced:
             self.X_train = Preprocess.balance_dataset_by_label(self.X_train)
             self.y_train = self.X_train['Y']
-<<<<<<< HEAD
         self.xg_cls = xgb.XGBClassifier(n_estimators=250, max_depth=3, learning_rate=0.01)
         self.xg_cls.fit(self.X_train[self.features_cols], self.y_train, sample_weight=self.train_samples_weight)
         self.trained = True
@@ -63,13 +59,6 @@ class XGBClfModel(MapfModel):
         self.trained = True
 
     def print_results(self, results_file='model-results.csv'):
-=======
-        self.xg_cls = xgb.XGBClassifier(n_estimators=50, max_depth=4, learning_rate=0.01)
-        self.xg_cls.fit(self.X_train[self.features_cols], self.y_train, sample_weight=self.train_samples_weight)
-        self.trained = True
-
-    def print_results(self, results_file='xgbmodel-results.csv'):
->>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28
         if not self.trained:
             print("ERROR! Can't print model results before training")
             return

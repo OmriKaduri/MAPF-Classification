@@ -164,11 +164,7 @@ class CNNRegModel(MapfModel):
 
         self.X_test['img_path'] = self.X_test.apply(
             lambda x: experiments_dir + CNNRegModel.folder_from_label(x['Y'])
-<<<<<<< HEAD
                           + "/" + CNNRegModel.name_from_row(x), axis=1)
-=======
-                      + "/" + CNNRegModel.name_from_row(x), axis=1)
->>>>>>> 4d8f07cd55d17bda7fb9aa0442a39a9056248d28
 
         self.X_train['mapf_file'] = self.X_train.apply(lambda x: CNNRegModel.file_name_from(x), axis=1)
         self.X_test['mapf_file'] = self.X_test.apply(lambda x: CNNRegModel.file_name_from(x), axis=1)

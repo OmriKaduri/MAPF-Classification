@@ -13,7 +13,7 @@ def agents_from_scen_row(agent_row, num_agents):
     start_x = agent_data[5]
     goal_y = agent_data[6]
     goal_x = agent_data[7]
-    return ','.join([str(x) for x in [num_agents-2, goal_x, goal_y, start_x, start_y]])
+    return ','.join([str(x) for x in [num_agents - 2, goal_x, goal_y, start_x, start_y]])
 
 
 def generate_instance_from_scen(mapfile, scenfile, num_agents, base_file):
@@ -30,8 +30,8 @@ def generate_instance_from_scen(mapfile, scenfile, num_agents, base_file):
         for line in base:
             instance.write(line)
         instance.write(str(num_agents) + "\n")
-        for i in range(2, num_agents+2):
-            instance.write(agents_from_scen_row(linecache.getline(scenfile, i), i)+'\n')
+        for i in range(2, num_agents + 2):
+            instance.write(agents_from_scen_row(linecache.getline(scenfile, i), i) + '\n')
     # print("Creating instance",instance_file)
 
 
