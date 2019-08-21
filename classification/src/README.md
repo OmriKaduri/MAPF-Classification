@@ -100,10 +100,12 @@ Training the different models have basically the same basic API. For example, tr
 
 ```python 
 xgb_reg = XGBRegModel(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
-xgb_reg.train()
+xgb_reg.train_cv() #xgb_reg.train() can be used if CV (Cross Validation) takes too long
 ```
 
 You can see more examples of training models at the [main.py file](https://github.com/OmriKaduri/MAPF-Classification/blob/master/classification/src/main.py)
+
+*CNN Model* weights can be found [here](https://drive.google.com/file/d/1GrSK-M8jY0ZLAFuCkm-T_ahS6O556cZO/view?usp=sharing) 
 
 
 ## Predict
