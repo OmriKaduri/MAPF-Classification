@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import operator
-
+from src.preprocess import Preprocess
 import numpy as np
 
 
@@ -64,3 +64,27 @@ class MapfEDA:
 
             index += 1
         fig.savefig(histograms_filename, format="jpg")
+
+    def create_cumsum_histogram(self, df, predict_col='P', filename='cumsum_histogram.jpg'):
+
+        predict_runtime_col = predict_col + ' Runtime'
+
+        df[Preprocess.runtime_to_success(predict_runtime_col)] = df.apply(
+            lambda x: x[Preprocess.runtime_to_success(x[predict_col])], axis=1)
+
+        df[predict_runtime_col] = df.apply(lambda x: x[x[predict_col]], axis=1)
+
+        runtime_per_algo = {}
+        if predict_col not in df:
+            print("ERROR - Didn't found predicted runtime at Dataframe.")
+        cols = self.runtime_cols + ['P Runtime']
+        for runtime in cols:
+            substr_index = runtime.rfind(')')
+            if (substr_index != -1):
+                key = runtime[:substr_index + 1]
+            else:
+                key = runtime
+            runtime_per_algo[key] = df[runtime].sum()
+        fig, ax = plt.subplots(figsize=(20, 10))
+        ax.bar(*zip(*runtime_per_algo.items()))
+        fig.savefig(filename, format="jpg")

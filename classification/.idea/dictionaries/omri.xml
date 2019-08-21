@@ -1,6 +1,8 @@
 <component name="ProjectDictionaryState">
   <dictionary name="omri">
     <words>
+      <w>bytree</w>
+      <w>colsample</w>
       <w>csvfile</w>
       <w>cumsum</w>
       <w>dataset</w>
@@ -11,6 +13,7 @@
       <w>pred</w>
       <w>preds</w>
       <w>preprocess</w>
+      <w>regressor</w>
       <w>withbridges</w>
       <w>xgboost</w>
     </words>

@@ -23,7 +23,6 @@ for file in glob.glob('../data/from-azure/' + mapf_dir + '/*'):
     if 'brc' in file or 'ost' in file or 'den' in file:
         continue
 
-
     print("Working on ", filename)
     graph = MapfGraph(file)
     graph.create_graph()

@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2591c2b2-089b-41b3-bc09-ead0aac7a1eb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/mapf_dims_128_epochs_5_lr_0.3_embeddings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/problem_solved_under_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AddYLabelToCSV.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/AddYLabelToCSV.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CreateGridFromMapFile.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/CreateGridFromMapFile.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graph/model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/0cdfea44-b4f7-4c5c-b059-586488955cf4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/0f1f70b5-756a-4a33-8fa2-54d17fe1e9b7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/30a13237-34ef-4a03-a993-b5ec912968c6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/4cb6da39-bbc3-4b10-9772-fb2165a8c2cb.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/58ef5c8c-999a-4c66-8037-9afb0f67dc27.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/6abd4aa7-a0f4-40b6-ac0d-117bba2c5c23.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/b9803970-a5b3-4695-8061-c32dcc6713c9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/bf4c339a-08ef-4b07-8e37-92dd1c6ecc09.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/ebb3decf-7b9c-4042-9316-b1c0dbd53143.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/f5e625d5-1f6c-4faf-9037-3b4a1a75206f.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mapf_eda.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mapf_eda.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/cnn_reg_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/cnn_reg_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/xgbmodel-results.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/xgbmodel-results.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,47 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/baselines.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/xgb_reg_model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="71" column="21" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/xgb_clf_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+            <state relative-caret-position="34">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -63,53 +40,38 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/mapf_model.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/models/xgb_reg_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+            <state relative-caret-position="-170">
+              <caret line="74" column="47" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mapf_eda.py">
+        <entry file="file://$PROJECT_DIR$/src/models/cnn_reg_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8">
-              <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+            <state relative-caret-position="17">
+              <caret line="102" column="50" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="50" />
               <folding>
-                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/preprocess.py">
+        <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/io/common.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="231" selection-start-line="231" selection-end-line="231" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/core/frame.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="2933" selection-start-line="2933" selection-end-line="2933" />
+            <state relative-caret-position="25">
+              <caret line="53" column="42" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -125,13 +87,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>df</find>
-      <find>train_samples</find>
-      <find>train_samples_weight</find>
-      <find>balanced</find>
       <find>train_s</find>
       <find>xg_train_res</find>
-      <find>print(</find>
       <find>xg_regs</find>
       <find>Image</find>
       <find>alg_runtime_cols</find>
@@ -152,9 +109,14 @@
       <find>self.modelname</find>
       <find>Notes =</find>
       <find>runtime_cols</find>
-      <find>accuracy_sc</find>
       <find>only_alg_runtime_cols</find>
+      <find>accuracy_sc</find>
+      <find>runtime_to</find>
       <find>baselines</find>
+      <find>write(</find>
+      <find>base_file</find>
+      <find>instance</find>
+      <find>print(</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -182,18 +144,19 @@
         <option value="$PROJECT_DIR$/graph/graph_utils.py" />
         <option value="$PROJECT_DIR$/graph/mapf_graph.py" />
         <option value="$PROJECT_DIR$/graph/model.py" />
-        <option value="$PROJECT_DIR$/graph/mapf_to_graph.py" />
         <option value="$PROJECT_DIR$/xgb_model.py" />
         <option value="$PROJECT_DIR$/src/metrics.py" />
-        <option value="$PROJECT_DIR$/src/mapf_eda.py" />
         <option value="$PROJECT_DIR$/src/xgb_model.py" />
-        <option value="$PROJECT_DIR$/src/models/cnn_reg_model.py" />
         <option value="$PROJECT_DIR$/src/preprocess.py" />
         <option value="$PROJECT_DIR$/src/models/baselines.py" />
-        <option value="$PROJECT_DIR$/src/models/xgb_reg_model.py" />
-        <option value="$PROJECT_DIR$/src/models/xgb_clf_model.py" />
         <option value="$PROJECT_DIR$/src/models/mapf_model.py" />
+        <option value="$PROJECT_DIR$/src/models/cnn_reg_model.py" />
+        <option value="$PROJECT_DIR$/src/mapf_eda.py" />
+        <option value="$PROJECT_DIR$/graph/scen_to_instance.py" />
+        <option value="$PROJECT_DIR$/graph/mapf_to_graph.py" />
         <option value="$PROJECT_DIR$/src/main.py" />
+        <option value="$PROJECT_DIR$/src/models/xgb_clf_model.py" />
+        <option value="$PROJECT_DIR$/src/models/xgb_reg_model.py" />
       </list>
     </option>
   </component>
@@ -219,17 +182,31 @@
             <path>
               <item name="classification" type="b2602c69:ProjectViewProjectNode" />
               <item name="classification" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="classification" type="b2602c69:ProjectViewProjectNode" />
-              <item name="classification" type="462c0819:PsiDirectoryNode" />
               <item name="graph" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="classification" type="b2602c69:ProjectViewProjectNode" />
               <item name="classification" type="462c0819:PsiDirectoryNode" />
+              <item name="graph" type="462c0819:PsiDirectoryNode" />
+              <item name="base-maps" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="classification" type="b2602c69:ProjectViewProjectNode" />
+              <item name="classification" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="classification" type="b2602c69:ProjectViewProjectNode" />
+              <item name="classification" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="classification" type="b2602c69:ProjectViewProjectNode" />
+              <item name="classification" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="nathan" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="classification" type="b2602c69:ProjectViewProjectNode" />
@@ -244,7 +221,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/graph/scen_to_instance.py" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -268,8 +245,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.RandomForestAss">
-    <configuration name="RandomForestAss" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.classification-main">
+    <configuration name="classification-main" type="PythonConfigurationType" factoryName="Python">
       <module name="projectz" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -311,7 +288,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="rfcnb" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="scenToInstance" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="projectz" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -319,11 +296,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pyZ" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/graph" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyZ/rfcnb.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/graph/scen_to_instance.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -333,15 +310,14 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.rfcnb" />
-      <item itemvalue="Python.RandomForestAss" />
+      <item itemvalue="Python.classification-main" />
+      <item itemvalue="Python.scenToInstance" />
       <item itemvalue="Python.globals" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.RandomForestAss" />
+        <item itemvalue="Python.scenToInstance" />
         <item itemvalue="Python.globals" />
-        <item itemvalue="Python.rfcnb" />
       </list>
     </recent_temporary>
   </component>
@@ -360,14 +336,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20111288" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20111288" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3285968" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3268206" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3268206" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39964476" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -417,19 +392,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/banknote_authentication.csv" />
-    <entry file="file://$PROJECT_DIR$/data/cmc.csv" />
-    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/tree/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/data/seeds_dataset.csv" />
-    <entry file="file://$PROJECT_DIR$/data/abalone.csv" />
-    <entry file="file://$PROJECT_DIR$/data/breast-cancer-wisconsin.csv" />
-    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/datasets/samples_generator.py" />
-    <entry file="file://$PROJECT_DIR$/data/EEG Eye State.csv" />
-    <entry file="file://$PROJECT_DIR$/pyZ/tree.py" />
-    <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/tree/tree.py" />
-    <entry file="file://$PROJECT_DIR$/tfs/tf292.txt" />
-    <entry file="file://$PROJECT_DIR$/pyZ/feature_extraction/FeatureHandlerRawData.py" />
-    <entry file="file://$PROJECT_DIR$/pyZ/forest.py" />
     <entry file="file://$PROJECT_DIR$/data/transfusion.csv" />
     <entry file="file://$PROJECT_DIR$/pyZ/Data.py" />
     <entry file="file://$USER_HOME$/Downloads/project/Awsomoriarty/venv/Lib/site-packages/sklearn/ensemble/forest.py" />
@@ -486,37 +448,10 @@
     <entry file="file://$PROJECT_DIR$/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/graph/graph_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="27" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorflow/python/framework/versions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
           <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graph/mapf_to_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graph/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -537,30 +472,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graph/mapf_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="73" column="28" lean-forward="true" selection-start-line="73" selection-end-line="74" />
-          <folding>
-            <element signature="e#0#120#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.ipynb_checkpoints/sklearn-tests-checkpoint.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
           <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/cnn_reg_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="320" column="71" selection-start-line="320" selection-start-column="71" selection-end-line="320" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -585,43 +500,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/preprocess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mapf_eda.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8">
-          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/xgb_reg_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="71" column="21" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/xgb_clf_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/mapf_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -632,9 +510,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/baselines.py">
+    <entry file="file://$PROJECT_DIR$/xgb_model.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kernel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="6" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/core/indexing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
+          <caret line="1251" selection-start-line="1251" selection-end-line="1251" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/baselines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
           <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
@@ -642,15 +550,144 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xgb_model.py">
+    <entry file="file://$PROJECT_DIR$/src/preprocess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="28" column="26" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/xgboost/core.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="586" selection-start-line="586" selection-end-line="586" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mapf_eda.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="82" column="36" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/base-maps/Berlin_1_256-base">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4403">
+          <caret line="259" lean-forward="true" selection-start-line="259" selection-end-line="259" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/instances/Berlin_1_256-4-1">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/instances/Berlin_1_256-5-1">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/instances/Berlin_1_256-1-1">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/instances/Berlin_1_256-2-1">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/instances/Berlin_1_256-3-1">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/instances/Berlin_1_256-6-1">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4182" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/instances/Berlin_1_256-8-1">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4182" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/instances/Berlin_1_256-241-1">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4272" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/scen_to_instance.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/mapf_graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-718">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/graph_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph/mapf_to_graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/cnn_reg_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="102" column="50" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+        <state relative-caret-position="25">
+          <caret line="53" column="42" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="42" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/xgb_clf_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/xgb_reg_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="74" column="47" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>

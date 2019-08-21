@@ -9,3 +9,4 @@ Regression based classification - balanced,37.99%,96.84%,539,This model is a sup
 XGBoost Classification Model ,60.49%,89.97%,1095,
 XGBoost Classification Model  - balanced,42.19%,94.53%,720,
 "Pretrained VGG16, GAP layer, features concat, Linear regression (5)",22.25%,97.87%,434,Fine tune vgg from layer 12 
+"Pretrained VGG16, GAP layer, features concat, Linear regression (5)",22.25%,97.87%,434,Fine tune vgg from layer 12 
