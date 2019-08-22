@@ -3,7 +3,6 @@ from src.mapf_eda import MapfEDA
 from src.models.baselines import baselines
 from src.models.xgb_reg_model import XGBRegModel
 from src.models.xgb_clf_model import XGBClfModel
-from src.models.cnn_reg_model import CNNRegModel
 from sklearn.model_selection import train_test_split
 
 features_cols = ['GridSize', 'NumOfObstacles',
@@ -21,7 +20,9 @@ runtime_cols = ['EPEA*+ID Runtime',
                 'Y Runtime']
 
 preprocess = Preprocess(max_runtime, runtime_cols)
-results_file = 'data/nathan/nathan_AllData.csv'
+
+results_file = 'data/nathan/experiments/AllData.csv'
+# results_file = 'data/nathan/nathan_AllData.csv'
 labelled_results = preprocess.label_raw_results(results_file)
 
 df = preprocess.load_labelled_results(labelled_results)

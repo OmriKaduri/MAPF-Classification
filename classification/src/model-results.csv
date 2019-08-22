@@ -10,3 +10,27 @@ Regression based classification,73.52%,99.21%,200,This model is a super-model of
 Regression based classification - balanced,57.97%,96.71%,292,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
 XGBoost Classification Model ,85.64%,99.21%,216,
 XGBoost Classification Model  - balanced,70.62%,95.13%,371,
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Random baseline,17.20%,80.13%,726,
+EPEA*+ID Runtime,15.53%,92.32%,416,
+MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime,44.07%,59.27%,1287,
+ICTS 3E +ID Runtime,25.04%,91.99%,390,
+A*+OD+ID Runtime,6.01%,86.31%,577,
+Basic-CBS/(A*/SIC)+ID Runtime,9.35%,68.28%,1040,
+Optimal Oracle,100.00%,100.00%,164,
+Regression based classification,74.79%,99.33%,184,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+Regression based classification - balanced,59.93%,98.33%,227,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+XGBoost Classification Model ,84.97%,98.66%,204,
+XGBoost Classification Model  - balanced,72.12%,96.83%,267,
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Random baseline,19.68%,77.02%,1330,
+EPEA*+ID Runtime,16.06%,91.49%,775,
+MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime,46.28%,59.15%,2013,
+ICTS 3E +ID Runtime,23.30%,90.96%,750,
+A*+OD+ID Runtime,5.43%,84.68%,1039,
+Basic-CBS/(A*/SIC)+ID Runtime,8.94%,67.55%,1725,
+Optimal Oracle,100.00%,100.00%,332,
+Regression based classification,75.32%,98.83%,398,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+Regression based classification - balanced,55.64%,96.91%,487,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+XGBoost Classification Model ,84.68%,98.94%,405,
+XGBoost Classification Model  - balanced,64.89%,96.70%,511,
