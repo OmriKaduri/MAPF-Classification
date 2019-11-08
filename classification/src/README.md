@@ -33,6 +33,7 @@ runtime_cols = ['EPEA*+ID Runtime',
                 'ICTS 3E +ID Runtime',
                 'A*+OD+ID Runtime',
                 'Basic-CBS/(A*/SIC)+ID Runtime',
+                'CBS/(A*/SIC) + BP + PC without smart tie breaking using Dynamic Lazy Open List with Heuristic MVC of Cardinal Conflict Graph Heuristic Runtime',
                 'Y Runtime']
                 
 preprocess = Preprocess(max_runtime, runtime_cols)
@@ -57,7 +58,7 @@ df = preprocess.load_labelled_results(labelled_results)
 Currently the exploration contains:
 1. Generating histograms of the running time for each algorithm
 2. Generating histograms of the rankings for each algorithm
-*rankings* are the relative ranking for each MAPF problem, i.e. at a given problem MA-CBS might be ranked 1, Basic-CBS 2, ICTS 3, EPEA* 4, A* 5.
+*rankings* are the relative ranking for each MAPF problem, i.e. at a given problem MA-CBS might be ranked 1, CBS-H 2, Basic-CBS 3, ICTS 4, EPEA* 5, A* 6.
 
 ```python
 from src.mapf_eda import MapfEDA
