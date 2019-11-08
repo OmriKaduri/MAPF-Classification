@@ -133,7 +133,7 @@ class CNNRegModel(MapfModel):
         img = Image.open(path).convert('RGB')
         img = img.resize((224, 224))
         imgdata = np.array(img, dtype=np.float32)
-        imgdata /= 225.0
+        imgdata /= 255.0
         return imgdata
 
     def create_data_for(self, train=False):

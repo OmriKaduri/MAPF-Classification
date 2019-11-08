@@ -1,10 +1,11 @@
 import glob
 import os
 import linecache
+import pandas as pd
 
 
 def mapname_from_file(mapfile):
-    return mapfile.split('.map')[0].split('\\')[1]
+    return mapfile.split('.map')[0].split('/')[-1]
 
 
 def agents_from_scen_row(agent_row, num_agents):
@@ -35,7 +36,7 @@ def generate_instance_from_scen(mapfile, scenfile, num_agents, base_file):
     # print("Creating instance",instance_file)
 
 
-def create_baseinstance_from_map(mapfile):
+def baseinstance_from_map(mapfile):
     base_instance_file = 'base-maps/' + mapname_from_file(mapfile) + '-base'
     if os.path.isfile(base_instance_file):
         return base_instance_file
@@ -47,18 +48,18 @@ def create_baseinstance_from_map(mapfile):
             if index == 1:  # line should be height VALUE
                 instance.write('Grid:\n')
                 height = line.split()[1]
-            if index == 2:  # line should be weigth VALUE
+            if index == 2:  # line should be weight VALUE
                 width = line.split()[1]
-                instance.write(height + ',' + width + '\n')
+                instance.write(height + ',' + width)
             if index > 3:  # Skipping line index==3, should contain 'map'
-                instance.write(line)
+                instance.write('\n'+line.rstrip())
         instance.write('\nAgents:\n')
 
     return base_instance_file
 
 
 def generate_instances_from_scen(map_file, scen_file):
-    base_file = create_baseinstance_from_map(map_file)
+    base_file = baseinstance_from_map(map_file)
     with open(scen_file) as scen:
         for index, line in enumerate(scen):
             if index == 0:
@@ -67,8 +68,29 @@ def generate_instances_from_scen(map_file, scen_file):
                 generate_instance_from_scen(map_file, scen_file, index, base_file)
 
 
-for scen in glob.glob('../src/data/nathan/scen/scen-even/*'):
-    for map in glob.glob('../src/data/nathan/maps/*'):
-        map_name = mapname_from_file(map)
-        if map_name in scen:
-            generate_instances_from_scen(map, scen)
+df = pd.read_csv('../src/data/nathan/AllData-labelled.csv')
+
+maps_dir = '../src/data/nathan/maps/'
+scen_dir = '../src/data/nathan/scen/scen-even/'
+
+
+def generate_image_from_mapf(mapf_problem):
+    map_name = maps_dir + mapf_problem.GridName + '.map'
+    scen_name = ''.join([str(x) for x in [
+        scen_dir,
+        mapf_problem.GridName,
+        '-even-',
+        mapf_problem.InstanceId,
+        '.scen']])  # Berlin_1_256-even-1.scen
+
+    baseinstance = baseinstance_from_map(map_name)
+    generate_instance_from_scen(map_name, scen_name, mapf_problem.NumOfAgents, baseinstance)
+    # print(map_name, scen_name)
+
+
+df.apply(generate_image_from_mapf, axis=1)
+# for scen in glob.glob('../src/data/nathan/scen/used-scen/*'):
+#     for map in glob.glob('../src/data/nathan/maps/*'):
+#         map_name = mapname_from_file(map)
+#         if map_name in scen:
+#             generate_instances_from_scen(map, scen)

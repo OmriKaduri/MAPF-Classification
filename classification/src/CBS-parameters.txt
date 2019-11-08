@@ -1,0 +1,14 @@
+Adding CBS-H:
+mergeThreshold = -1, #CBS-H is with -1, MA-CBS-H is with 10
+BypassStrategy - FIRST_FIT_LOOKAHEAD
+doMalte = false
+conflictChoice = ConflictChoice.cardinal_mvp (3rd value)
+heuristic = var cbs_heuristics = new List<IHeuristicCalculator<CbsNode>>();
+            var mvc = new MvcHeuristicForCbs();
+disableTiebreaking = true
+lookaheadMaxExpansions = 1
+mergeCausesRestart = true
+bool replanSameCostWithMdd = false,
+bool cacheMdds = false,
+bool useOldCost = false,
+bool useCAT = true

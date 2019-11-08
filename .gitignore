@@ -11,3 +11,7 @@ bfg-1.13.0.jar
 classification/.idea/
 bin/Release/scen/
 bin/Release/maps/
+classification/src/data/
+classification/graph/base-maps/
+classification/graph/instances/
+classification/src/AuthorKit20/

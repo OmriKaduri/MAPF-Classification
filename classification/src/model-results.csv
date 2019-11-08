@@ -34,3 +34,72 @@ Regression based classification,75.32%,98.83%,398,This model is a super-model of
 Regression based classification - balanced,55.64%,96.91%,487,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
 XGBoost Classification Model ,84.68%,98.94%,405,
 XGBoost Classification Model  - balanced,64.89%,96.70%,511,
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Random baseline,18.94%,77.55%,1319,
+EPEA*+ID Runtime,16.49%,91.28%,775,
+MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime,44.79%,57.87%,2063,
+ICTS 3E +ID Runtime,22.55%,90.85%,752,
+A*+OD+ID Runtime,5.85%,83.83%,1052,
+Basic-CBS/(A*/SIC)+ID Runtime,10.32%,67.23%,1720,
+Optimal Oracle,100.00%,100.00%,326,
+Regression based classification,72.13%,98.40%,392,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+Regression based classification - balanced,57.66%,95.00%,530,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+XGBoost Classification Model ,82.13%,98.94%,380,
+XGBoost Classification Model  - balanced,68.51%,97.98%,461,
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Random baseline,19.57%,79.57%,1204,
+EPEA*+ID Runtime,17.77%,92.23%,723,
+MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime,44.26%,58.83%,2051,
+ICTS 3E +ID Runtime,23.09%,91.81%,731,
+A*+OD+ID Runtime,5.11%,84.89%,1000,
+Basic-CBS/(A*/SIC)+ID Runtime,9.79%,67.87%,1709,
+Optimal Oracle,100.00%,100.00%,334,
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Random baseline,10.39%,72.52%,4852,
+EPEA*+ID Runtime,11.13%,84.39%,3091,
+MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime,27.67%,52.87%,7577,
+ICTS 3E +ID Runtime,13.02%,85.70%,3098,
+A*+OD+ID Runtime,1.41%,79.26%,4074,
+Basic-CBS/(A*/SIC)+ID Runtime,1.09%,61.43%,6353,
+Optimal Oracle,100.00%,100.00%,629,
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Random baseline,17.76%,73.32%,4720,
+EPEA*+ID Runtime,11.45%,84.55%,3131,
+MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime,25.65%,51.23%,7854,
+ICTS 3E +ID Runtime,14.49%,85.19%,3191,
+A*+OD+ID Runtime,1.28%,78.87%,4219,
+Basic-CBS/(A*/SIC)+ID Runtime,1.09%,59.70%,6642,
+CBS/(A*/SIC) + BP + PC without smart tie breaking using Dynamic Lazy Open List with Heuristic MVC of Cardinal Conflict Graph Heuristic Runtime,46.04%,77.49%,3871,
+Optimal Oracle,100.00%,100.00%,704,
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Random baseline,16.42%,73.42%,4659,
+EPEA*+ID Runtime,10.48%,84.48%,3065,
+MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime,26.90%,52.58%,7607,
+ICTS 3E +ID Runtime,13.66%,85.32%,3139,
+A*+OD+ID Runtime,1.31%,79.35%,4045,
+Basic-CBS/(A*/SIC)+ID Runtime,0.83%,61.65%,6340,
+CBS/(A*/SIC) + BP + PC without smart tie breaking using Dynamic Lazy Open List with Heuristic MVC of Cardinal Conflict Graph Heuristic Runtime,46.81%,79.48%,3559,
+Optimal Oracle,100.00%,100.00%,654,
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Random baseline,16.70%,74.48%,4505,
+EPEA*+ID Runtime,11.35%,84.64%,3066,
+MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime,27.28%,53.77%,7470,
+ICTS 3E +ID Runtime,13.27%,85.44%,3100,
+A*+OD+ID Runtime,1.35%,79.67%,3997,
+Basic-CBS/(A*/SIC)+ID Runtime,1.06%,61.62%,6334,
+CBS/(A*/SIC) + BP + PC without smart tie breaking using Dynamic Lazy Open List with Heuristic MVC of Cardinal Conflict Graph Heuristic Runtime,45.69%,79.10%,3585,
+Optimal Oracle,100.00%,100.00%,657,
+Model,Accuracy,Coverage,Cumsum(minutes),Notes
+Random baseline,16.99%,73.90%,4604,
+EPEA*+ID Runtime,10.90%,84.87%,3064,
+MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime,27.28%,52.16%,7709,
+ICTS 3E +ID Runtime,12.95%,85.64%,3064,
+A*+OD+ID Runtime,1.06%,78.87%,4141,
+Basic-CBS/(A*/SIC)+ID Runtime,1.12%,62.26%,6227,
+CBS/(A*/SIC) + BP + PC without smart tie breaking using Dynamic Lazy Open List with Heuristic MVC of Cardinal Conflict Graph Heuristic Runtime,46.68%,79.71%,3490,
+Optimal Oracle,100.00%,100.00%,680,
+Regression based classification,57.65%,88.75%,2207,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+Regression based classification - balanced,35.81%,79.90%,3590,This model is a super-model of 5 Regression models - one for each model - and then argmin for each regression output gives the classification
+XGBoost Classification Model ,80.80%,99.39%,776,
+XGBoost Classification Model  - balanced,52.93%,92.24%,1926,

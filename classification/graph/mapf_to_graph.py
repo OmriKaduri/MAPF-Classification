@@ -6,13 +6,13 @@ import os
 from mapf_graph import MapfGraph
 
 mapf_dir = 'AllData'
-
-for file in glob.glob('../data/from-azure/' + mapf_dir + '/*'):
+# output_dir = '../edgelists/' + mapf_dir + '/'
+output_dir = 'nathan-images/'
+# for file in glob.glob('../data/from-azure/' + mapf_dir + '/*'):
+for file in glob.glob('instances/*'):
     if 'current' in file:
         continue
 
-    if 'Instance-110-10-80-0' not in file:
-        continue
     filename = file.split('\\')[-1]
     # if os.path.isfile('../edgelists/' + mapf_dir + '/' + filename + ".png"):
     #     continue  # NOT REDO INSTANCES ALREADY EVALUATED
@@ -20,11 +20,11 @@ for file in glob.glob('../data/from-azure/' + mapf_dir + '/*'):
     # if os.path.isfile('../edgelists/' + mapf_dir + '/' + filename + ".gexf"):
     #     continue  # NOT REDO INSTANCES ALREADY EVALUATED
 
-    if 'brc' in file or 'ost' in file or 'den' in file:
-        continue
+    # if 'brc' in file or 'ost' in file or 'den' in file:
+    #     continue
 
     print("Working on ", filename)
     graph = MapfGraph(file)
     graph.create_graph()
-    # graph.draw_graph_to('../edgelists/' + mapf_dir + '/' + filename + ".png")
-    graph.save_gexf_graph_to('../edgelists/' + mapf_dir + '/' + filename + ".gexf")
+    graph.draw_graph_to(output_dir + filename + ".png")
+    graph.save_gexf_graph_to(output_dir + filename + ".gexf")

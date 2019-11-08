@@ -1,0 +1,45 @@
+7. Add Feature importance and interpretability
+8. Add significant wins
+
+
+bank - XwTPPiFv7LJ5Aq
+
+
+blender - gvxxaAa4MT4npjE
+
+tasks from roni:
+4.1 explain more about the feature extraction
+Add sparsity
+4.3 Sensitivity to maps (out of distribution)
+4.4 Should be before feature extraction (4.1)
+4.5 
+
+feature importance (information gain)
+one column - feature importance (by gain),
+feature importance with one-but-all, 
+table per algorithm of feature importance
+
+table per map type 
+(empty, games, cities, maze, random, room)
+ of feature importance
+
+SHOW RESULTS BY MAP TYPE (TABLE 2, FIGURE 3, FIGURE 4)
+
+
+
+5. Sort results by accuracy 
+add about combination of CNN + XGBOOST 
+(both ways, manual features to
+ CNN and CNN embeddings to XGBOOST)
+
+5.1 Explain that each algorithm has it's own regression
+
+tasks to roni:
+1. More features
+2. Adding new CBS
+3. What new data to run? - Not for now
+4. Ellaborate on evaluated algorithms + problem defintion
+
+
+
+Sparsity 

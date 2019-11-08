@@ -184,6 +184,7 @@ namespace CPF_experiment
                     this.distanceBetweenAgentGoals[agentId, otherAgentId] = GetSingleAgentOptimalCost(agentId, otherAgentState.agent.Goal); //Distance from this agent to other agent goal
                     this.distanceBetweenAgentStartPoints[agentId, otherAgentId] = ShortestPathFromAToB(agentStartState, otherAgentState.lastMove);
                 }
+
             }
         }
 
@@ -636,7 +637,6 @@ namespace CPF_experiment
                     TextWriter output;
 
                     string[] cur_lineParts = null;
-
 
                     Console.WriteLine("Starting scen with {0} agents", agentNum);
                     // Generate the problem instance

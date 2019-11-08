@@ -45,15 +45,15 @@ class MapfGraph:
                     start, goal = agent_points_from(agent_data, self.grid_size[1])
                     self.G.add_node(goal, color="blue", size=3)
                     self.G.add_node(start, color="green", size=3)
-                    paths = nx.astar_path(self.G, start, goal, weight='weight')
-                    self.agent_sps.append([p for p in paths])
+                    # paths = nx.astar_path(self.G, start, goal, weight='weight')
+                    # self.agent_sps.append([p for p in paths])
 
-            for sp in self.agent_sps:
-                path_edges = list(zip(sp, sp[1:]))
-                for edge in path_edges:
-                    node_from, node_to = edge
-                    self.G.add_edge(*edge, weight=self.G[node_from][node_to]['weight'] + 3)
-                    # THIS MUST BE DONE AFTER ALL SHORTEST PATHS COMPUTED
+            # for sp in self.agent_sps:
+            #     path_edges = list(zip(sp, sp[1:]))
+            #     for edge in path_edges:
+            #         node_from, node_to = edge
+            #         self.G.add_edge(*edge, weight=self.G[node_from][node_to]['weight'] + 3)
+            #         # THIS MUST BE DONE AFTER ALL SHORTEST PATHS COMPUTED
 
     def save_graph_to(self, filename):
         nx.write_edgelist(self.G, filename)

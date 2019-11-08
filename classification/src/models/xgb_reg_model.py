@@ -67,7 +67,7 @@ class XGBRegModel(MapfModel):
             self.X_train = Preprocess.balance_dataset_by_label(self.X_train)
             self.y_train = self.X_train['Y']
 
-        param_dist = {'regressor__n_estimators': stats.randint(100, 300),
+        param_dist = {'regressor__n_estimators': stats.randint(75, 300),
                       'regressor__learning_rate': stats.uniform(0.01, 0.07),
                       'regressor__subsample': stats.uniform(0.3, 0.7),
                       'regressor__max_depth': [3, 4, 5, 6, 7, 8, 9],

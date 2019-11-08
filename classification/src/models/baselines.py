@@ -12,7 +12,7 @@ class baselines(MapfModel):
             fieldnames = ['Model', 'Accuracy', 'Coverage', 'Cumsum(minutes)', 'Notes']
             res_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             res_writer.writeheader()
-            random_preds = [self.conversions[x] for x in np.random.randint(0, 5, size=(len(self.X_test)))]
+            random_preds = [self.conversions[x] for x in np.random.randint(0, 6, size=(len(self.X_test)))]
             random_acc = accuracy_score(self.y_test, random_preds)
             random_coverage = coverage_score(self.X_test, random_preds, self.max_runtime)
             random_cumsum = cumsum_score(self.X_test, random_preds)

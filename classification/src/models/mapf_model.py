@@ -23,7 +23,8 @@ class MapfModel:
         1: 'MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime',
         2: 'ICTS 3E +ID Runtime',
         3: 'A*+OD+ID Runtime',
-        4: 'Basic-CBS/(A*/SIC)+ID Runtime'
+        4: 'Basic-CBS/(A*/SIC)+ID Runtime',
+        5: 'CBS/(A*/SIC) + BP + PC without smart tie breaking using Dynamic Lazy Open List with Heuristic MVC of Cardinal Conflict Graph Heuristic Runtime'
     }
 
     @abstractmethod
