@@ -5,9 +5,9 @@ from sklearn.metrics import accuracy_score
 from src.metrics import coverage_score, cumsum_score
 
 
-class baselines(MapfModel):
+class Baselines(MapfModel):
 
-    def print_results(self, results_file='model-results.csv'):
+    def print_results(self, results_file='model-results.csv', notes=''):
         with open(results_file, 'a+', newline='') as csvfile:
             fieldnames = ['Model', 'Accuracy', 'Coverage', 'Cumsum(minutes)', 'Notes']
             res_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -20,7 +20,7 @@ class baselines(MapfModel):
                                  'Accuracy': "{0:.2%}".format(random_acc),
                                  'Coverage': "{0:.2%}".format(random_coverage),
                                  'Cumsum(minutes)': int(random_cumsum),
-                                 'Notes': ''})
+                                 'Notes': notes})
 
             for key, conversion in self.conversions.items():
                 preds = [conversion] * len(self.X_test)
@@ -31,7 +31,7 @@ class baselines(MapfModel):
                                      'Accuracy': "{0:.2%}".format(alg_acc),
                                      'Coverage': "{0:.2%}".format(alg_coverage),
                                      'Cumsum(minutes)': int(alg_cumsum),
-                                     'Notes': ''})
+                                     'Notes': notes})
 
             optimal_acc = accuracy_score(self.y_test, self.X_test['Y'])
             optimal_coverage = coverage_score(self.X_test, self.X_test['Y'])
@@ -41,4 +41,4 @@ class baselines(MapfModel):
                                  'Accuracy': "{0:.2%}".format(optimal_acc),
                                  'Coverage': "{0:.2%}".format(optimal_coverage),
                                  'Cumsum(minutes)': int(optimal_cumsum),
-                                 'Notes': ''})
+                                 'Notes': notes})

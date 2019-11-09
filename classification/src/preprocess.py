@@ -53,6 +53,26 @@ class Preprocess:
 
         return labelled_csv_file
 
+    @staticmethod
+    def map_type(x):
+        cities = ['Berlin', 'Boston', 'Paris']
+        games = ['brc', 'den', 'ht_', 'lak', 'lt_', 'orz', 'ost', 'woundedcoast']
+        if any(city in x for city in cities):
+            return 'city'
+        elif any(game in x for game in games):
+            return 'game'
+        elif 'maze' in x:
+            return 'maze'
+        elif 'room' in x:
+            return 'room'
+        elif 'random' in x:
+            return 'random'
+        elif 'empty' in x:
+            return 'empty'
+        else:
+            print("OH SHIT!")
+            return 'other'
+
     def load_labelled_results(self, csv_file):
         """
         load_raw_results read the csv given to it,
@@ -62,10 +82,11 @@ class Preprocess:
         self.df = pd.read_csv(csv_file)
 
         self.fix_measurement_errors_on_maxtime()
+        self.df['maptype'] = self.df.apply(lambda x: Preprocess.map_type(x['GridName']),axis=1)
+
         self.solved_df = self.df[self.df['Y Runtime'] < self.max_runtime]  # Drop all rows no algorithm solved
         self.algorithm_statistics(self.df)
         self.algorithm_statistics(self.solved_df)
-
         return self.solved_df
 
     @staticmethod

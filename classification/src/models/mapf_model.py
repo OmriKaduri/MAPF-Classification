@@ -17,6 +17,7 @@ class MapfModel:
         self.only_alg_runtime_cols.remove('Y Runtime')
         self.train_samples_weight = X_train.apply(lambda x:
                                                   np.log10(np.std(x[self.only_alg_runtime_cols].values)), axis=1)
+        self.modelname='model'
 
     conversions = {
         0: 'EPEA*+ID Runtime',
@@ -30,3 +31,7 @@ class MapfModel:
     @abstractmethod
     def print_results(self, results_file='model-results.csv'):
         pass
+
+    def add_modelname_suffix(self, suffix):
+        self.modelname += '-' + suffix
+

@@ -143,4 +143,4 @@ class XGBRegModel(MapfModel):
                                  'Notes': 'This model is a super-model of 5 Regression models - one for each model'
                                           ' - and then argmin for each regression output gives the classification'})
 
-        return self.X_test
+        return self.X_test, test_preds

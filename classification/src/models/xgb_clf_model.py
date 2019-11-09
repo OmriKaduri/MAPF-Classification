@@ -48,8 +48,8 @@ class XGBClfModel(MapfModel):
 
         clf = RandomizedSearchCV(self.xg_cls,
                                  param_distributions=param_dist,
-                                 cv=5,
-                                 n_iter=5,
+                                 cv=2,
+                                 n_iter=1,
                                  scoring='accuracy',
                                  error_score=0,
                                  verbose=3,
@@ -63,6 +63,7 @@ class XGBClfModel(MapfModel):
             print("ERROR! Can't print model results before training")
             return
         test_preds = self.xg_cls.predict(self.X_test[self.features_cols])
+        self.X_test['P'] = test_preds
 
         model_acc = accuracy_score(self.y_test, test_preds)
         model_coverage = coverage_score(self.X_test, test_preds)
@@ -76,3 +77,5 @@ class XGBClfModel(MapfModel):
                                  'Coverage': "{0:.2%}".format(model_coverage),
                                  'Cumsum(minutes)': int(model_cumsum),
                                  'Notes': ''})
+
+        return self.X_test, test_preds
