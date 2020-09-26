@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using System.IO;
 
 namespace CPF_experiment
 {
@@ -211,7 +212,7 @@ namespace CPF_experiment
         /// Prints the plan to the Console. 
         /// This is used for debugging purposes.
         /// </summary>
-        public void PrintPlan()
+        public void PrintPlan(string plan_filename="")
         {
             foreach (List<Move> locationsAtTime in this.locationsAtTimes)
             {
@@ -223,6 +224,29 @@ namespace CPF_experiment
                 Console.WriteLine();
             }
         }
+
+        public void PrintPlanTo(string plan_file = "")
+        {
+            if (string.IsNullOrEmpty(plan_file))
+                return;
+            var plan_writer = new StreamWriter(plan_file, true);
+            plan_writer.WriteLine("Length: {0}", this.locationsAtTimes.Count);
+            int move_num = 0;
+            foreach (List<Move> locationsAtTime in this.locationsAtTimes)
+            {
+                plan_writer.Write("{0}:", move_num);
+                foreach (Move aMove in locationsAtTime)
+                {
+                    plan_writer.Write(aMove.ToString() + ",");
+                }
+                move_num++;
+                plan_writer.Write("|");
+            }
+            plan_writer.WriteLine("");
+            plan_writer.Close();
+        }
+
+
 
         public HashSet<TimedMove> AddPlanToHashSet(HashSet<TimedMove> addTo, int until)
         {
@@ -410,10 +434,10 @@ namespace CPF_experiment
             return false;
         }
 
-        /// <summary>
-        /// Prints the plan to the Console. 
-        /// This is used for debugging purposes.
-        /// </summary>
+        ///// <summary>
+        ///// Prints the plan to the Console. 
+        ///// This is used for debugging purposes.
+        ///// </summary>
         public void PrintPlan()
         {
             for (int time = 0; time < this.locationAtTimes.Count; time++)

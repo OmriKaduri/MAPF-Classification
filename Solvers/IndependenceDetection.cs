@@ -44,7 +44,6 @@ namespace CPF_experiment
         private int solutionDepth;
         private Dictionary<TimedMove, List<int>> conflictAvoidance;
         private int maxSolutionCostFound;
-        private string name;
 
         public IndependenceDetection(HeuristicCalculator heuristic)
             : this(new ClassicAStar(heuristic), new AStarWithOD(heuristic), heuristic) { }

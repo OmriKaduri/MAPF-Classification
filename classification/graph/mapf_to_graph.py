@@ -27,4 +27,4 @@ for file in glob.glob('instances/*'):
     graph = MapfGraph(file)
     graph.create_graph()
     graph.draw_graph_to(output_dir + filename + ".png")
-    graph.save_gexf_graph_to(output_dir + filename + ".gexf")
+    # graph.save_gexf_graph_to(output_dir + filename + ".gexf")

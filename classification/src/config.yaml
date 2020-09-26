@@ -1,0 +1,4 @@
+features: ['GridRows', 'GridColumns', 'NumOfAgents', 'NumOfObstacles',
+           'BranchingFactor', 'ObstacleDensity', 'AvgDistanceToGoal', 'MaxDistanceToGoal', 'MinDistanceToGoal',
+           'AvgStartDistances', 'AvgGoalDistances',
+           'PointsAtSPRatio', 'Sparsity']

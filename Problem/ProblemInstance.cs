@@ -302,10 +302,17 @@ namespace CPF_experiment
         /// <param name="agentState"></param>
         /// <returns></returns>
         public SinglePlan GetSingleAgentOptimalPlan(AgentState agentState,
-                                                    out Dictionary<int, int> conflictCountPerAgent, out Dictionary<int, List<int>> conflictTimesPerAgent)
+                                                    out Dictionary<int, int> conflictCountPerAgent,
+                                                    out Dictionary<int, List<int>> conflictTimesPerAgent,
+                                                    int agentNumber = -1)
         {
             LinkedList<Move> moves = new LinkedList<Move>();
-            int agentNum = agentState.agent.agentNum;
+            int agentNum;
+            if (agentNumber==-1)
+                agentNum = agentState.agent.agentNum;
+            else
+                agentNum = agentNumber;
+
             var conflictCounts = new Dictionary<int, int>();
             var conflictTimes = new Dictionary<int, List<int>>();
             IReadOnlyDictionary<TimedMove, List<int>> CAT;
@@ -389,7 +396,7 @@ namespace CPF_experiment
                 var agentStartState = this.m_vAgents[agentId];
                 var conflictCountsPerAgent = new Dictionary<int, int>[this.GetNumOfAgents()]; 
                 var conflictTimesPerAgent = new Dictionary<int, List<int>>[this.GetNumOfAgents()];
-                var optimalPlan = GetSingleAgentOptimalPlan(agentStartState, out conflictCountsPerAgent[agentId], out conflictTimesPerAgent[agentId]);
+                var optimalPlan = GetSingleAgentOptimalPlan(agentStartState, out conflictCountsPerAgent[agentId], out conflictTimesPerAgent[agentId], agentId);
                 foreach(Move currMove in optimalPlan.locationAtTimes){
                     pointAtSP[currMove.x, currMove.y] = true;
                 }
@@ -583,6 +590,13 @@ namespace CPF_experiment
             List<AgentState> stateList = new List<AgentState>();
             Run runner = new Run();
             Console.WriteLine("Starting scen file {0}", fileName);
+            var rnd = new Random();
+            var filename_without_extension = fileName.Substring(0, fileName.IndexOf(".scen"));
+            var agents_fileName = filename_without_extension+".agents";
+            var plan_fileName = filename_without_extension + ".plans";
+
+            //if (File.Exists(agents_fileName))
+            //    File.Delete(agents_fileName);
             using (TextReader input = new StreamReader(fileName))
             {
                 // Read the format version number
@@ -605,40 +619,109 @@ namespace CPF_experiment
                 int mapRows;
                 int mapCols;
                 double optimalCost;  // Assuming diagonal moves are allowed and cost sqrt(2)
+                List<string> lines = new List<string>();
                 while (true)
                 {
                     line = input.ReadLine();
                     if (string.IsNullOrWhiteSpace(line))
                         break;
-                    lineParts = line.Split('\t');
-                    block = int.Parse(lineParts[0]);
-                    mapFileName = lineParts[1];
-                    mapRows = int.Parse(lineParts[2]);
-                    Debug.Assert(mapRows == maxX);
-                    mapCols = int.Parse(lineParts[3]);
-                    Debug.Assert(mapRows == maxY);
+                    lines.Add(line);
+                    //lineParts = line.Split('\t');
+                    //block = int.Parse(lineParts[0]);
+                    //mapFileName = lineParts[1];
+                    //mapRows = int.Parse(lineParts[2]);
+                    //Debug.Assert(mapRows == maxX);
+                    //mapCols = int.Parse(lineParts[3]);
+                    //Debug.Assert(mapRows == maxY);
 
-                    startY = int.Parse(lineParts[4]);
-                    startX = int.Parse(lineParts[5]);
-                    goalY = int.Parse(lineParts[6]);
-                    goalX = int.Parse(lineParts[7]);
-                    optimalCost = double.Parse(lineParts[8]);
-                    agent = new Agent(goalX, goalY, agentNum);
-                    state = new AgentState(startX, startY, agent);
-                    stateList.Add(state);
-                    agentNum++;
-                    String instanceName;
+                    //startY = int.Parse(lineParts[4]);
+                    //startX = int.Parse(lineParts[5]);
+                    //goalY = int.Parse(lineParts[6]);
+                    //goalX = int.Parse(lineParts[7]);
+                    //optimalCost = double.Parse(lineParts[8]);
+                    //agent = new Agent(goalX, goalY, agentNum);
+                    //state = new AgentState(startX, startY, agent);
+                    //stateList.Add(state);
+                    //agentNum++;
+                    //String instanceName;
+                    //bool resultsFileExisted = File.Exists(Program.RESULTS_FILE_NAME);
+                    //runner.OpenResultsFile(Program.RESULTS_FILE_NAME);
+
+                    //if (resultsFileExisted == false)
+                    //    runner.PrintResultsFileHeader();
+                    //runner.CloseResultsFile();
+                    //TextWriter output;
+
+                    //string[] cur_lineParts = null;
+
+                    //Console.WriteLine("Starting scen with {0} agents", agentNum);
+                    //// Generate the problem instance
+                    //ProblemInstance instance = new ProblemInstance();
+                    //instance.Init(stateList.ToArray(), grid);
+                    //instance.instanceId = instanceId;
+                    //instance.parameters[ProblemInstance.GRID_NAME_KEY] = mapfileName;
+                    //instance.parameters[ProblemInstance.INSTANCE_NAME_KEY] = fileNameWithoutExtension + ".scen";
+                    //instance.ComputeSingleAgentShortestPaths();
+                    //runner.OpenResultsFile(Program.RESULTS_FILE_NAME);
+                    //if (resultsFileExisted == false)
+                    //    runner.PrintResultsFileHeader();
+                    //Boolean solved = runner.SolveGivenProblem(instance);
+                    //runner.CloseResultsFile();
+                    //if (!solved)
+                    //{
+                    //    break;
+                    //}
+                }
+                Console.WriteLine("Found {0} agents", lines.Count);
+
+                for (int i = 2; i < lines.Count; i++)
+                {
+                    agentNum = 0;
+                    stateList = new List<AgentState>();
+                    var rand_lines = lines.AsEnumerable().OrderBy(n => Guid.NewGuid()).Take(i).Cast<String>().ToList();
+                    if (File.Exists(agents_fileName))
+                    {
+                        bool already_executed = File.ReadLines(agents_fileName)
+                            .Any(curr_line => curr_line.Contains("NumAgents: " + i));
+                        if (already_executed)
+                        {
+                            Console.WriteLine("Skipping already solved problem with {0} agents", i);
+                            continue;
+                        }
+                            
+                    }
+                    var agents_writer = new StreamWriter(agents_fileName, true);
+
+                    agents_writer.WriteLine("NumAgents: {0}", i);
+                    foreach (String rand_line in rand_lines)
+                    {
+                        lineParts = rand_line.Split('\t');
+                        block = int.Parse(lineParts[0]);
+                        mapFileName = lineParts[1];
+                        mapRows = int.Parse(lineParts[2]);
+                        Debug.Assert(mapRows == maxX);
+                        mapCols = int.Parse(lineParts[3]);
+                        Debug.Assert(mapRows == maxY);
+
+                        startY = int.Parse(lineParts[4]);
+                        startX = int.Parse(lineParts[5]);
+                        goalY = int.Parse(lineParts[6]);
+                        goalX = int.Parse(lineParts[7]);
+                        optimalCost = double.Parse(lineParts[8]);
+                        agent = new Agent(goalX, goalY, agentNum);
+                        state = new AgentState(startX, startY, agent);
+                        stateList.Add(state);
+                        agents_writer.WriteLine("{0},{1},{2},{3}", startX, startY, goalX, goalY);
+                        agentNum++;
+                    }
                     bool resultsFileExisted = File.Exists(Program.RESULTS_FILE_NAME);
                     runner.OpenResultsFile(Program.RESULTS_FILE_NAME);
 
                     if (resultsFileExisted == false)
                         runner.PrintResultsFileHeader();
                     runner.CloseResultsFile();
-                    TextWriter output;
 
-                    string[] cur_lineParts = null;
-
-                    Console.WriteLine("Starting scen with {0} agents", agentNum);
+                    Console.WriteLine("Starting scen with {0} agents", i);
                     // Generate the problem instance
                     ProblemInstance instance = new ProblemInstance();
                     instance.Init(stateList.ToArray(), grid);
@@ -647,18 +730,17 @@ namespace CPF_experiment
                     instance.parameters[ProblemInstance.INSTANCE_NAME_KEY] = fileNameWithoutExtension + ".scen";
                     instance.ComputeSingleAgentShortestPaths();
                     runner.OpenResultsFile(Program.RESULTS_FILE_NAME);
-                    if (resultsFileExisted == false)
-                        runner.PrintResultsFileHeader();
-                    Boolean solved = runner.SolveGivenProblem(instance);
+                    Boolean solved = runner.SolveGivenProblem(instance, plan_fileName);
                     runner.CloseResultsFile();
+                    agents_writer.Close();
+
                     if (!solved)
                     {
                         break;
                     }
+
                 }
             }
-
-            
             return null;
         }
 

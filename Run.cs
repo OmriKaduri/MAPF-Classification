@@ -532,7 +532,7 @@ namespace CPF_experiment
             //solvers.Add(astar_with_od);
             //solvers.Add(astar_with_partial_expansion);
 
-            solvers.Add(new IndependenceDetection(sic)); // AStar + OD + ID
+            //solvers.Add(new IndependenceDetection(sic)); // AStar + OD + ID
 
             // MA-CBS-Global-10/(A*+OD/SIC) choosing the first conflict in CBS nodes
             //solvers.Add(new CBS_GlobalConflicts(astar_with_od, astar_with_od, 10));
@@ -553,7 +553,7 @@ namespace CPF_experiment
             //solvers.Add(new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.CARDINAL_LOOKAHEAD, false, false));
 
             // Basic-CBS/(A*/SIC)+ID - Use ID, for single agent solve vith A*, for groups use Basic-CBS which will use A* (again) for single agent, and epea* for groups
-            solvers.Add(new IndependenceDetection(astar, new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.MOST_CONFLICTING, false, false), sic));
+            //solvers.Add(new IndependenceDetection(astar, new CBS_LocalConflicts(astar, epea, -1, false, CBS_LocalConflicts.BypassStrategy.NONE, false, CBS_LocalConflicts.ConflictChoice.MOST_CONFLICTING, false, false), sic));
 
             // ICTS 2RE
             //solvers.Add(new CostTreeSearchSolverRepeatedMatch(2));
@@ -778,7 +778,7 @@ namespace CPF_experiment
         /// Solve given instance with a list of algorithms 
         /// </summary>
         /// <param name="instance">The instance to solve</param>
-        public bool SolveGivenProblem(ProblemInstance instance)
+        public bool SolveGivenProblem(ProblemInstance instance, string plan_fileName="")
         {
             //return; // add for generator
             // Preparing a list of agent indices (not agent nums) for the heuristics' Init() method
@@ -858,10 +858,15 @@ namespace CPF_experiment
                     {
                         Plan plan = solvers[i].GetPlan();
                         int planSize = plan.GetSize();
-                        if (planSize < 200)
+                        if (planSize < 10)
                             plan.PrintPlan();
                         else
                             Console.WriteLine("Plan is too long to print (" + planSize + " steps).");
+
+                        if (!string.IsNullOrEmpty(plan_fileName))
+                        {
+                            plan.PrintPlanTo(plan_fileName);
+                        }
                         outOfTimeCounters[i] = 0;
 
                         // Validate solution:

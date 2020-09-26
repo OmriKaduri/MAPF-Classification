@@ -35,8 +35,8 @@ def train_all_models(df):
     mapf_eda.create_runtime_histograms()
     mapf_eda.create_rankings_histograms()
 
-    # X_train = pd.read_csv('../data/from-vpn/splitted/-X_train.csv')
-    # X_test = pd.read_csv('../data/from-vpn/splitted/-X_test.csv')
+    # X_train = pd.read_csv('../data/from-vpn/splitted/X_train.csv')
+    # X_test = pd.read_csv('../data/from-vpn/splitted/X_test.csv')
     # y_train = X_train['Y']
     # y_test = X_test['Y']
 
@@ -45,6 +45,7 @@ def train_all_models(df):
                                                         )
     X_train.to_csv('../data/from-vpn/splitted/X_train.csv', index=False)
     X_test.to_csv('../data/from-vpn/splitted/X_test.csv', index=False)
+    # mapf_eda.create_stacked_rankings(X_test)
 
     baselines = Baselines(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
     baselines.print_results()
@@ -56,9 +57,12 @@ def train_all_models(df):
     # cnn_reg.load_weights()  # weights file can be transferred as an argument
     # cnn_reg.print_results()
     #
-    # xgb_reg = XGBRegModel(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
-    # xgb_reg.train_cv()
-    # xgb_reg_prediction = xgb_reg.print_results()
+    xgb_reg = XGBRegModel(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
+    xgb_reg.train_cv()
+    reg_test_preds = xgb_reg.print_results()
+    X_test['P-Reg Runtime'] = reg_test_preds
+    mapf_eda.add_model_results(reg_test_preds, 'P-Reg Runtime')
+
     # X_train, X_test, features_with_reg_cols = xgb_reg.add_regression_as_features_to_data()
 
     # mapf_eda.create_cumsum_histogram(xgb_reg_prediction, filename='xgb_reg_cumsum.jpg')
@@ -77,10 +81,13 @@ def train_all_models(df):
     # xgb_balanced_clf.print_results()
 
     xgb_clf = XGBClfModel(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
-    xgb_clf.train_cv()
-    X_test, test_preds = xgb_clf.print_results()
-    mapf_eda.create_cumsum_histogram(X_test)
-    mapf_eda.plot_cactus_graph(X_test, test_preds, filename='all-cactus.jpg')
+    xgb_clf.train_cv(load=False, model_path='clf-model.xgb')
+    clf_test_preds = xgb_clf.print_results()
+    X_test['P-Clf Runtime'] = clf_test_preds
+    mapf_eda.add_model_results(clf_test_preds, 'P-Clf Runtime')
+
+    # mapf_eda.create_cumsum_histogram(X_test)
+    mapf_eda.plot_cactus_graph(X_test, filename='all-cactus.jpg')
 
 
 def train_predict_per_maptype(df):
@@ -105,15 +112,21 @@ def train_predict_per_maptype(df):
         baselines.print_results(notes='on map type ' + maptype)
         model = XGBClfModel(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
         model.add_modelname_suffix(maptype)
-        model.train_cv()
-        clf_X_test, clf_test_preds = model.print_results()
-        mapf_eda.plot_cactus_graph(clf_X_test, clf_test_preds , filename=maptype+'-clf-cactus.jpg')
-
+        model.train_cv(load=True, model_path="models/" + maptype + '-clf-model.xgb')
+        clf_test_preds = model.print_results()
+        X_test['P-Clf Runtime'] = clf_test_preds
+        mapf_eda.add_model_results(clf_test_preds, 'P-Clf Runtime')
+        mapf_eda.plot_importance_for(model)
+        #
         xgb_reg = XGBRegModel(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
         model.add_modelname_suffix(maptype)
-        xgb_reg.train_cv()
-        reg_X_test, reg_test_preds = xgb_reg.print_results()
-        mapf_eda.plot_cactus_graph(reg_X_test, reg_test_preds , filename=maptype+'-reg-cactus.jpg')
+        xgb_reg.train_cv(load=True, model_path=maptype + '-reg-model.xgb')
+        reg_test_preds = xgb_reg.print_results()
+        X_test['P-Reg Runtime'] = reg_test_preds
+        mapf_eda.add_model_results(reg_test_preds, 'P-Reg Runtime')
+
+        # mapf_eda.plot_cactus_graph(reg_X_test, reg_test_preds , filename=maptype+'-reg-cactus.jpg')
+        mapf_eda.plot_cactus_graph(X_test, filename=maptype + '-zoom-cactus.jpg', max_time=30000, step=100)
 
 
 train_predict_per_maptype(df)

@@ -9,6 +9,7 @@ import seaborn as sns
 class MapfEDA:
 
     def __init__(self, df, runtime_cols):
+        self.models = {}
         self.df = df
         self.runtime_cols = runtime_cols
         self.alg_runtime_cols = self.runtime_cols.copy()
@@ -76,6 +77,29 @@ class MapfEDA:
             index += 1
         fig.savefig(histograms_filename, format="jpg")
 
+    def create_stacked_rankings(self, X_test, filename='stacked_bar_rankings.jpg'):
+        ranked_df = MapfEDA.add_ranking_results(X_test, self.alg_runtime_cols)
+        fig = plt.figure(figsize=(15, 7))
+        ax = fig.add_subplot(1, 1, 1)
+        index = 0
+        X = [1, 2, 3, 4, 5, 6]
+        vals = [0, 0, 0, 0, 0, 0]
+        prevals = [0, 0, 0, 0, 0, 0]
+        for alg in self.runtime_cols:
+            if 'Y Runtime' in alg or 'P Runtime' in alg:
+                continue
+            prevals = [a + b for a, b in zip(vals, prevals)]
+            vals = ranked_df[alg + '-results'].value_counts().to_dict()
+            vals = [v[1] for v in sorted(vals.items())]
+            print(vals)
+            if index == 0:
+                ax.bar(X, vals)
+            else:
+                ax.bar(X, vals, bottom=prevals)
+            index += 1
+        ax.legend([MapfEDA.folder_from_label(alg) for alg in self.alg_runtime_cols])
+        fig.savefig(filename, format="jpg")
+
     def create_cumsum_histogram(self, df, predict_col='P', filename='cumsum_histogram.jpg'):
         predict_runtime_col = predict_col + ' Runtime'
 
@@ -110,21 +134,42 @@ class MapfEDA:
             'CBS/(A*/SIC) + BP + PC without smart tie breaking using Dynamic Lazy Open List with Heuristic MVC of Cardinal Conflict Graph Heuristic Runtime': 'cbs-h',
             'Y Runtime': 'Oracle',
             'P Runtime': 'ML Model',
+            'P-Reg Runtime': 'Regression Model',
+            'P-Clf Runtime': 'Classification Model',
             'Random': 'Random'
         }[label]
 
-    def plot_cactus_graph(self, X_test, test_preds, filename='cactus.jpg'):
-        print("Plotting cactus graph to:",filename)
+    @staticmethod
+    def line_style_for_model(model):
+        return {
+            'EPEA*+ID Runtime': (0, (1, 1)),  # densely dotted
+            'MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime': 'dashed',
+            'ICTS 3E +ID Runtime': (0, (1, 10)),  # loosely dotted
+            'A*+OD+ID Runtime': 'dotted',
+            'Basic-CBS/(A*/SIC)+ID Runtime': 'dashdot',
+            'CBS/(A*/SIC) + BP + PC without smart tie breaking using Dynamic Lazy Open List with Heuristic MVC of Cardinal Conflict Graph Heuristic Runtime': (
+                0, (5, 10)),
+            'Y Runtime': 'solid',
+            'P Runtime': 'solid',
+            'P-Reg Runtime': 'solid',
+            'P-Clf Runtime': 'solid',
+        }[model]
+
+    def plot_cactus_graph(self, X_test, filename='cactus.jpg', max_time=300000, step=500):
+        print("Plotting cactus graph to:", filename)
         # y-axis = coverage, x-axis=time, draw line for each algorithm/model/oracle
         coverages = {'Random': {}}
         random_preds = [self.conversions[x] for x in np.random.randint(0, 6, size=(len(X_test)))]
         fig, ax = plt.subplots(figsize=(10, 7))
-        cols = self.runtime_cols + ['P Runtime']
+        cols = self.runtime_cols.copy()
+        for col_name in self.models:
+            if col_name not in self.runtime_cols:
+                cols.append(col_name)
 
-        for i in range(1, 300000, 500):
+        for i in range(1, max_time, step):
             for runtime_col in cols:
-                if 'P Runtime' in runtime_col:
-                    elem = coverage_score(X_test, test_preds, i)
+                if runtime_col not in self.runtime_cols:  # It's a model results
+                    elem = coverage_score(X_test, self.models[runtime_col], i)
                 else:
                     elem = coverage_score(X_test, [runtime_col] * len(X_test), i)
                 if runtime_col in coverages:
@@ -139,9 +184,12 @@ class MapfEDA:
             lists = sorted(coverages[runtime_col].items())
             x, y = zip(*lists)
 
-            sns.lineplot(x, y)
+            ax.plot(x, y, linestyle=MapfEDA.line_style_for_model(runtime_col))
 
-        ax.legend([MapfEDA.folder_from_label(r) for r in sorted_runtime_cols])
+        ax.legend([MapfEDA.folder_from_label(r) for r in sorted_runtime_cols], prop={'size': 16})
         fig.savefig(filename, format="jpg")
 
         # plt.show()
+
+    def add_model_results(self, preds, col_name):
+        self.models[col_name] = preds

@@ -28,7 +28,7 @@ namespace CPF_experiment
         /// <summary>
         /// Max Consecutive failures before an algorithm is omitted from the list of tested algorithms
         /// </summary>
-        public const int MAX_FAIL_COUNT = 1;
+        public const int MAX_FAIL_COUNT = 5;
         /// <summary>
         /// This determines whether the ICTS should search a solution with lowest conflicts for the ID framework
         /// </summary>

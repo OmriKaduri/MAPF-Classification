@@ -52,7 +52,7 @@ def baseinstance_from_map(mapfile):
                 width = line.split()[1]
                 instance.write(height + ',' + width)
             if index > 3:  # Skipping line index==3, should contain 'map'
-                instance.write('\n'+line.rstrip())
+                instance.write('\n' + line.rstrip())
         instance.write('\nAgents:\n')
 
     return base_instance_file
@@ -68,13 +68,11 @@ def generate_instances_from_scen(map_file, scen_file):
                 generate_instance_from_scen(map_file, scen_file, index, base_file)
 
 
-df = pd.read_csv('../src/data/nathan/AllData-labelled.csv')
-
-maps_dir = '../src/data/nathan/maps/'
-scen_dir = '../src/data/nathan/scen/scen-even/'
+df = pd.read_csv('../data/from-vpn/AllData-labelled.csv')
 
 
-def generate_image_from_mapf(mapf_problem):
+def generate_image_from_mapf(mapf_problem, maps_dir='../data/from-vpn/maps/',
+                             scen_dir='../data/from-vpn/scen/scen-even/'):
     map_name = maps_dir + mapf_problem.GridName + '.map'
     scen_name = ''.join([str(x) for x in [
         scen_dir,
@@ -88,7 +86,10 @@ def generate_image_from_mapf(mapf_problem):
     # print(map_name, scen_name)
 
 
-df.apply(generate_image_from_mapf, axis=1)
+maps_dir = '../data/from-vpn/maps/'
+scen_dir = '../data/from-vpn/scen/scen-even/'
+
+df.apply(lambda x: generate_image_from_mapf(x, maps_dir, scen_dir), axis=1)
 # for scen in glob.glob('../src/data/nathan/scen/used-scen/*'):
 #     for map in glob.glob('../src/data/nathan/maps/*'):
 #         map_name = mapname_from_file(map)
