@@ -1494,7 +1494,7 @@
             <param name="time">The time at which to check if the collision occured</param>
             <param name="otherPlan">The plan to check against</param>
         </member>
-        <member name="M:CPF_experiment.Plan.PrintPlan">
+        <member name="M:CPF_experiment.Plan.PrintPlan(System.String)">
             <summary>
             Prints the plan to the Console. 
             This is used for debugging purposes.
@@ -1551,12 +1551,6 @@
             </summary>
             <param name="time">The time at which to check if the collision occured</param>
             <param name="otherPlan">The plan to check against</param>
-        </member>
-        <member name="M:CPF_experiment.SinglePlan.PrintPlan">
-            <summary>
-            Prints the plan to the Console. 
-            This is used for debugging purposes.
-            </summary>
         </member>
         <member name="M:CPF_experiment.SinglePlan.GetSinglePlans(System.Collections.Generic.LinkedList{CPF_experiment.Move}[])">
             <summary>
@@ -1936,7 +1930,7 @@
             <param name="agent"></param>
             <returns></returns>
         </member>
-        <member name="M:CPF_experiment.ProblemInstance.GetSingleAgentOptimalPlan(CPF_experiment.AgentState,System.Collections.Generic.Dictionary{System.Int32,System.Int32}@,System.Collections.Generic.Dictionary{System.Int32,System.Collections.Generic.List{System.Int32}}@)">
+        <member name="M:CPF_experiment.ProblemInstance.GetSingleAgentOptimalPlan(CPF_experiment.AgentState,System.Collections.Generic.Dictionary{System.Int32,System.Int32}@,System.Collections.Generic.Dictionary{System.Int32,System.Collections.Generic.List{System.Int32}}@,System.Int32)">
             <summary>
             The returned plan wasn't constructed considering a CAT, so it's possible there's an alternative plan with the same cost and less collisions.
             </summary>
@@ -1985,7 +1979,7 @@
             </summary>
             <param name="ags"></param>
         </member>
-        <member name="M:CPF_experiment.ProblemInstance.Import(System.String)">
+        <member name="M:CPF_experiment.ProblemInstance.Import(System.String,System.String)">
             <summary>
             Imports a problem instance from a given file
             </summary>
@@ -2226,7 +2220,7 @@
             <param name="agentsNum"></param>
             <returns></returns>
         </member>
-        <member name="M:CPF_experiment.Run.SolveGivenProblem(CPF_experiment.ProblemInstance)">
+        <member name="M:CPF_experiment.Run.SolveGivenProblem(CPF_experiment.ProblemInstance,System.String)">
             <summary>
             Solve given instance with a list of algorithms 
             </summary>

@@ -21,6 +21,11 @@ GridRows, GridColumns, NumOfAgents, NumOfObstacles, BranchingFactor, ObstacleDen
 Ofcourse that using the repository MAPF project to solve the problems would generate the output at the desired format.
 You can see how to solve MAPF problems using the repo's code [here](https://github.com/OmriKaduri/MAPF-Classification/blob/master/README.md#how-to-run-solve-mapf-problems)
 
+### Joining experiments ###
+In a case you're running multiple experiements (different algorithm?) on the same set of problems,
+you will probably want to merge those experiment results to a single dataset.
+You can look at the `usage_example` in `experiments.py` file.
+
 ## Labels
 After generating the data, we need to add labels to it in order to train the supervised models.
 

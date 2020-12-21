@@ -91,6 +91,7 @@
     <Compile Include="Heuristics\CbsHeuristic.cs" />
     <Compile Include="Solvers\CBS\CBS_IDA.cs" />
     <Compile Include="Solvers\CBS\CbsConflict.cs" />
+    <Compile Include="Utilities\Shuffler.cs" />
     <Compile Include="Utilities\DisjointSets.cs" />
     <Compile Include="MyExtensions.cs" />
     <Compile Include="Solvers\CBS\ConflictAvoidanceTable.cs" />

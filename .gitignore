@@ -16,3 +16,6 @@ classification/graph/base-maps/
 classification/graph/instances/
 classification/src/AuthorKit20/
 classification/src/models/
+bin/
+classification/**/*.csv
+classification/**/*.pkl

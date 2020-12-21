@@ -1,18 +1,39 @@
 import pandas as pd
 import numpy as np
 
+def map_type(x):
+    cities = ['Berlin', 'Boston', 'Paris']
+    games = ['brc', 'den', 'ht_', 'lak', 'lt_', 'orz', 'ost', 'woundedcoast']
+    if any(city in x for city in cities):
+        return 'city'
+    elif any(game in x for game in games):
+        return 'game'
+    elif 'maze' in x:
+        return 'maze'
+    elif 'room' in x:
+        return 'room'
+    elif 'random' in x:
+        return 'random'
+    elif 'empty' in x:
+        return 'empty'
+    elif 'warehouse' in x:
+        return 'warehouse'
+    else:
+        print("WHAT", x)
+        return 'other'
 
 class Preprocess:
-    def __init__(self, max_runtime, runtime_cols, features_cols, cat_features_cols, max_sub_runtime=-1):
+    def __init__(self, max_runtime, runtime_cols, features_cols, cat_features_cols, success_cols):
         self.max_runtime = max_runtime
         self.runtime_cols = runtime_cols
+        self.success_cols = success_cols
         self.features_cols = features_cols
         self.cat_features_cols = cat_features_cols
         self.only_alg_runtime_cols = self.runtime_cols.copy()
         self.only_alg_runtime_cols.remove('Y Runtime')
-        self.max_sub_runtime = max_sub_runtime
         self.df = pd.DataFrame()
         self.solved_df = {}
+        self.runtime_to_index = dict(zip(iter(self.only_alg_runtime_cols), np.arange(len(self.only_alg_runtime_cols))))
 
     @staticmethod
     def runtime_to_success(col):
@@ -21,7 +42,7 @@ class Preprocess:
         return " ".join(splitted)
 
     def fix_measurement_errors_on_maxtime(self):
-        for runtime_col in self.runtime_cols:
+        for runtime_col in self.only_alg_runtime_cols:
             self.df.loc[self.df[runtime_col] > self.max_runtime, runtime_col] = self.max_runtime
 
             # self.df[runtime_col] = self.df[runtime_col].where(
@@ -29,6 +50,12 @@ class Preprocess:
             success_col = Preprocess.runtime_to_success(runtime_col)
             self.df[success_col] = 1
             self.df.loc[self.df[runtime_col] == self.max_runtime, success_col] = 0
+
+        Y = self.df[self.runtime_cols].idxmin(axis=1)
+
+        self.df['Y'] = Y
+        self.df['Y Success'] = self.df.apply(lambda x: x[Preprocess.runtime_to_success(x['Y'])], axis=1)
+        self.df['Y Runtime'] = self.df.apply(lambda x: x[x['Y']], axis=1)
 
     @staticmethod
     def algorithm_statistics(df):
@@ -38,35 +65,15 @@ class Preprocess:
         print(count_df)
         print("Choosing the best algorithm each time accuracy:", df['Y'].value_counts()[0] / len(df))
 
-    @staticmethod
-    def map_type(x):
-        cities = ['Berlin', 'Boston', 'Paris']
-        games = ['brc', 'den', 'ht_', 'lak', 'lt_', 'orz', 'ost', 'woundedcoast']
-        # TODO: Add warehouse support
-        if any(city in x for city in cities):
-            return 'city'
-        elif any(game in x for game in games):
-            return 'game'
-        elif 'maze' in x:
-            return 'maze'
-        elif 'room' in x:
-            return 'room'
-        elif 'random' in x:
-            return 'random'
-        elif 'empty' in x:
-            return 'empty'
-        else:
-            print("OH SHIT!")
-            return 'other'
-
-    def load_labelled_results(self, csv_file, drop_maps=None):
+    def load_labelled_results(self, csv_file, drop_maps=None, unsolved_only=False):
         """
         load_raw_results read the csv given to it,
         fixing measurment errors (if existed, i.e. 300100 can't be a valid runtime),
         extracting the subset of at least partially solved problems and prints the statistics for the labels (algorithms)
         """
-
         self.df = pd.read_csv(csv_file)
+        # assert len(
+        #     self.df.ObstacleDensity.value_counts().keys()) == 25  # 29 maps, 4 empty => 25 diff obstacle densities
 
         if drop_maps is not None:
             for map in drop_maps:
@@ -77,6 +84,7 @@ class Preprocess:
             self.drop_algorithms(algorithms_not_in_configuration)
 
         self.fix_measurement_errors_on_maxtime()
+        self.df['maptype'] = self.df.apply(lambda x: map_type(x['GridName']), axis=1)
 
         for cat_feature in self.cat_features_cols:
             feature_dummies = pd.get_dummies(self.df[cat_feature])
@@ -85,6 +93,12 @@ class Preprocess:
             self.features_cols.extend(feature_dummies.columns.values)
 
         self.solved_df = self.df[self.df['Y Runtime'] < self.max_runtime]  # Drop all rows no algorithm solved
+        if unsolved_only:
+            self.solved_df['NumOfSuccesfulSolvers'] = self.solved_df[self.success_cols].sum(axis=1)
+            # Drop all rows where all algorithms solved
+            self.solved_df = self.solved_df[self.solved_df['NumOfSuccesfulSolvers'] < len(self.only_alg_runtime_cols)]
+        self.solved_df = self.solved_df.reset_index(drop=True)
+        self.solved_df['Y_code'] = self.solved_df['Y'].apply(lambda x: self.runtime_to_index[x])
         self.algorithm_statistics(self.df)
         self.algorithm_statistics(self.solved_df)
 

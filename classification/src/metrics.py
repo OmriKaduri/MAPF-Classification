@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def runtime_adjusted_coverage_score(df, preds, max_runtime_arr=None):
     if max_runtime_arr is None:
         max_runtime_arr = [300000] * len(preds)
@@ -15,7 +18,10 @@ def coverage_score(df, preds, max_runtime=300000):
     tmp_df = df.copy()
     tmp_df['CurrP'] = preds
     if len(set(preds)) == 1:  # Same one, can just use x[preds[0]]
-        tmp_df['CurrP-Runtime'] = tmp_df[preds[0]]
+        if isinstance(preds, pd.Series):
+            tmp_df['CurrP-Runtime'] = tmp_df[preds.iloc[0]]
+        else:
+            tmp_df['CurrP-Runtime'] = tmp_df[preds[0]]
     else:
         tmp_df['CurrP-Runtime'] = tmp_df.apply(lambda x: x[x['CurrP']], axis=1)
     solved = len(tmp_df[tmp_df['CurrP-Runtime'] < max_runtime])
@@ -26,7 +32,10 @@ def cumsum_score(df, preds, online_feature_extraction_time=None):
     tmp_df = df.copy()
     tmp_df['CurrP'] = preds
     if len(set(preds)) == 1:  # Same one, can just use x[preds[0]]
-        tmp_df['CurrP-Runtime'] = tmp_df[preds[0]]
+        if isinstance(preds, pd.Series):
+            tmp_df['CurrP-Runtime'] = tmp_df[preds.iloc[0]]
+        else:
+            tmp_df['CurrP-Runtime'] = tmp_df[preds[0]]
     else:
         tmp_df['CurrP-Runtime'] = tmp_df.apply(lambda x: x[x['CurrP']], axis=1)
 
