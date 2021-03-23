@@ -1,28 +1,28 @@
 base_path: '../data/from-vpn'
 results_path: '../data/from-vpn/AllData.csv'
-experiments_path: '../data/from-vpn/experiments/30.11.20-linux-withlazycbs_cbsh-c'
+experiments_path: '../data/from-vpn/experiments/customAndMovingAI'
 features: [
-  'GridRows',
-  'GridColumns',
+    'GridRows',
+    'GridColumns',
   'NumOfAgents',
-  'NumOfObstacles',
+    'NumOfObstacles',
   #                 'BranchingFactor',
-  'ObstacleDensity',
-  'AvgDistanceToGoal',
-  'MaxDistanceToGoal',
-  'MinDistanceToGoal',
-  'AvgStartDistances',
-  'AvgGoalDistances',
-  'PointsAtSPRatio',
-  'Sparsity',
-  '2waycollisions',
-  'StdDistanceToGoal',
-  'MaxStartDistances',
-  'MaxGoalDistances',
-  'MinStartDistances',
-  'MinGoalDistances',
-  'StdStartDistances',
-  'StdGoalDistances',
+    'ObstacleDensity',
+    'AvgDistanceToGoal',
+    'MaxDistanceToGoal',
+    'MinDistanceToGoal',
+    'AvgStartDistances',
+    'AvgGoalDistances',
+    'PointsAtSPRatio',
+    'Sparsity',
+  #  '2waycollisions',
+  #  'StdDistanceToGoal',
+  #  'MaxStartDistances',
+  #  'MaxGoalDistances',
+  #  'MinStartDistances',
+  #  'MinGoalDistances',
+  #  'StdStartDistances',
+  #  'StdGoalDistances',
   #             '0.1Y Runtime',
   #             '0.25Y Runtime',
   #           '0.5Y Runtime',
@@ -50,23 +50,25 @@ cat_features: [
   #  '0.9Y',
 ]
 
+use_cell_features: False
+
 algorithms: [
   #  'astar',
-  #  'macbs',
-  #  'cbs',
-  #  'icts',
+  #    'macbs',
+  #    'cbs',
+  'icts',
   'epea',
-  #  'cbsh',
-  #  'sat',
+  #    'cbsh',
+  'sat',
   'cbsh-c',
-  #  'idcbs',
-  #  'lazycbs'
+  #    'idcbs',
+  'lazycbs'
 ]
 
 with_models: True
-unsolved_problems_only: False
-data_split_method: 'in-map' # One of: 'in-map', 'in-maptype', 'between-maptypes'
+unsolved_problems_only: 'All' # One of: 'All','AllSuccess','AtLeastOneFail','OnlyOneWin'
+data_split_method: 'in-map' # One of: 'in-map', 'in-maptype', 'between-maptypes', 'in-problem-type', 'no-split'
 group_splits: 2
 inner_splits: 1
-hyperopt_evals: 1
+hyperopt_evals: 3
 max_runtime: 300000

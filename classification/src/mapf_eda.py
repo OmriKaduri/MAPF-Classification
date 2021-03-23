@@ -187,7 +187,7 @@ class MapfEDA:
             'cbsh Runtime': 'CBS-H',
             'cbsh-c Runtime': 'CBS-H',
             'sat Runtime': 'SAT',
-            'lazycbs Runtime': 'lazy-cbs',
+            'lazycbs Runtime': 'LAZY-CBS',
             'Y Runtime': 'Oracle',
             'P Runtime': 'ML Model',
             'P-Reg Runtime': 'XGBoost Regression',
@@ -296,7 +296,7 @@ class MapfEDA:
                                                for j in self.coverages[i].keys()},
                                               orient='index')
         mean_dict = coverages_df.groupby(level=1).mean().T.to_dict()
-        std_dict = coverages_df.groupby(level=1).std().T.to_dict()
+        std_dict = coverages_df.groupby(level=1).std().fillna(0).T.to_dict()
 
         fig, ax = plt.subplots(figsize=(10, 7))
 

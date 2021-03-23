@@ -9,8 +9,9 @@ from pathlib import Path
 from preprocess import Preprocess
 from preprocess import map_type
 
+
 def merge_dataframes(df1, df2):
-    merged = df1.merge(df2, on=['GridName', 'InstanceId', 'NumOfAgents'],
+    merged = df1.merge(df2, on=['GridName', 'InstanceId', 'NumOfAgents', 'problem_type'],
                        how='outer')
     cols = list(merged.columns)
 
@@ -32,6 +33,7 @@ def merge_dataframes(df1, df2):
     merged = merged.drop(y_cols + x_cols, axis=1)
     return merged
 
+
 class Experiment:
     def __init__(self):
         with open("config.yaml", 'r') as stream:
@@ -51,6 +53,7 @@ class Experiment:
             'Basic-CBS/(A*/SIC)+ID Runtime': 'cbs Runtime',
             'CBS/(A*/SIC) + BP + PC without smart tie breaking using Dynamic Lazy Open List with Heuristic MVC of Cardinal Conflict Graph Heuristic Runtime': 'cbsh Runtime',
             'CBSH-C Runtime': 'cbsh-c Runtime',
+            'cbsh Runtime': 'cbsh-c Runtime',
             'LazyCBS Runtime': 'lazycbs Runtime',
             'IDCBS Runtime': 'idcbs Runtime',
             'SAT Runtime': 'sat Runtime'
@@ -74,7 +77,8 @@ class Experiment:
         return group[:first_failure]
 
     def load(self):
-        for exp in glob.iglob((self.config['experiments_path'] + '/**/*.csv'), recursive=True):
+        for exp in glob.iglob(self.config['experiments_path'] + '/*.csv', recursive=True):
+            print(exp)
             # if not ('Version' in exp or 'CBSH' in exp or 'EPEA' in exp):  # CBSH-C and Version only
             #     print("Skipping on", exp)
             #     continue
@@ -90,6 +94,10 @@ class Experiment:
                 curr_exp[experiment_type.lower() + ' Success'] = (
                         curr_exp[curr_runtime_col] <= self.config['max_runtime']).astype(int)
                 curr_success_cols.append(experiment_type.lower() + ' Success')
+
+            if 'problem_type' not in curr_exp.columns:
+                return "problem_type must be column in data"
+
             # Remove rows after first failure (if exist).
             # curr_exp = curr_exp.groupby(['InstanceId', 'GridName']).apply(
             #     lambda x: Experiment.remove_group_failures(x, curr_success_cols)).reset_index(drop=True)
@@ -134,13 +142,13 @@ class Experiment:
         self.df['Y Runtime'] = self.df.apply(lambda x: x[x['Y']], axis=1)
 
     def add_computed_features(self):
-        self.df['GridSize'] = self.df['GridRows'] * self.df['GridColumns']
-        self.df['Sparsity'] = self.df.apply(lambda x: x['NumOfAgents'] / (x['GridSize'] - x['NumOfObstacles']), axis=1)
+        # self.df['GridSize'] = self.df['GridRows'] * self.df['GridColumns']
+        # self.df['Sparsity'] = self.df.apply(lambda x: x['NumOfAgents'] / (x['GridSize'] - x['NumOfObstacles']), axis=1)
         self.df['maptype'] = self.df.apply(lambda x: map_type(x['GridName']), axis=1)
 
     def remove_redundant_columns(self):
         relev_cols = self.config['features'] + self.config['cat_features'] + self.runtime_cols + \
-                     self.success_cols + ['GridSize', 'InstanceId', 'Y', 'Y Runtime', 'Y Success']
+                     self.success_cols + ['GridSize', 'InstanceId', 'problem_type', 'Y', 'Y Runtime', 'Y Success']
         self.df = self.df[list(set(relev_cols))]
 
     def to_csv(self, filename):
@@ -154,7 +162,7 @@ def usage_example():
     mapf_experiemnt.add_target_variable()
     mapf_experiemnt.add_computed_features()
     mapf_experiemnt.remove_redundant_columns()
-    mapf_experiemnt.to_csv('Alldata-labelled.csv')
+    mapf_experiemnt.to_csv('../data/from-vpn/experiments/customAndMovingAI/MovingAIAndCustomData-labelled.csv')
 
 
 # usage_example()

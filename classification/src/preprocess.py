@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+
 def map_type(x):
     cities = ['Berlin', 'Boston', 'Paris']
     games = ['brc', 'den', 'ht_', 'lak', 'lt_', 'orz', 'ost', 'woundedcoast']
@@ -22,13 +23,16 @@ def map_type(x):
         print("WHAT", x)
         return 'other'
 
+
 class Preprocess:
-    def __init__(self, max_runtime, runtime_cols, features_cols, cat_features_cols, success_cols):
+    def __init__(self, max_runtime, runtime_cols, features_cols, cat_features_cols, success_cols,
+                 use_cell_features=False):
         self.max_runtime = max_runtime
         self.runtime_cols = runtime_cols
         self.success_cols = success_cols
         self.features_cols = features_cols
         self.cat_features_cols = cat_features_cols
+        self.use_cell_features = use_cell_features
         self.only_alg_runtime_cols = self.runtime_cols.copy()
         self.only_alg_runtime_cols.remove('Y Runtime')
         self.df = pd.DataFrame()
@@ -65,7 +69,7 @@ class Preprocess:
         print(count_df)
         print("Choosing the best algorithm each time accuracy:", df['Y'].value_counts()[0] / len(df))
 
-    def load_labelled_results(self, csv_file, drop_maps=None, unsolved_only=False):
+    def load_labelled_results(self, csv_file, drop_maps=None, unsolved_filter='All'):
         """
         load_raw_results read the csv given to it,
         fixing measurment errors (if existed, i.e. 300100 can't be a valid runtime),
@@ -92,11 +96,47 @@ class Preprocess:
             self.df = pd.concat([self.df, feature_dummies], axis=1)
             self.features_cols.extend(feature_dummies.columns.values)
 
+        if self.use_cell_features:
+            if False:  # TODO: Change to if 4x4 - collapse 8x8 to 4x4 features
+                for i in range(0, 4):
+                    for j in range(0, 4):
+
+                        self.df[f'{i}_{j}_cell_agent_start'] = [0] * len(self.df)
+                        self.df[f'{i}_{j}_cell_agent_goal'] = [0] * len(self.df)
+                        self.df[f'{i}_{j}_cell_obstacles'] = [0] * len(self.df)
+                        # self.df[f'{i}_{j}_cell_open'] = [0] * len(self.df)
+                        self.features_cols.append(f'{i}_{j}_cell_agent_start')
+                        self.features_cols.append(f'{i}_{j}_cell_agent_goal')
+                        self.features_cols.append(f'{i}_{j}_cell_obstacles')
+                        # self.features_cols.append(f'{i}_{j}_cell_open')
+
+                        for sub_i in range(2):
+                            for sub_j in range(2):
+                                self.df[f'{i}_{j}_cell_agent_start'] += self.df[
+                                    f'{i * 2 + sub_i}_{j * 2 + sub_j}_cell_agent_start']
+                                self.df[f'{i}_{j}_cell_agent_goal'] += self.df[
+                                    f'{i * 2 + sub_i}_{j * 2 + sub_j}_cell_agent_goal']
+                                self.df[f'{i}_{j}_cell_obstacles'] += self.df[
+                                    f'{i * 2 + sub_i}_{j * 2 + sub_j}_cell_obstacles']
+                                # self.df[f'{i}_{j}_cell_open'] += self.df[f'{i * 2 + sub_i}_{j * 2 + sub_j}_cell_open']
+            else:
+                for column in [c for c in self.df.columns if '_cell_' in c]:
+                    self.features_cols.append(column)
+
         self.solved_df = self.df[self.df['Y Runtime'] < self.max_runtime]  # Drop all rows no algorithm solved
-        if unsolved_only:
+        if unsolved_filter == 'AtLeastOneFail':
             self.solved_df['NumOfSuccesfulSolvers'] = self.solved_df[self.success_cols].sum(axis=1)
             # Drop all rows where all algorithms solved
             self.solved_df = self.solved_df[self.solved_df['NumOfSuccesfulSolvers'] < len(self.only_alg_runtime_cols)]
+        elif unsolved_filter == 'OnlyOneWin':
+            self.solved_df['NumOfSuccesfulSolvers'] = self.solved_df[self.success_cols].sum(axis=1)
+            # Drop all rows where more than one algorithm solved
+            self.solved_df = self.solved_df[self.solved_df['NumOfSuccesfulSolvers'] == 1]
+        elif unsolved_filter == 'AllSuccess':
+            self.solved_df['NumOfSuccesfulSolvers'] = self.solved_df[self.success_cols].sum(axis=1)
+            # Drop all rows where an algorithm failed
+            self.solved_df = self.solved_df[self.solved_df['NumOfSuccesfulSolvers'] == len(self.only_alg_runtime_cols)]
+
         self.solved_df = self.solved_df.reset_index(drop=True)
         self.solved_df['Y_code'] = self.solved_df['Y'].apply(lambda x: self.runtime_to_index[x])
         self.algorithm_statistics(self.df)

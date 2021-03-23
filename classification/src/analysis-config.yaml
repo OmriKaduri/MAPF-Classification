@@ -1,0 +1,74 @@
+base_path: '../data/from-vpn'
+results_path: '../data/from-vpn/AllData.csv'
+experiments_path: '../data/from-vpn/custom-experiments'
+features: [
+  'GridRows',
+  'GridColumns',
+  'NumOfAgents',
+  'NumOfObstacles',
+  #                 'BranchingFactor',
+  'ObstacleDensity',
+  'AvgDistanceToGoal',
+  'MaxDistanceToGoal',
+  'MinDistanceToGoal',
+  'AvgStartDistances',
+  'AvgGoalDistances',
+  'PointsAtSPRatio',
+  'Sparsity',
+  '2waycollisions',
+  'StdDistanceToGoal',
+  'MaxStartDistances',
+  'MaxGoalDistances',
+  'MinStartDistances',
+  'MinGoalDistances',
+  'StdStartDistances',
+  'StdGoalDistances',
+  #             '0.1Y Runtime',
+  #             '0.25Y Runtime',
+  #           '0.5Y Runtime',
+  #             '0.75Y Runtime',
+  #           '0.9Y Runtime',
+  #          '0.1maxtime_60000calctime',
+  #          '0.25maxtime_60000calctime',
+  #          '0.5maxtime_60000calctime',
+  #            '0.75maxtime_10000calctime',
+  #           '0.9maxtime_1000calctime',
+]
+
+cat_features: [
+  'maptype',
+  #  'GridName',
+  #  '0.1maxtime_60000Y Success',
+  #  '0.25maxtime_60000Y Success',
+  #  '0.5maxtime_60000Y Success',
+  #    '0.75maxtime_1000Y Success',
+  #  '0.9maxtime_1000Y Success',
+  #  '0.1Y',
+  #  '0.25Y',
+  #  '0.5Y',
+  #    '0.75Y',
+  #  '0.9Y',
+]
+
+use_cell_features: True
+
+algorithms: [
+  #  'astar',
+  #    'macbs',
+  #    'cbs',
+  'icts',
+  'epea',
+  #    'cbsh',
+  'sat',
+  'cbsh-c',
+  #    'idcbs',
+  'lazycbs'
+]
+
+with_models: True
+unsolved_problems_only: 'All' # One of: 'All','AtLeastOneFail','OnlyOneWin'
+data_split_method: 'in-maptype' # One of: 'in-map', 'in-maptype', 'between-maptypes', 'in-problem-type', 'no-split'
+group_splits: 2
+inner_splits: 1
+hyperopt_evals: 3
+max_runtime: 300000
