@@ -1,133 +1,114 @@
 # MAPF Algorithm selection - documentation #
 
-This page will contain all neccessery documentation in order to train the existing models on new data
-(or just use the trained models in order to predict on new data)
+1. [ Solved MAPF problems data preparation ](#Dataset)
+2. [ MAPF feature extraction ](#Feature)
+3. [ Experiments configuration ](#Configuration)
+4. [ Train models ](#Train)
+5. [ Deeper Analysis ](#Deeper)
 
-1. [ Generate new data ](#data)
-2. [ Add labels to new data ](#labels)
-3. [ Preprocess the data ](#preprocess)
-4. [ Explore the data ](#exploration)
-5. [ Train models ](#train)
-6. [ Prediction and metrics ](#predict)
+## Dataset
+You can either use our solved MAPF problems dataset, or create your own custom dataset.
 
-## Data
-In order to create new data, you need to generate new MAPF problems and solve them.
-There are various methods to achieve this goal, but after solving the problems the data should be a csv file with the following columns (features for every solved MAPF problem):
-```csv
-GridRows, GridColumns, NumOfAgents, NumOfObstacles, BranchingFactor, ObstacleDensity, AvgDistanceToGoal, MaxDistanceToGoal, MinDistanceToGoal, AvgStartDistances, AvgGoalDistances, PointsAtSPRatio, A*+OD+ID Runtime, MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime, Basic-CBS/(A*/SIC)+ID Runtime, ICTS 3E +ID Runtime , EPEA*+ID Runtime
-```
-*Clarification* - `PointsAtSPRatio` computed as the number of cells at the grid that exists in a shortest path of some agent divided by the total number of cells at the grid. All other features should be self-describing. Otherwise - contact me (Omri) :)
+### Solved MAPF problems dataset ###
+We solved more then 200,000 MAPF problems with 5 different MAPF solvers. 
+Specifically, we solved the classical [grid-based MAPF benchmark](https://www.movingai.com/benchmarks/mapf.html) problems, 
+and our suggested extension to it.
+Both benchmarks data (with features for algorithm selection) can be found [here](https://www.movingai.com/benchmarks/mapf.html).
+ 
+### Custom MAPF problems dataset ###
+Read this section if you choose to create your own solved MAPF dataset (with different solvers/problems). 
+In order to create new data, you need to choose/generate MAPF problems and solve them.
+The data about the solved MAPF problems should contain the following attributes for each problem: 
+1. Number of agents solved
+2. Instance id
+3. Map file
+4. Scenario type (i.e. even/random)
+3. [ALG] Runtime (i.e. CBS-H Runtime)
 
-Ofcourse that using the repository MAPF project to solve the problems would generate the output at the desired format.
-You can see how to solve MAPF problems using the repo's code [here](https://github.com/OmriKaduri/MAPF-Classification/blob/master/README.md#how-to-run-solve-mapf-problems)
+You are advised to use this repository to solve your MAPF problems. See the relevant [documentation](https://github.com/OmriKaduri/MAPF-Classification/blob/master/README.md#how-to-run-solve-mapf-problems) for using our solvers.
+Yet, you can solve with any other implementation, and provide the attributes above.
 
-### Joining experiments ###
-In a case you're running multiple experiements (different algorithm?) on the same set of problems,
-you will probably want to merge those experiment results to a single dataset.
-You can look at the `usage_example` in `experiments.py` file.
+#### Joining experiments ####
+In a case you ran multiple experiements (might be the case if running differenta algorithms from different code bases),
+you want to merge those experiment results to a single dataset.
+Relevant code is found in `usage_example` function under `experiments.py`.
 
-## Labels
-After generating the data, we need to add labels to it in order to train the supervised models.
+## Feature Extraction ##
+Having collected solved MAPF problems attribute, now you will extract features 
+for algorithm selection. Two types of features might be extracted, depending on the 
+machine learning approach being used to takcle the algorithm selection task. 
+We provide code to extract both MAPF-specific features (for our XGBoost models),
+and casting MAPF problems to images (for CNN models). 
 
-The label for each row would be the fastest algorithm solved the mapf problem. In order to add the label, you should run:
+We note by `RAW_DATA_PATH` as the path to your `csv` file with attributes about solved MAPF instances.
+Specifically, next parts assume the following columns to exists in your `csv` file:
+1. GridName (i.e. `Berlin-1-256`)
+2. InstanceId
+3. problem_type (i.e. even/random)
+4. [ALG] Runtime
+5. NumOfAgents
+
+### MAPF-specific features ###
+The code for extracting MAPF-specific features is in `feature_extraction.py`.
+You need to update `raw_data_path` to point to your `csv` file. Also, update `scen` and `maps` directories according
+to their location on your machine.
+Then, choose relevant features to be extracted from `config.yaml` file (under `features` array).
+Also, uncomment the following lines:
 ```python
-from src.preprocess import Preprocess
-max_runtime = 300000
-runtime_cols = ['EPEA*+ID Runtime',
-                'MA-CBS-Global-10/(EPEA*/SIC) choosing the first conflict in CBS nodes Runtime',
-                'ICTS 3E +ID Runtime',
-                'A*+OD+ID Runtime',
-                'Basic-CBS/(A*/SIC)+ID Runtime',
-                'CBS/(A*/SIC) + BP + PC without smart tie breaking using Dynamic Lazy Open List with Heuristic MVC of Cardinal Conflict Graph Heuristic Runtime',
-                'Y Runtime']
-                
-preprocess = Preprocess(max_runtime, runtime_cols)
-results_file = 'AllData.csv'
-labelled_results = preprocess.label_raw_results(results_file)
+df = df.groupby('scen').progress_apply(feature_enhancement_per_group)
+df.to_csv(raw_data_path.split('.csv')[0] + '-with-features.csv', index=False)
+```
+Finally, run:
+```commandline
+python feature_extraction.py
 ```
 
-Now, the labelled results saved at `AllData-labelled.csv` file.
-
-## Preprocess
-After labelling the data, we need to do some basic preprocessing.
-
-The preprocess basically does:
-1. putting upper bound for algorithm runtime
-2. droping all non-solved MAPF problems
-
-```python
-df = preprocess.load_labelled_results(labelled_results)
+  
+### MAPF as an image ###
+The code for casting MAPF to an image features is in `VizMapfGraph.py`.
+First, make sure to update `scen` and `maps` directories according
+to their location on your machine. 
+At the `main` function, update the path for the `read_csv` command with your `raw_data_path`.
+Finally, run:
+```commandline
+ python VizMapfGraph.py
 ```
 
-## Exploration
-Currently the exploration contains:
-1. Generating histograms of the running time for each algorithm
-2. Generating histograms of the rankings for each algorithm
-*rankings* are the relative ranking for each MAPF problem, i.e. at a given problem MA-CBS might be ranked 1, CBS-H 2, Basic-CBS 3, ICTS 4, EPEA* 5, A* 6.
+## Configuration ##
+Before evaluating the different algorithms and conducting algorithm selection experiments,
+you need to define in `config.yaml` the following properties:
+1. `max_runtime` - Maximum running time for a MAPF algorithm to solve a problem (in milliseconds). We used 300,000 (5 minutes) throughout our experiments.
+2. `data_split_method` - Following our definitions of algorithm selection setups, here you can se the relevant setup train/test split logic (i.e., in-map, in-maptype, etc.)
+3. `group_splits` - How many cross-validation splits should be used. We performed 3-fold CV at our experiments.
+4. `with_models` - Boolean attribute - True in case you want to train/evaluate algorithm selection models, False otherwise.
+5. `unsolved_problems_only` - You might want to evaluate different subsets of your solved MAPF dataset. We provide options to select 
+problems where only one algorithm solved (`OnlyOneWin`), problems where at least one algorithm failed to solve `AtLeastOneFail`, 
+and problems where all algorithms successfully solved (`AllSuccess)`. Leaving this option with `All` would 
+evaluate over all dataset.
 
-```python
-from src.mapf_eda import MapfEDA
-
-mapf_eda = MapfEDA(df, runtime_cols)
-mapf_eda.create_runtime_histograms()
-mapf_eda.create_rankings_histograms()
-```
-
-The exploration output (images) will be saved by default to files under `src` folder, but the path be given as an argument.
-
-## Train
-It is time to train some models!
-
-Before training, we need to take one very important step - splitting our data to train and test.
-
-The pretrained models data already splitted and can be used as:
-```python
-X_train = pd.read_csv('data/splitted/train_features.csv')
-y_train = pd.read_csv('data/splitted/train_labels.csv')
-X_test = pd.read_csv('data/splitted/test_features.csv')
-y_test = pd.read_csv('data/splitted/test_labels.csv')
-```
-
-But you can ofcourse just use scikit-learn to split your new data:
-```python
-X_train, X_test, y_train, y_test = train_test_split(df, df['Y'], test_size=0.25)
-```
-
-It is recommended to save the output of the split before any training and save it (or just using the same random_state for the split)
-
-**Now we are really ready to train!**
-
-Currently the supported models are:
-1. XGBoost classification models
-2. XGBoost regression models
-3. CNN VGG16-based models (classification and regression)
+## Train and evaluate algorithm selection models
+We support both CNN and XGBoost models over four different algorithm selection tasks.
 
 Training the different models have basically the same basic API. For example, training XGBoost regression model:
 
 ```python 
-xgb_reg = XGBRegModel(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
-xgb_reg.train_cv() #xgb_reg.train() can be used if CV (Cross Validation) takes too long
+xgb_reg = XGBRegModel(runtime_cols, max_runtime, features, success_cols, type_suffix)
+xgb_reg.train_cv(X_train,
+                 n_splits=config['inner_splits'],
+                 hyperopt_evals=config['hyperopt_evals'],
+                 load=load,
+                 models_dir='models/regression/{i}'.format(i=index),
+                 exp_type=exp_name)
+reg_preds = xgb_reg.predict(X_test, y_test)
 ```
 
-You can see more examples of training models at the [main.py file](https://github.com/OmriKaduri/MAPF-Classification/blob/master/classification/src/main.py)
+You can see more examples of training XGBoost models at [main.py file](https://github.com/OmriKaduri/MAPF-Classification/blob/master/classification/src/main.py).
+For CNN models, check [main-cnn.py file](https://github.com/OmriKaduri/MAPF-Classification/blob/master/classification/src/main-cnn.py).
 
-*CNN Model* weights can be found [here](https://drive.google.com/file/d/1GrSK-M8jY0ZLAFuCkm-T_ahS6O556cZO/view?usp=sharing) 
+*CNN Model* weights can be found. 
 
+The trained models results save to `model-results.csv` file.
+The trained models (weights/xgb files) saved to the relevant models directory.
 
-## Predict
-Now you will examine your new trained model!
-
-First, you'll want to get some baselines. Those can be achieved using:
-```python
-baselines = baselines(X_train, y_train, X_test, y_test, runtime_cols, max_runtime, features_cols)
-baselines.print_results()
-```
-
-Now we have a file named `model-results.csv` (file name can be given as an argument to `print_results`)
-containing the baselines. Let's add our model results to the file!
-
-```python
-xgb_reg.print_results()
-```
-
-That's it! The trained model (XGBoost regression model) results save to the file. Have fun! :)
+## Deeper Analysis
+For deeper analysis of the MAPF results, we refer to our `analysis` notebook under `notebooks` directory. 

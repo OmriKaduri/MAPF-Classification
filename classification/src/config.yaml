@@ -68,7 +68,7 @@ algorithms: [
 with_models: True
 unsolved_problems_only: 'All' # One of: 'All','AllSuccess','AtLeastOneFail','OnlyOneWin'
 data_split_method: 'in-map' # One of: 'in-map', 'in-maptype', 'between-maptypes', 'in-problem-type', 'no-split'
-group_splits: 2
+group_splits: 3
 inner_splits: 1
 hyperopt_evals: 3
 max_runtime: 300000

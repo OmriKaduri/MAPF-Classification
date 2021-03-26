@@ -71,13 +71,11 @@ class Preprocess:
 
     def load_labelled_results(self, csv_file, drop_maps=None, unsolved_filter='All'):
         """
-        load_raw_results read the csv given to it,
-        fixing measurment errors (if existed, i.e. 300100 can't be a valid runtime),
+        load_labelled_results read the csv given to it,
+        fixing measurement errors (if existed, i.e. 300100 can't be a valid runtime if max_runtime is 300000),
         extracting the subset of at least partially solved problems and prints the statistics for the labels (algorithms)
         """
         self.df = pd.read_csv(csv_file)
-        # assert len(
-        #     self.df.ObstacleDensity.value_counts().keys()) == 25  # 29 maps, 4 empty => 25 diff obstacle densities
 
         if drop_maps is not None:
             for map in drop_maps:

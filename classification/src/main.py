@@ -178,52 +178,33 @@ def train_all_models(df, exp_name, outer_splits, with_plots=True, maptype='', pr
         X_train_offline = X_train[X_train.columns.drop(list(X_train.filter(regex='0\.')))].copy()
         X_test_offline = X_test[X_test.columns.drop(list(X_test.filter(regex='0\.')))].copy()
         if with_models:
-            # nn_clf.train_cv(X_train_offline, y_train, n_splits=1,
-            #                 load=False,
-            #                 models_dir='models/nn-classification/{i}'.format(i=index),
-            #                 exp_type=exp_name)
-            #
-            # nn_preds = nn_clf.predict(X_test_offline, y_test)
-            # mapf_eda.add_model_results(nn_preds, 'P-Clf Runtime')
-
-            # xgb_coverage.train_cv(X_train_offline,
-            #                       n_splits=config['inner_splits'],
-            #                       hyperopt_evals=config['hyperopt_evals'],
-            #                       load=load,
-            #                       models_dir='models/coverage/{i}'.format(i=index),
-            #                       exp_type=exp_name)
-            # cov_preds = xgb_coverage.predict(X_test_offline, y_test)
-            # mapf_eda.add_model_results(cov_preds, 'P-Cov Runtime')
+            xgb_coverage.train_cv(X_train_offline,
+                                  n_splits=config['inner_splits'],
+                                  hyperopt_evals=config['hyperopt_evals'],
+                                  load=load,
+                                  models_dir='models/coverage/{i}'.format(i=index),
+                                  exp_type=exp_name)
+            cov_preds = xgb_coverage.predict(X_test_offline, y_test)
+            mapf_eda.add_model_results(cov_preds, 'P-Cov Runtime')
             # # #
-            # xgb_reg.train_cv(X_train_offline,
-            #                  n_splits=config['inner_splits'],
-            #                  hyperopt_evals=config['hyperopt_evals'],
-            #                  load=load,
-            #                  models_dir='models/regression/{i}'.format(i=index),
-            #                  exp_type=exp_name)
-            # reg_preds = xgb_reg.predict(X_test_offline, y_test)
-            # mapf_eda.add_model_results(reg_preds, 'P-Reg Runtime')
+            xgb_reg.train_cv(X_train_offline,
+                             n_splits=config['inner_splits'],
+                             hyperopt_evals=config['hyperopt_evals'],
+                             load=load,
+                             models_dir='models/regression/{i}'.format(i=index),
+                             exp_type=exp_name)
+            reg_preds = xgb_reg.predict(X_test_offline, y_test)
+            mapf_eda.add_model_results(reg_preds, 'P-Reg Runtime')
             #
-            # # xgb_reg_online_selection.train_cv(X_train,
-            # #                                   model_suffix='-online-reg-model.xgb',
-            # #                                   n_splits=config['inner_splits'],
-            # #                                   hyperopt_evals=config['hyperopt_evals'],
-            # #                                   load=load)
-            #
-            # # xgb_reg_online_selection.predict(X_test, y_test, online_feature_extraction_time='0.9maxtime_1000calctime')
-            # # xgb_reg.plot_feature_importance()
-            # # X_test['P-Reg Runtime'] = reg_test_preds
-            # # mapf_eda.add_model_results(reg_test_preds, 'P-Reg Runtime')
-            #
-            # xgb_clf.train_cv(X_train_offline, X_train['Y_code'],
-            #                  n_splits=config['inner_splits'],
-            #                  hyperopt_evals=config['hyperopt_evals'],
-            #                  load=load,
-            #                  models_dir='models/classification/{i}'.format(i=index),
-            #                  exp_type=exp_name)
-            # clf_preds = xgb_clf.predict(X_test_offline, y_test)
-            # X_test['P-Clf Runtime'] = clf_preds
-            # mapf_eda.add_model_results(clf_preds, 'P-Clf Runtime')
+            xgb_clf.train_cv(X_train_offline, X_train['Y_code'],
+                             n_splits=config['inner_splits'],
+                             hyperopt_evals=config['hyperopt_evals'],
+                             load=load,
+                             models_dir='models/classification/{i}'.format(i=index),
+                             exp_type=exp_name)
+            clf_preds = xgb_clf.predict(X_test_offline, y_test)
+            X_test['P-Clf Runtime'] = clf_preds
+            mapf_eda.add_model_results(clf_preds, 'P-Clf Runtime')
             #
             xgb_cost_sensitive.train_cv(X_train_offline,
                                         n_splits=config['inner_splits'],

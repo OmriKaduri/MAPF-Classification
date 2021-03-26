@@ -49,8 +49,6 @@ tqdm.pandas()
 
 
 def problem_features(df, n_agents, instance_id, grid_name, problem_type=None):
-    if True:
-        return dict()
     if 'problem_type' in df.columns:
         problem = df[(df.NumOfAgents == n_agents) & (df.InstanceId == instance_id) & (
                 df.GridName == grid_name) & (df["problem_type"] == problem_type)]
@@ -98,9 +96,8 @@ def feature_enhancement_per_group(group):
     graph.create_graph()
     return group.apply(lambda x: feature_enhancement(x, graph), axis=1)
 
-
-df = df.groupby('scen').progress_apply(feature_enhancement_per_group)
-df.to_csv(raw_data_path.split('.csv')[0] + '-with-features.csv', index=False)
+# df = df.groupby('scen').progress_apply(feature_enhancement_per_group)
+# df.to_csv(raw_data_path.split('.csv')[0] + '-with-features.csv', index=False)
 
 #
 # files = glob.iglob('../data/from-vpn/experiments/SAT/*.csv', recursive=True)
